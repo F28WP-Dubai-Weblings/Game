@@ -13,5 +13,4 @@ const server = require('http').createServer(app);
 app.get('/', function (req, res) {
   res.send("This is a test");
 });
-
 server.listen(3000);
