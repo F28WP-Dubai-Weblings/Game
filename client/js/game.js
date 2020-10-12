@@ -7,5 +7,4 @@ var Width = 556;
 var Height = 556;
 var intervalVar;
 
-
 console.log("the client script is working")

@@ -8,7 +8,6 @@ const path = require('path');
 const server = require('http').createServer(app);
 
 
-
 //app.use(express.static(path.join(__dirname, '/static')))
 
 app.get('/', function (req, res) {
