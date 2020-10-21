@@ -1,0 +1,43 @@
+body {
+    background-image: url('background.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;  
+    background-size: cover;
+    }
+  
+ .btn-grp {
+    text-align: center;
+    position: absolute;
+    top: 30%;
+    width: 100%;
+    font-size: 30px;
+    
+  }
+     
+  .btn-grp button {
+    background-color: #050505; /* Green background */
+    border: 1px solid rgb(45, 0, 128); /* Green border */
+    color: white; /* White text */
+    padding: 20px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    border-radius: 8px;
+    font-size: larger;
+    font: 200;
+    font-family: "Times New Roman", Times, serif;
+  }
+  
+  /* Clear floats (clearfix hack)*/
+  .btn-grp button:after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  .btn-grp button:not(:last-child) {
+    border-right: none; /* Prevent double borders */
+  }
+  
+  /* Add a background color on hover */
+  .btn-grp button:hover {
+    background-color: rgb(45, 0, 128);
+  }
