@@ -1,6 +1,5 @@
 // js code here
-var canvas = document.getElementById("Game");
-var context = canvas.getContext("2d");
+var canvas = document.getElementById("Gamecanvas");
 var x = 425;
 var y = 3;
 var Width = 556;
