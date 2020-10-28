@@ -23,3 +23,33 @@ Next, we’ll create a new class called animate, which applies the jump animatio
 .animate{
     animation: jump 300ms linear;
 }
+##car descrip
+body {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#gameSetUp {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.fa-truck {
+    font-size: 50px;
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+}
+
+.fa-user-secret {
+    font-size: 80px;
+    color: brown;
+}
+
+.track {
+    height: 50px;
+    background-image: url('../images/track.png');
+}
