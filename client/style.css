@@ -1,25 +1,103 @@
-#game{
-    width: 500px;
-    height: 200px;
-    border: 1px solid black;
-    margin: auto;
+body{
+    background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/background.PNG");
+    background-size: 100% ;
 }
-Next we’ll style our character div. 
-#character{
-    width: 20px;
-    height: 50px;
-    background-color: red;
+  
+  html {
+    scroll-behavior: smooth;
+}
+  
+  .header{
+    
+    position:relative;
+    margin: 2px 0px 40px 0px;
+    padding: 0px 17px 5px 17px;
+    border-width: 3px;
+    height:150px;
+    /*
+    position:relative;
+    display:flex;
+    text-align: center;
+    justify-content: center;
+    border: solid;
+    border-width: 3px;
+    margin: 2px 0px 40px 0px;
+    padding: 0px 17px 5px 17px;
+    font-family: fantasy;
+    height:150px;*/
+}
+  
+  
+  /*.nav-links{
+    margin-right:20px;
+  }
+  
+  .left-panel{
+    display:flex;
+    margin-right:150px;
     position: relative;
-    top: 150px; //game height - character height (200 - 50)
+    top:60px;
+  
+  }
+  .right-panel{
+    display:flex;
+    margin-left:150px;
+    position: relative;
+    top:60px;
+  }
+  
+  #title{
+    color:white;
+    position: relative;
+    top:15px;
+    font-size:90px;
+  }*/
+  
+.game{
+    position: relative;
+    color:white;
+    background-color: black;
+    height:500px;
+    border: solid;
+    border-width: 1px;
+    border-color: black;
+    margin: 0px 15px 40px 15px;
+    padding: 0px 17px 40px 17px;
+    border-radius: 25px;
+    font-family: fantasy;
+    top:230px;
 }
-Create a keyframe animation called jump. This animation will make the top position slide up 50 pixels and then slide back down.
-@keyframes jump{
-    0%{top: 150px;}
-    30%{top: 100px;}
-    70%{top: 100px;}
-    100%{top: 150px;}
+  
+#leaderboard{
+    position: relative;
+    color:white;
+    background-color: black;
+    height:200px;
+    border: solid;
+    border-width: 1px;
+    border-color: black;
+    margin: 0px 15px 40px 15px;
+    padding: 0px 17px 40px 17px;
+    border-radius: 25px;
+    font-family: fantasy;
+    top:230px;
 }
-Next, we’ll create a new class called animate, which applies the jump animation.
-.animate{
-    animation: jump 300ms linear;
+  
+#PLAY{
+    position: relative;
+    color:white;
+    background-color: rgb(8, 1, 8);
+    height:20px;
+    width:200px;
+    text-align:center;
+    top:5px;
+    border: solid;
+    border-width: 1px;
+    border-color: rgb(100, 97, 97);
+    margin: 30px 200px 20px 550px;
+    padding: 10px 17px 40px 17px;
+    border-radius: 17px;
+    font-family: fantasy;
+    font-size: 30px;
 }
+  
