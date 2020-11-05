@@ -1,5 +1,4 @@
 // js code here
-<<<<<<< HEAD
 var raceGame;
 var spwanpoint=0;
 var type=0;
@@ -33,14 +32,19 @@ var raceGameArea = {
 
 console.log("the client script is working") ;
 
+function downarrow() {
+    accelerate(-0.2);
+  }
+  
+  function uparrow() {
+    accelerate(0.05);
+  }
+          },
+      clear : function() {
+          this.context.clearRect(0, 0, this.canvas.Width, this.canvas.Height);
+      },
+      stop : function() {
+          clearInterval(this.interval);
+      }
 
-=======
-var canvas = document.getElementById("Gamecanvas");
-var x = 425;
-var y = 3;
-var Width = 556;
-var Height = 556;
-var intervalVar;
 
-console.log("the client script is working")
->>>>>>> bb8e9cdc40fd34f6cace6207b0f564d59c3fc1ee
