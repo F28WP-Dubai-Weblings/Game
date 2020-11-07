@@ -47,4 +47,4 @@ function downarrow() {
           clearInterval(this.interval);
       }
 
-
+}
