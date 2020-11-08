@@ -1,6 +1,7 @@
 const score = document.querySelector("#scoreBoard");
 const startBoard = document.querySelector(".startNav");
 const gameScreen = document.querySelector(".practiceScreen");
+let road = document.querySelector(".animateTrack")
 
 document.addEventListener("keydown", downKey);
 document.addEventListener("keyup", upKey);
@@ -32,19 +33,19 @@ function upKey(event){
 function move(){
 
     let car = document.querySelector(".carVector");
-    
+
     if(racer.ready){
-        if (events.ArrowUp) {
+        if (events.ArrowUp && racer.verticalPos>70) {   //move up when ArrowUp is pressed & don't let the car move above 70px (height)
             racer.verticalPos -= racer.pixelPosition;
         }
-        if (events.ArrowLeft) {
+        if (events.ArrowLeft && racer.horizontalPos>35) {   //move left when ArrowLeft is pressed & set minimum horizontal position as 35px (width)
             racer.horizontalPos -= racer.pixelPosition;
         }
 
-        if (events.ArrowDown) {
+        if (events.ArrowDown  && racer.verticalPos<1000) {  //move down when ArrowDown is pressed & don't let the car move beyond 1000px (height)
             racer.verticalPos += racer.pixelPosition;
         }
-        if (events.ArrowRight) {
+        if (events.ArrowRight && racer.horizontalPos<1020) {    //move right when the ArrowRight is press & don't let the car move beyond 1020px (width)
             racer.horizontalPos += racer.pixelPosition;
         }
     }
@@ -53,6 +54,7 @@ function move(){
 
     window.requestAnimationFrame(move);
 }
+
 
 function start(){
 
@@ -64,7 +66,7 @@ function start(){
 
     let car = document.createElement("div"); //create a div element in the dom
     car.setAttribute("class", "carVector"); //set class attribute of the div
-    gameScreen.appendChild(car);    //append the div to the game screen
+    road.appendChild(car);    //append the div to the game screen
 
     racer.horizontalPos = car.offsetLeft;   //initialise the position of the player (x-axis)
     racer.verticalPos = car.offsetTop; //initialise the position of the player (y-axis) 
