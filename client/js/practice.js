@@ -68,6 +68,7 @@ function start(){
     gameScreen.classList.remove("hide");    //remove class list "hide" from gameScreen to make the game screen visible
     startBoard.classList.add("hide");    //add classList "hide" to get rid of the start navigation pop-up
 
+
     window.requestAnimationFrame(move)  //invoke another play()
 
     let car = document.createElement("div"); //create a div element in the dom
@@ -77,21 +78,38 @@ function start(){
     racer.horizontalPos = car.offsetLeft;   //initialise the position of the player (x-axis)
     racer.verticalPos = car.offsetTop; //initialise the position of the player (y-axis) 
 
-
-    for (x = 0; x<3; x++)   {
-        let fuel = document.createElement("div");
-        fuel.setAttribute("class", "fuelStyle");
-        
-        fuel.verticalPos=(x*150);
-        fuel.style.top = fuel.verticalPos + "px";
-        let random =  Math.floor(Math.random() * 750) + "px";
-        fuel.style.left = random;
-        road.append(fuel);
-   }
+    /*let fuel = document.createElement("div");
+    fuel.setAttribute("class", "fuelStyle");
+    let rightDiv = document.querySelector("#rightDiv");
+    let leftDiv = document.querySelector("#leftDiv");
+    let midDiv = document.querySelector("#midDiv");*/
 
    
     
-		
-		
+
+    let fuelImg = document.createElement("img");    //create an image element, fuelImg
+ 
+    fuelImg.src = "media/fuel"; //add the image source to fuelImg 
+    let fuelPoint = document.getElementById("fuelDiv");   //create a parent variable that stores the fuelDiv
+     
+    fuelPoint.appendChild(fuelImg);    //add fuelImg to the fuelDiv
     
+    
+    let currentTop = 0; //initialise currentTop to 0
+    
+    
+    let initialHeight = road.offsetHeight;  //initialise height on the road
+    let initialWidth = road.offsetWidth;    //initialise width of the road
+    
+    
+
+    window.setInterval(function() { //generate a fuelPoint at a random position every 3000ms
+    
+        currentTop = Math.floor(Math.random() * initialHeight)+1;   
+        currentLeft = Math.floor(Math.random() * (initialWidth)-100)+1;
+
+        fuelPoint.style.top = currentTop + "px";    
+        fuelPoint.style.left = currentLeft + "px";
+        }, 3000);      
+
 }
