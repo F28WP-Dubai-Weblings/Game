@@ -1,3 +1,11 @@
+#container{
+  position: relative;
+}
+
+#practiceScreen{
+  position: relative;
+}
+
 .hide {
     display: none;
 }
@@ -22,8 +30,7 @@
     align-content: center;
     position: relative;
     background-size:contain;
-
-    /*overflow: hidden;*/
+    overflow: hidden;
     animation: track 25s linear infinite;
 
 
@@ -39,17 +46,11 @@
     }
   }
 
-.fuelStyle{
-  /*background-image:url("media/police.png");*/
-  position: absolute;
-  background: crimson;
-  height:70px;
-  width:50px;
-  bottom:120px;
-  left: 50px;
-  
-}
 
+
+#fuelDiv{
+  position: absolute;
+}
 
 
 .trackContainer{
