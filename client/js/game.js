@@ -52,7 +52,7 @@ function downarrow() {
 function startGame() {
     
     
-    myMusic = new sound("gametheme.mp3");
+    myMusic = new sound("car bg music 1.mp3");
     myMusic.play();
     myGameArea.start();
 }
