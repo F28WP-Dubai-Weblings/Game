@@ -1,5 +1,5 @@
 // js code here
-var raceGame;
+/*var raceGame;
 var spwanpoint=0;
 var type=0;
 var raceObstacles = [];
@@ -47,4 +47,15 @@ function downarrow() {
           clearInterval(this.interval);
       }
 
-}
+}*/
+
+console.log("multiplayer.js");
+
+           
+
+
+let h1 = document.createElement("h1");
+let y = document.createTextNode("This just got added");
+h1.appendChild(y);
+
+document.body.appendChild(h1);
