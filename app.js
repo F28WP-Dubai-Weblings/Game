@@ -1,22 +1,33 @@
 //entry point file of the server
-
-
+console.log("hello world");
 
 const express = require('express');
-const PORT = 3000 || process.env.PORT
 const app = express();
-app.listen(PORT, () => console.log('Server running on port ${PORT}'));
-app.use(express.static('client'));
-
-
-/*const path = require('path');
 const server = require('http').createServer(app);
 
 
-//app.use(express.static(path.join(__dirname, '/static')))
+
+
 
 app.get('/', function (req, res) {
-  res.send("This is a test");
+    res.sendFile(__dirname + '/client'); //set default request path
 });
 
-server.listen(3000);*/
+app.use(express.static(__dirname + '/client'));
+
+server.listen(5000);
+
+console.log("server is on");
+
+//app.listen(PORT, () => console.log('Server running on port ${PORT}'));
+//app.use(express.static('client'));
+
+let io = require ('socket.io')(server,{});
+io.sockets.on('connection',function(socket){
+  console.log('socket connected');
+
+  socket.on('happy', function(data){
+    console.log('yay!' + data.reason);
+  });
+});
+

@@ -14,44 +14,7 @@ body{
     padding: 0px 17px 5px 17px;
     border-width: 3px;
     height:150px;
-    /*
-    position:relative;
-    display:flex;
-    text-align: center;
-    justify-content: center;
-    border: solid;
-    border-width: 3px;
-    margin: 2px 0px 40px 0px;
-    padding: 0px 17px 5px 17px;
-    font-family: fantasy;
-    height:150px;*/
-}
-  
-  
-  /*.nav-links{
-    margin-right:20px;
   }
-  
-  .left-panel{
-    display:flex;
-    margin-right:150px;
-    position: relative;
-    top:60px;
-  
-  }
-  .right-panel{
-    display:flex;
-    margin-left:150px;
-    position: relative;
-    top:60px;
-  }
-  
-  #title{
-    color:white;
-    position: relative;
-    top:15px;
-    font-size:90px;
-  }*/
   
 .game{
     position: relative;

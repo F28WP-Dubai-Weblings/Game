@@ -47,7 +47,13 @@ function downarrow() {
           clearInterval(this.interval);
       }
 
+
 }
+
+}
+
+
+
 //background music
 function startGame() {
     
@@ -68,4 +74,4 @@ function updateGameArea() //this function : stops the music when the car hits an
         } 
     }
 
-
+}

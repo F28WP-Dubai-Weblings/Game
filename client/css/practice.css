@@ -11,7 +11,7 @@
 }
 
 .carVector{
-    background-image:url("media/raceGreen.png");
+    background-image:url("https://f28wp-dubai-weblings.github.io/Game/client/media/raceGreen.png");
     position: absolute;
     height:150px;
     width:130px;
@@ -31,7 +31,7 @@
     position: relative;
     background-size:contain;
     overflow: hidden;
-    animation: track 25s linear infinite;
+    animation: track 21s linear infinite;
 
 
 }

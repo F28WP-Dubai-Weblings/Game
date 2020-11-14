@@ -7,8 +7,9 @@ document.addEventListener("keydown", downKey);
 document.addEventListener("keyup", upKey);
 startBoard.addEventListener("click", start);
 
+console.log("in practice")
 let racer = {
-    pixelPosition:10
+    pixelPosition:4
 };
 
 let events = {  //set the default values of all relevant key events to false
@@ -19,7 +20,7 @@ let events = {  //set the default values of all relevant key events to false
 }; 
 
 function downKey(event){
-    event.preventDefault();
+    event.preventDefault(); //disregrard the inbuilt default representation of the key events
     events[event.key] = true;
     
 }
@@ -48,7 +49,7 @@ function move(){
         if (events.ArrowDown  && racer.verticalPos<1000) {  //move down when ArrowDown is pressed & don't let the car move beyond 1000px (height)
             racer.verticalPos += racer.pixelPosition;
         }
-        if (events.ArrowRight && racer.horizontalPos<950) {    //move right when the ArrowRight is press & don't let the car move beyond 1020px (width)
+        if (events.ArrowRight && racer.horizontalPos<687) {    //move right when the ArrowRight is press & don't let the car move beyond 1020px (width)
             racer.horizontalPos += racer.pixelPosition;
         }
     }
@@ -77,19 +78,11 @@ function start(){
 
     racer.horizontalPos = car.offsetLeft;   //initialise the position of the player (x-axis)
     racer.verticalPos = car.offsetTop; //initialise the position of the player (y-axis) 
-
-    /*let fuel = document.createElement("div");
-    fuel.setAttribute("class", "fuelStyle");
-    let rightDiv = document.querySelector("#rightDiv");
-    let leftDiv = document.querySelector("#leftDiv");
-    let midDiv = document.querySelector("#midDiv");*/
-
-   
-    
+  
 
     let fuelImg = document.createElement("img");    //create an image element, fuelImg
  
-    fuelImg.src = "media/fuel"; //add the image source to fuelImg 
+    fuelImg.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/fuel.png"; //add the image source to fuelImg 
     let fuelPoint = document.getElementById("fuelDiv");   //create a parent variable that stores the fuelDiv
      
     fuelPoint.appendChild(fuelImg);    //add fuelImg to the fuelDiv
@@ -102,14 +95,22 @@ function start(){
     let initialWidth = road.offsetWidth;    //initialise width of the road
     
     
-
+    let runner = 0;
     window.setInterval(function() { //generate a fuelPoint at a random position every 3000ms
-    
-        currentTop = Math.floor(Math.random() * initialHeight)+1;   
-        currentLeft = Math.floor(Math.random() * (initialWidth)-100)+1;
-
+        
+        if (runner === 2){
+            runner = 0;
+            currentTop = 0;
+        }
+        if (runner === 1){
+            currentTop = 400;
+        }
+        //currentTop = Math.floor(Math.random() * initialHeight)+1;   
+        currentLeft =(0.9 * (initialWidth)-100)+1;
+        
         fuelPoint.style.top = currentTop + "px";    
         fuelPoint.style.left = currentLeft + "px";
+        runner = runner +1;
         }, 3000);      
 
 }
