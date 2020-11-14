@@ -1,5 +1,5 @@
 // js code here
-/*var raceGame;
+var raceGame;
 var spwanpoint=0;
 var type=0;
 var raceObstacles = [];
@@ -47,15 +47,31 @@ function downarrow() {
           clearInterval(this.interval);
       }
 
-}*/
 
-console.log("multiplayer.js");
+}
 
-           
+}
 
 
-let h1 = document.createElement("h1");
-let y = document.createTextNode("This just got added");
-h1.appendChild(y);
 
-document.body.appendChild(h1);
+//background music
+function startGame() {
+    
+    
+    myMusic = new sound("car bg music 1.mp3");
+    myMusic.play();
+    myGameArea.start();
+}
+function updateGameArea() //this function : stops the music when the car hits an obstacle.
+{
+    var x, height, gap, minHeight, maxHeight, minGap, maxGap;
+    for (i = 0; i < myObstacles.length; i += 1) {
+        if (myGamePiece.crashWith(myObstacles[i])) {
+            
+            myMusic.stop();
+            myGameArea.stop();
+            return;
+        } 
+    }
+
+}
