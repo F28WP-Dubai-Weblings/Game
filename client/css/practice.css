@@ -1,9 +1,15 @@
+
+
 #container{
   position: relative;
 }
 
-#practiceScreen{
+.practiceScreen{
   position: relative;
+  background-color:black;
+  background-image: url("temp.png");  /*temporary game bg*/
+  background-size: 100%;
+
 }
 
 .hide {
