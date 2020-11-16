@@ -32,8 +32,6 @@ function upKey(event){
 }
 
 
-
-
 function move(){
 
     let car = document.querySelector(".carVector");
@@ -55,8 +53,6 @@ function move(){
     }
     car.style.left = racer.horizontalPos + "px";
     car.style.top = racer.verticalPos + "px";
-
-
 
     window.requestAnimationFrame(move);
 }
@@ -105,7 +101,7 @@ function start(){
         if (runner === 1){
             currentTop = 400;
         }
-        //currentTop = Math.floor(Math.random() * initialHeight)+1;   
+       
         currentLeft =(0.9 * (initialWidth)-100)+1;
         
         fuelPoint.style.top = currentTop + "px";    

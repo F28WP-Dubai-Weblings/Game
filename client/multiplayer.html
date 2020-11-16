@@ -5,26 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multiplayer</title>
+    <link rel='stylesheet' href='css/multiplayer.css'/>
 </head>
 <body>
    
         <div class ="container h-100">
 
             <div id = "gameScreen">
-                <div class = animateTrack> 
-                        <!--<div id = "fuelDiv"></div>-->
+                <div id ="Track">
+                    <canvas id="canvas"></canvas>
                 </div>
             </div>
         </div>
 
-        <script src="js/multiplayer.js"></script>
         <script src ="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-        <script>
-            let socket = io(); //initialise a new socket each time a player arrives
-            socket.emit('happy', {
-                reason:'data recieved!'
-            });
-        </script>
+        <script src="js/multiplayer.js"></script>
+       
+        
    
 </body>
 </html>
