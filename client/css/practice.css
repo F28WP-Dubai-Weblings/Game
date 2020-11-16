@@ -7,7 +7,7 @@
 .practiceScreen{
   position: relative;
   background-color:black;
-  background-image: url("temp.png");  /*temporary game bg*/
+  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/temp.png");  /*temporary game bg*/
   background-size: 100%;
 
 }

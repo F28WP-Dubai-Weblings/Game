@@ -1,5 +1,6 @@
 // js code here
-var raceGame;
+
+/*var raceGame;
 var spwanpoint=0;
 var type=0;
 var raceObstacles = [];
@@ -50,10 +51,6 @@ function downarrow() {
 
 }
 
-}
-
-
-
 //background music
 function startGame() {
     
@@ -74,4 +71,72 @@ function updateGameArea() //this function : stops the music when the car hits an
         } 
     }
 
+}*/
+
+
+/*let car = document.createElement("div"); //create a div element in the dom
+    car.setAttribute("class", "carVector"); //set class attribute of the div
+    track.appendChild(car);   //add the car to the track*/ 
+
+//import Liveplayers from './liveplayers.js'
+
+class Liveplayers{
+    constructor({id}){
+        this.id = id;
+        this.horizontalPos = 10;
+        this.verticalPos = 10;
+        this.score = 0;
+        this.movement = {
+            ArrowUp = false,
+            ArrowDown = false,
+            ArrowRight = false,
+            ArrowLeft = false
+        };
+        this.acceleration = 10;
+        //this.speed = 10;
+    }
+    
+    draw(ctx){
+        ctx.beginPath();
+        ctx.fillStyle = "red";
+        ctx.fillRect(this.horizontalPos, this.verticalPos, 50, 50);
+    }
 }
+
+const canvas = document.getElementById("canvas"),
+ctx = canvas.getContext("2d");
+
+fillTrack(canvas);
+
+function fillTrack(canvas){   //make the canvas cover the entire Track div
+    canvas.style.width='100%';
+    canvas.style.height='100%';
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+}
+
+let clients = [];
+const socket = io(); //initialise a new socket each time a player arrives
+
+socket.emit('happy', {
+    reason:'data recieved!'
+});
+
+socket.on("init", ({id,player_list}) => {
+    console.log("got the init message");
+
+    const player = new Liveplayers({id}); //instantiate an object of the 'liveplayers' class
+    
+    socket.emit('newPlayer', player);   //to broadcast to other players that there is a new player
+    socket.on('newPlayer', newPlayer => clients.push(new Liveplayer(newPlayer)));   //update the 'clients' list on their browser when a newPlayer message is recieved
+ 
+    clients = player_list.map( elem => new Liveplayers(elem)).concat(player);
+    //clients.forEach(client => clients.push(new Liveplayers(client)))
+
+    function updateGameState(){
+        ctx.clearRect(0,0,canvas.width,canvas.height); //clear the canvas every frame
+        clients.forEach(client => client.draw(ctx))    //draw the updated position of the client on the canvas
+        requestAnimationFrame(updateGameState); //try adding window.
+    }
+    updateGameState();
+});
