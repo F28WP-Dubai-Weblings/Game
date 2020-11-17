@@ -74,34 +74,11 @@ function updateGameArea() //this function : stops the music when the car hits an
 }*/
 
 
-/*let car = document.createElement("div"); //create a div element in the dom
-    car.setAttribute("class", "carVector"); //set class attribute of the div
-    track.appendChild(car);   //add the car to the track*/ 
 
-//import Liveplayers from './liveplayers.js'
 
-class Liveplayers{
-    constructor({id}){
-        this.id = id;
-        this.horizontalPos = 10;
-        this.verticalPos = 10;
-        this.score = 0;
-        this.movement = {
-            ArrowUp = false,
-            ArrowDown = false,
-            ArrowRight = false,
-            ArrowLeft = false
-        };
-        this.acceleration = 10;
-        //this.speed = 10;
-    }
-    
-    draw(ctx){
-        ctx.beginPath();
-        ctx.fillStyle = "red";
-        ctx.fillRect(this.horizontalPos, this.verticalPos, 50, 50);
-    }
-}
+
+
+
 
 const canvas = document.getElementById("canvas"),
 ctx = canvas.getContext("2d");
@@ -115,28 +92,112 @@ function fillTrack(canvas){   //make the canvas cover the entire Track div
     canvas.height = canvas.offsetHeight;
 }
 
-let clients = [];
+
+
+class Liveplayers{
+    constructor({id}){
+        this.id = id;
+        this.horizontalPos = 10;
+        this.verticalPos = 10;
+        this.score = 0;
+        this.keyEvents = {  //set the default values of all relevant key events to false
+            ArrowUp:   false,
+            ArrowDown:  false,
+            ArrowRight: false,
+            ArrowLeft: false
+        }; 
+        this.speed = 10;
+    }
+    
+    draw(ctx){
+        ctx.beginPath();
+        ctx.fillStyle = "red";
+        ctx.fillRect(this.horizontalPos, this.verticalPos, 50, 50);
+    }
+
+    move(dir){
+        if (this.keyEvents.ArrowUp || dir === "up") {   //move up when ArrowUp is pressed & don't let the car move above 70px (height)
+        this.verticalPos -= this.speed;
+        }
+        if (this.keyEvents.ArrowLeft || dir === "left") {   //move left when ArrowLeft is pressed & set minimum horizontal position as 35px (width)
+            this.horizontalPos -= this.speed;
+        }
+
+        if (this.keyEvents.ArrowDown || dir === "down") {  //move down when ArrowDown is pressed & don't let the car move beyond 1000px (height)
+            this.verticalPos += this.speed;
+        }
+        if (this.keyEvents.ArrowRight || dir === "right") {    //move right when the ArrowRight is press & don't let the car move beyond 1020px (width)
+            this.horizontalPos += this.speed;
+        }
+        this.draw(ctx);
+    }
+
+}
+
+//import { Liveplayers } from './liveplayers.js';
+
+
+function controls(player, socket) {
+    console.log("here");
+      
+    document.addEventListener("keydown", downKey);
+
+    function downKey(event){
+        event.preventDefault(); //disregrard the inbuilt default representation of the key events
+        player.keyEvents[event.key] = true;
+        let dir;
+        if (event.key ===  68) dir = "right";
+        if (event.key === 83) dir = "down";
+        if (event.key === 65) dir = "left";
+        if (event.key === 87) dir = "up";
+        player.move(dir);   //try without dir?
+        socket.emit("playerMoved", dir);
+    }
+
+
+    console.log("the new position is"+ player.horizontalPos);
+
+    document.addEventListener("keyup", upKey);
+    function upKey(event){
+        event.preventDefault();
+        player.keyEvents[event.key] = false;
+        player.move();
+        console.log(player.verticalPos, player.horizontalPos);
+    }
+
+};
+
+let players = [];
+
 const socket = io(); //initialise a new socket each time a player arrives
 
-socket.emit('happy', {
-    reason:'data recieved!'
-});
-
 socket.on("init", ({id,player_list}) => {
+    console.log("there is a player connected" + players.length);
+
     console.log("got the init message");
-
     const player = new Liveplayers({id}); //instantiate an object of the 'liveplayers' class
-    
-    socket.emit('newPlayer', player);   //to broadcast to other players that there is a new player
-    socket.on('newPlayer', newPlayer => clients.push(new Liveplayer(newPlayer)));   //update the 'clients' list on their browser when a newPlayer message is recieved
- 
-    clients = player_list.map( elem => new Liveplayers(elem)).concat(player);
-    //clients.forEach(client => clients.push(new Liveplayers(client)))
 
-    function updateGameState(){
+    controls(player, socket);
+
+    socket.emit('newPlayer', player);   //emit to the server that a new player has joined 
+    socket.on('newPlayer', newPlayer => {
+        console.log('player connected')
+        players.push(new Liveplayers(newPlayer))});  //update the 'clients' list on the browser when a newPlayer message is recieved
+
+    socket.on('playerMoved', ({id, dir}) => players.find(elem => elem.id === id).move(dir));
+
+    players = player_list.map(v => new Liveplayers(v)).concat(player);
+    console.log("there is a player connected" + players.length);
+
+    //socket.on('stopMovement', ({id, dir}) => clients.find(elem => elem.id === id).stop());
+
+    //clients.forEach(client => clients.push(new Liveplayers(client)))
+    
+
+    function draw(){
         ctx.clearRect(0,0,canvas.width,canvas.height); //clear the canvas every frame
-        clients.forEach(client => client.draw(ctx))    //draw the updated position of the client on the canvas
-        requestAnimationFrame(updateGameState); //try adding window.
+        players.forEach(client => client.draw(ctx))    //draw the updated position of the client on the canvas
+        requestAnimationFrame(draw); //try adding window.
     }
-    updateGameState();
+    draw();
 });
