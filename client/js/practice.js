@@ -22,6 +22,7 @@ let events = {  //set the default values of all relevant key events to false
 function downKey(event){
     event.preventDefault(); //disregrard the inbuilt default representation of the key events
     events[event.key] = true;
+    console.log(event.key);
     
 }
 
