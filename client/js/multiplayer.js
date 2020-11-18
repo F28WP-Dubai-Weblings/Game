@@ -154,11 +154,25 @@ socket.on("init", ({id,player_list, fuelPoints}) => {
     players = player_list.map(element => new Liveplayers(element)).concat(player);  //make a copy of the list of players sent by the server on the client browser
     points = fuelPoints.map(element => new Fuel(element));  //make a copy of the list of fuelPoints sent by the server on the client browser
     
+   let counter = 0;
 
     function draw(){
         ctx.clearRect(0,0,canvas.width,canvas.height); //clear the canvas every frame
-        players.forEach(client => client.draw(ctx))    //draw the updated position of the client on the canvas
-        points.forEach(client => client.draw(ctx))
+        let randomx = () => {return Math.random() * 620};
+        let randomy = () => {return Math.random() * 630};
+
+        players.forEach(client => client.draw(ctx));    //draw the updated position of the client on the canvas
+        if (counter >=50 && counter <= 150){
+            points.horizontalPos =  randomx();
+            points.verticalPos = randomy();
+            points.forEach(client => client.draw(ctx)); 
+            counter++;
+            if (counter === 149) {
+                counter = 0;
+            }
+        }
+        counter++;
+        console.log(counter);
         window.requestAnimationFrame(draw); //try adding window.
     }
     draw();

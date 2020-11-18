@@ -45,8 +45,8 @@ let clients =[];  //create an object to store the socket of each client
 let fuelPoints = [];
 
 
-for (let i = 1; i<=30; i++) {
-  fuelPoints.push(new Fuel({horizontalPos: Math.random() * 620, verticalPos:  Math.random() * 630}))
+for (let i = 1; i<=2; i++) {
+  fuelPoints.push(new Fuel({horizontalPos: Math.random() * 620, verticalPos:  Math.random() * 670}))
 }
 
 //all socket events go in here
