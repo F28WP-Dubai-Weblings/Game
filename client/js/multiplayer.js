@@ -58,7 +58,7 @@ class Liveplayers{
     draw(ctx){
         ctx.beginPath();
         const img = new Image();
-        img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/raceGreen.png";
+        img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/fuel.png";
         ctx.drawImage(img, this.horizontalPos, this.verticalPos, img.width, 150);
     }
 
