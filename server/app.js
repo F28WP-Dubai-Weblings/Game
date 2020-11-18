@@ -8,14 +8,6 @@ const path = require('path');
 // const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
-// app.use(express.static(''));
-app.set('view-engine', 'ejs')
-app.use(express.static(path.join(__dirname, '/static')))
-
-app.get('/', function(req, res){
-  res.render('index.ejs', {name: 'Kyle'})
-});
-
 app.use(express.urlencoded({ extended: false}))
 const port = process.env.PORT || 3000;
 const server = app.listen(port, function() {
