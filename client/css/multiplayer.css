@@ -4,6 +4,14 @@
     padding: 0;
 }
 
+#gameScreen{
+  position: relative;
+  background-color:black;
+  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/temp.png");  /*temporary game bg*/
+  background-size: 100%;
+
+}
+
 #Track{
     background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/racetrack.png");
     width:700px;

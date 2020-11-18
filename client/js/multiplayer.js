@@ -115,18 +115,18 @@ class Liveplayers{
         ctx.fillRect(this.horizontalPos, this.verticalPos, 50, 50);
     }
 
-    move(dir){
-        if (this.keyEvents.ArrowUp || dir === "up") {   //move up when ArrowUp is pressed & don't let the car move above 70px (height)
+    move(){
+        if (this.keyEvents.ArrowUp) {   //move up when ArrowUp is pressed & don't let the car move above 70px (height)
             this.verticalPos -= this.speed;
         }
-        if (this.keyEvents.ArrowLeft || dir === "left") {   //move left when ArrowLeft is pressed & set minimum horizontal position as 35px (width)
+        if (this.keyEvents.ArrowLeft) {   //move left when ArrowLeft is pressed & set minimum horizontal position as 35px (width)
             this.horizontalPos -= this.speed;
         }
 
-        if (this.keyEvents.ArrowDown || dir === "down") {  //move down when ArrowDown is pressed & don't let the car move beyond 1000px (height)
+        if (this.keyEvents.ArrowDown) {  //move down when ArrowDown is pressed & don't let the car move beyond 1000px (height)
             this.verticalPos += this.speed;
         }
-        if (this.keyEvents.ArrowRight || dir === "right") {    //move right when the ArrowRight is press & don't let the car move beyond 1020px (width)
+        if (this.keyEvents.ArrowRight) {    //move right when the ArrowRight is press & don't let the car move beyond 1020px (width)
             this.horizontalPos += this.speed;
         }
         this.draw(ctx);
@@ -147,12 +147,7 @@ function controls(player, socket) {
         event.preventDefault(); //disregrard the inbuilt default representation of the key events
         player.keyEvents[event.key] = true;
 
-        let dir;
-        if (event.key ===  68) dir = "right";
-        if (event.key === 83) dir = "down";
-        if (event.key === 65) dir = "left";
-        if (event.key === 87) dir = "up";
-        player.move(dir);   //try without dir?
+        player.move();   //try without dir?
         console.log("the new player positionn is"+ player.horizontalPos + player.verticalPos);
         console.log("the player sent is" + player.id);
         socket.emit("playerMoved", {id: player.id, horizontalPos: player.horizontalPos, verticalPos: player.verticalPos});
@@ -160,14 +155,12 @@ function controls(player, socket) {
 
     }
 
-
     window.addEventListener("keyup", upKey);
     function upKey(event){
         event.preventDefault();
         player.keyEvents[event.key] = false;
-        let dir ="none";
-        player.move(dir);
-        console.log(player.verticalPos, player.horizontalPos);
+        player.move();
+
     }
 
 };
@@ -192,7 +185,6 @@ socket.on("init", ({id,player_list}) => {
 
     socket.on('playerMoved', ({id, horizontalPos, verticalPos}) => {
         console.log("the horizontal Pos recieved here in multiplayer.js "+ horizontalPos);
-        //console.log("the player moving is"+ (players.find(elem => elem.id === id)).horizontalPos + "and" + (players.find(elem => elem.id === id)).verticalPos);
         players.find(elem => elem.id === id).horizontalPos = horizontalPos;
         players.find(elem => elem.id === id).verticalPos = verticalPos;
 
