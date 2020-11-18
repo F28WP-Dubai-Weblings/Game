@@ -76,10 +76,6 @@ function updateGameArea() //this function : stops the music when the car hits an
 
 
 
-
-
-
-
 const canvas = document.getElementById("canvas"),
 ctx = canvas.getContext("2d");
 
@@ -91,8 +87,6 @@ function fillTrack(canvas){   //make the canvas cover the entire Track div
     canvas.width  = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
 }
-
-
 
 class Liveplayers{
     constructor({id}){
@@ -111,8 +105,9 @@ class Liveplayers{
     
     draw(ctx){
         ctx.beginPath();
-        ctx.fillStyle = "red";
-        ctx.fillRect(this.horizontalPos, this.verticalPos, 50, 50);
+        const img = new Image();
+        img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/raceGreen.png";
+        ctx.drawImage(img, this.horizontalPos, this.verticalPos, img.width, 150);
     }
 
     move(){
