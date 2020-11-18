@@ -28,15 +28,20 @@ let clients =[];  //create an object to store the socket of each client
 io.sockets.on('connection',socket => {
   
   socket.emit('init', {id:socket.id, player_list: clients});  //assign a unique id to each client and access to the list of live players
-  console.log("the player list is" + clients);
+  
 
   socket.on('newPlayer', newPlayer => {
+    console.log("got the new player message");
     newPlayer.id = socket.id;
     clients.push(newPlayer);
     socket.broadcast.emit("newPlayer", newPlayer);
   });
 
-  socket.on('playerMoved', dir => socket.broadcast.emit('playerMoved', {id: socket.id, dir}));
+
+  socket.on('playerMoved', ({id, horizontalPos, verticalPos}) => {
+
+    console.log("the horizontal Pos recieved here in app.js "+ horizontalPos);
+    socket.broadcast.emit('playerMoved', {id: socket.id, horizontalPos, verticalPos})});
 });
 
 
