@@ -89,8 +89,10 @@ class Fuel {
       this.height = 40;
     }
   
-    draw(ctx) {
+    draw(ctx, {x, y}) {
       ctx.beginPath();
+      this.horizontalPos = x;
+      this.verticalPos = y;
       const img = new Image();
           img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/fuel.png";
           ctx.drawImage(img, this.horizontalPos, this.verticalPos, img.width, 150);
@@ -153,26 +155,31 @@ socket.on("init", ({id,player_list, fuelPoints}) => {
 
     players = player_list.map(element => new Liveplayers(element)).concat(player);  //make a copy of the list of players sent by the server on the client browser
     points = fuelPoints.map(element => new Fuel(element));  //make a copy of the list of fuelPoints sent by the server on the client browser
-    
-   let counter = 0;
+
+    let counter = 0;
+    var x,y;
+    function store() {
+        x = Math.random()*620;
+        y = Math.random()*600;
+    };
 
     function draw(){
         ctx.clearRect(0,0,canvas.width,canvas.height); //clear the canvas every frame
-        let randomx = () => {return Math.random() * 620};
-        let randomy = () => {return Math.random() * 630};
-
         players.forEach(client => client.draw(ctx));    //draw the updated position of the client on the canvas
-        if (counter >=50 && counter <= 150){
-            points.horizontalPos =  randomx();
-            points.verticalPos = randomy();
-            points.forEach(client => client.draw(ctx)); 
+
+       
+
+        if (counter >=50 && counter <= 500){
+            console.log("x is "+x);
+            console.log("y is "+y);
+            points.forEach(client => client.draw(ctx, {x: x, y: y})); 
             counter++;
             if (counter === 149) {
                 counter = 0;
+                store();
             }
         }
         counter++;
-        console.log(counter);
         window.requestAnimationFrame(draw); //try adding window.
     }
     draw();
