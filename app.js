@@ -23,9 +23,9 @@ console.log("server is on");
 //                                                                  FUELPOINTS CLASS
 
 class Fuel {
-  constructor({x,y}) {
+  constructor({horizontalPos =10,verticalPos=10}) {
     this.horizontalPos = horizontalPos;
-    this.verticalPos = this.verticalPos;
+    this.verticalPos = verticalPos;
     this.width = 70;
     this.height = 40;
   }
@@ -33,29 +33,28 @@ class Fuel {
   draw(ctx) {
     ctx.beginPath();
     const img = new Image();
-        img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/raceGreen.png";
+        img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/fuel.png";
         ctx.drawImage(img, this.horizontalPos, this.verticalPos, img.width, 150);
   }
 }
 
 
-
-
-
-
-
-
 //                                                                  WEBSOCKET COMMUNICATION
 let io = require ('socket.io')(server,{});
 let clients =[];  //create an object to store the socket of each client
+let fuelPoints = [];
+
+
+for (let i = 1; i<=30; i++) {
+  fuelPoints.push(new Fuel({horizontalPos: Math.random() * 620, verticalPos:  Math.random() * 630}))
+}
 
 //all socket events go in here
 
 io.sockets.on('connection',socket => {
   
-  socket.emit('init', {id:socket.id, player_list: clients});  //assign a unique id to each client and access to the list of live players
+  socket.emit('init', {id:socket.id, player_list: clients, fuelPoints});  //assign a unique id to each client and access to the list of live players
   
-
   socket.on('newPlayer', newPlayer => {
     console.log("got the new player message");
     newPlayer.id = socket.id;
@@ -63,10 +62,7 @@ io.sockets.on('connection',socket => {
     socket.broadcast.emit("newPlayer", newPlayer);
   });
 
-
   socket.on('playerMoved', ({id, horizontalPos, verticalPos}) => {
-
-    console.log("the horizontal Pos recieved here in app.js "+ horizontalPos);
     socket.broadcast.emit('playerMoved', {id: socket.id, horizontalPos, verticalPos})});
 });
 
