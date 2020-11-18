@@ -20,6 +20,21 @@ console.log("server is on");
 //app.use(express.static('client'));
 
 
+//                                                                  FUELPOINTS CLASS
+
+class Fuel {
+  constructor
+
+}
+
+
+
+
+
+
+
+
+//                                                                  WEBSOCKET COMMUNICATION
 let io = require ('socket.io')(server,{});
 let clients =[];  //create an object to store the socket of each client
 

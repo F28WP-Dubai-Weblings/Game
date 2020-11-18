@@ -1,58 +1,8 @@
 // js code here
 
-/*var raceGame;
-var spwanpoint=0;
-var type=0;
-var raceObstacles = [];
-var raceScore;
-
-
-function startGame() {
-    raceGame = new component(40, 70, "c1.png",200,400, "image");
-    raceGame.gravity = 0.00;
-    raceScore = new component("30px", "Impact", "white", 150, 40, "text");
-    raceGameArea.start();
-}
-
-var raceGameArea = {
-    canvas : document.getElementById("Game") ,
-        start : function() {
-        this.canvas.width = 420;
-        this.canvas.height = 500;
-		this.canvas.id="demo";
-        this.context = this.canvas.getContext("2d");
-        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-        this.frameNo = 0;
-        this.interval = setInterval(updateGameArea, 20);
-		 window.addEventListener('keydown', function (e) {
-            raceGameArea.key = e.keyCode;
-        })
-        window.addEventListener('keyup', function (e) {
-            raceGameArea.key = false;
-        })
-
-console.log("the client script is working") ;
-
-function downarrow() {
-    accelerate(-0.2);
-  }
-  
-  function uparrow() {
-    accelerate(0.05);
-  }
-          },
-      clear : function() {
-          this.context.clearRect(0, 0, this.canvas.Width, this.canvas.Height);
-      },
-      stop : function() {
-          clearInterval(this.interval);
-      }
-
-
-}
 
 //background music
-function startGame() {
+/*function startGame() {
     
     
     myMusic = new sound("car bg music 1.mp3");
@@ -87,6 +37,8 @@ function fillTrack(canvas){   //make the canvas cover the entire Track div
     canvas.width  = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
 }
+
+//                                                          LIVE PLAYERS CLASS 
 
 class Liveplayers{
     constructor({id}){
@@ -126,11 +78,13 @@ class Liveplayers{
         }
         this.draw(ctx);
     }
-
 }
 
 //import { Liveplayers } from './liveplayers.js';
 
+
+
+//                                                 MODULE AND EVENT LISTENERS FOR PLAYER MOVEMENT
 
 function controls(player, socket) {
     console.log("here");
@@ -147,7 +101,6 @@ function controls(player, socket) {
         console.log("the player sent is" + player.id);
         socket.emit("playerMoved", {id: player.id, horizontalPos: player.horizontalPos, verticalPos: player.verticalPos});
         console.log("the horizontal Pos sent from multiplayer.js"+ player.horizontalPos);
-
     }
 
     window.addEventListener("keyup", upKey);
@@ -155,7 +108,6 @@ function controls(player, socket) {
         event.preventDefault();
         player.keyEvents[event.key] = false;
         player.move();
-
     }
 
 };
@@ -185,7 +137,7 @@ socket.on("init", ({id,player_list}) => {
 
     });
 
-    players = player_list.map(v => new Liveplayers(v)).concat(player);
+    players = player_list.map(element => new Liveplayers(element)).concat(player);
 
     //socket.on('stopMovement', ({id, dir}) => clients.find(elem => elem.id === id).stop());
     
