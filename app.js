@@ -23,8 +23,19 @@ console.log("server is on");
 //                                                                  FUELPOINTS CLASS
 
 class Fuel {
-  constructor
+  constructor({x,y}) {
+    this.horizontalPos = horizontalPos;
+    this.verticalPos = this.verticalPos;
+    this.width = 70;
+    this.height = 40;
+  }
 
+  draw(ctx) {
+    ctx.beginPath();
+    const img = new Image();
+        img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/raceGreen.png";
+        ctx.drawImage(img, this.horizontalPos, this.verticalPos, img.width, 150);
+  }
 }
 
 
