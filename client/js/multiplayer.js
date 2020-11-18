@@ -79,11 +79,6 @@ function updateGameArea() //this function : stops the music when the car hits an
 
 
 
-let i = 1;
-setTimeout(function run() {
-  func(i++);
-  setTimeout(run, 20000);
-}, 20000);
 
 const canvas = document.getElementById("canvas"),
 ctx = canvas.getContext("2d");
