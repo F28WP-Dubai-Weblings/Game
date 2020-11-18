@@ -117,7 +117,7 @@ class Liveplayers{
 
     move(dir){
         if (this.keyEvents.ArrowUp || dir === "up") {   //move up when ArrowUp is pressed & don't let the car move above 70px (height)
-        this.verticalPos -= this.speed;
+            this.verticalPos -= this.speed;
         }
         if (this.keyEvents.ArrowLeft || dir === "left") {   //move left when ArrowLeft is pressed & set minimum horizontal position as 35px (width)
             this.horizontalPos -= this.speed;
@@ -140,28 +140,33 @@ class Liveplayers{
 function controls(player, socket) {
     console.log("here");
       
-    document.addEventListener("keydown", downKey);
+    window.addEventListener("keydown", downKey);
 
     function downKey(event){
+        console.log("the player positionn is"+ player.horizontalPos + player.verticalPos);
         event.preventDefault(); //disregrard the inbuilt default representation of the key events
         player.keyEvents[event.key] = true;
+
         let dir;
         if (event.key ===  68) dir = "right";
         if (event.key === 83) dir = "down";
         if (event.key === 65) dir = "left";
         if (event.key === 87) dir = "up";
         player.move(dir);   //try without dir?
-        socket.emit("playerMoved", dir);
+        console.log("the new player positionn is"+ player.horizontalPos + player.verticalPos);
+        console.log("the player sent is" + player.id);
+        socket.emit("playerMoved", {id: player.id, horizontalPos: player.horizontalPos, verticalPos: player.verticalPos});
+        console.log("the horizontal Pos sent from multiplayer.js"+ player.horizontalPos);
+
     }
 
 
-    console.log("the new position is"+ player.horizontalPos);
-
-    document.addEventListener("keyup", upKey);
+    window.addEventListener("keyup", upKey);
     function upKey(event){
         event.preventDefault();
         player.keyEvents[event.key] = false;
-        player.move();
+        let dir ="none";
+        player.move(dir);
         console.log(player.verticalPos, player.horizontalPos);
     }
 
@@ -181,17 +186,21 @@ socket.on("init", ({id,player_list}) => {
 
     socket.emit('newPlayer', player);   //emit to the server that a new player has joined 
     socket.on('newPlayer', newPlayer => {
-        console.log('player connected')
+        console.log("pushing the player onto screen");
         players.push(new Liveplayers(newPlayer))});  //update the 'clients' list on the browser when a newPlayer message is recieved
+    
 
-    socket.on('playerMoved', ({id, dir}) => players.find(elem => elem.id === id).move(dir));
+    socket.on('playerMoved', ({id, horizontalPos, verticalPos}) => {
+        console.log("the horizontal Pos recieved here in multiplayer.js "+ horizontalPos);
+        //console.log("the player moving is"+ (players.find(elem => elem.id === id)).horizontalPos + "and" + (players.find(elem => elem.id === id)).verticalPos);
+        players.find(elem => elem.id === id).horizontalPos = horizontalPos;
+        players.find(elem => elem.id === id).verticalPos = verticalPos;
+
+    });
 
     players = player_list.map(v => new Liveplayers(v)).concat(player);
-    console.log("there is a player connected" + players.length);
 
     //socket.on('stopMovement', ({id, dir}) => clients.find(elem => elem.id === id).stop());
-
-    //clients.forEach(client => clients.push(new Liveplayers(client)))
     
 
     function draw(){
