@@ -1,6 +1,3 @@
-// js code here
-
-
 //background music
 /*function startGame() {
     
@@ -20,7 +17,6 @@ function updateGameArea() //this function : stops the music when the car hits an
             return;
         } 
     }
-
 }*/
 
 
@@ -58,7 +54,7 @@ class Liveplayers{
     draw(ctx){
         ctx.beginPath();
         const img = new Image();
-        img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/fuel.png";
+        img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/racecar1.png";
         ctx.drawImage(img, this.horizontalPos, this.verticalPos, img.width, 150);
     }
 
@@ -83,6 +79,24 @@ class Liveplayers{
 //import { Liveplayers } from './liveplayers.js';
 
 
+//                                                                  FUELS
+
+class Fuel {
+    constructor({horizontalPos,verticalPos}) {
+      this.horizontalPos = horizontalPos;
+      this.verticalPos = verticalPos;
+      this.width = 70;
+      this.height = 40;
+    }
+  
+    draw(ctx) {
+      ctx.beginPath();
+      const img = new Image();
+          img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/fuel.png";
+          ctx.drawImage(img, this.horizontalPos, this.verticalPos, img.width, 150);
+    }
+  }
+
 
 //                                                 MODULE AND EVENT LISTENERS FOR PLAYER MOVEMENT
 
@@ -92,7 +106,7 @@ function controls(player, socket) {
     window.addEventListener("keydown", downKey);
 
     function downKey(event){
-        console.log("the player positionn is"+ player.horizontalPos + player.verticalPos);
+        console.log("the player position is"+ player.horizontalPos + player.verticalPos);
         event.preventDefault(); //disregrard the inbuilt default representation of the key events
         player.keyEvents[event.key] = true;
 
@@ -100,7 +114,6 @@ function controls(player, socket) {
         console.log("the new player positionn is"+ player.horizontalPos + player.verticalPos);
         console.log("the player sent is" + player.id);
         socket.emit("playerMoved", {id: player.id, horizontalPos: player.horizontalPos, verticalPos: player.verticalPos});
-        console.log("the horizontal Pos sent from multiplayer.js"+ player.horizontalPos);
     }
 
     window.addEventListener("keyup", upKey);
@@ -113,10 +126,11 @@ function controls(player, socket) {
 };
 
 let players = [];
+let points = [];
 
 const socket = io(); //initialise a new socket each time a player arrives
 
-socket.on("init", ({id,player_list}) => {
+socket.on("init", ({id,player_list, fuelPoints}) => {
     console.log("there is a player connected" + players.length);
 
     console.log("got the init message");
@@ -137,15 +151,15 @@ socket.on("init", ({id,player_list}) => {
 
     });
 
-    players = player_list.map(element => new Liveplayers(element)).concat(player);
-
-    //socket.on('stopMovement', ({id, dir}) => clients.find(elem => elem.id === id).stop());
+    players = player_list.map(element => new Liveplayers(element)).concat(player);  //make a copy of the list of players sent by the server on the client browser
+    points = fuelPoints.map(element => new Fuel(element));  //make a copy of the list of fuelPoints sent by the server on the client browser
     
 
     function draw(){
         ctx.clearRect(0,0,canvas.width,canvas.height); //clear the canvas every frame
         players.forEach(client => client.draw(ctx))    //draw the updated position of the client on the canvas
-        requestAnimationFrame(draw); //try adding window.
+        points.forEach(client => client.draw(ctx))
+        window.requestAnimationFrame(draw); //try adding window.
     }
     draw();
 });
