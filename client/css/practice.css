@@ -1,0 +1,85 @@
+
+
+#container{
+  position: relative;
+}
+
+.practiceScreen{
+  position: relative;
+  background-color:black;
+  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/temp.png");  /*temporary game bg*/
+  background-size: 100%;
+
+}
+
+.hide {
+    display: none;
+}
+
+.carVector{
+    background-image:url("https://f28wp-dubai-weblings.github.io/Game/client/media/raceGreen.png");
+    position: absolute;
+    height:150px;
+    width:130px;
+    bottom:120px;
+    background-size:contain;
+}
+
+
+.animateTrack{
+
+    background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/racetrack.png");
+    width:800px;
+    height:100vh;
+    display:block;
+    margin:auto;
+    align-content: center;
+    position: relative;
+    background-size:contain;
+    overflow: hidden;
+    animation: track 21s linear infinite;
+
+
+}
+
+@keyframes track {
+    from {
+      background-position: 0 0;
+    }
+  
+    to {
+      background-position: 0px 10050px;
+    }
+  }
+
+
+
+#fuelDiv{
+  position: absolute;
+}
+
+
+.trackContainer{
+  display:flex;
+  flex-direction: row;
+  height: 100vh;
+  
+}
+
+#leftDiv{
+  position:relative;
+  width:235px;
+  left:24px;
+}
+
+#midDiv{
+  position:relative;
+  width:244px;
+  left:40px;
+}
+
+#rightDiv{
+  width:245px;
+  position:relative;
+  left:53px;
+}
