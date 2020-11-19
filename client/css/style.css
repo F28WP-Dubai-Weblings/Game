@@ -1,0 +1,66 @@
+body{
+    background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/background.PNG");
+    background-size: 100% ;
+}
+  
+  html {
+    scroll-behavior: smooth;
+}
+  
+  .header{
+    
+    position:relative;
+    margin: 2px 0px 40px 0px;
+    padding: 0px 17px 5px 17px;
+    border-width: 3px;
+    height:150px;
+  }
+  
+.game{
+    position: relative;
+    color:white;
+    background-color: black;
+    height:500px;
+    border: solid;
+    border-width: 1px;
+    border-color: black;
+    margin: 0px 15px 40px 15px;
+    padding: 0px 17px 40px 17px;
+    border-radius: 25px;
+    font-family: fantasy;
+    top:230px;
+}
+  
+#leaderboard{
+    position: relative;
+    color:white;
+    background-color: black;
+    height:200px;
+    border: solid;
+    border-width: 1px;
+    border-color: black;
+    margin: 0px 15px 40px 15px;
+    padding: 0px 17px 40px 17px;
+    border-radius: 25px;
+    font-family: fantasy;
+    top:230px;
+}
+  
+#PLAY{
+    position: relative;
+    color:white;
+    background-color: rgb(8, 1, 8);
+    height:20px;
+    width:200px;
+    text-align:center;
+    top:5px;
+    border: solid;
+    border-width: 1px;
+    border-color: rgb(100, 97, 97);
+    margin: 30px 200px 20px 550px;
+    padding: 10px 17px 40px 17px;
+    border-radius: 17px;
+    font-family: fantasy;
+    font-size: 30px;
+}
+  
