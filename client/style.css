@@ -83,7 +83,7 @@ body{
     top:230px;
 }
   
-#PLAY{
+.PLAY{
     position: relative;
     color:white;
     background-color: rgb(8, 1, 8);
