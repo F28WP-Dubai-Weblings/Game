@@ -1,5 +1,5 @@
 //entry point file of the server
-console.log("hello world");
+console.log("This is working");
 
 const express = require('express');
 const app = express();
