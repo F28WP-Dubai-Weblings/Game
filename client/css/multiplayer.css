@@ -4,7 +4,9 @@
     padding: 0;
 }
 
+
 #scoreBoard{
+  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/scorebaord background1.png");
   position: absolute;
   background-color:white;
   height:150px;
