@@ -34,9 +34,6 @@ function fillTrack(canvas){   //make the canvas cover the entire Track div
     canvas.height = canvas.offsetHeight;
 }
 
-//const Fuel = require('./fuel.js');
-//const Liveplayers = require('./liveplayers.js');
-
 
 
 //                                                 MODULE AND EVENT LISTENERS FOR PLAYER MOVEMENT
@@ -69,6 +66,77 @@ function controls(player, socket) {
 let players = [];
 let points = [];
 let number = 0;
+//Live Players 
+class Liveplayers{
+    constructor({id, num}){
+        this.id = id;
+        this.num = num;
+        this.horizontalPos = 10;
+        this.verticalPos = 10;
+        this.score = 0;
+        this.keyEvents = {  //set the default values of all relevant key events to false
+            ArrowUp:   false,
+            ArrowDown:  false,
+            ArrowRight: false,
+            ArrowLeft: false
+        }; 
+        this.speed = 10;
+    }
+    
+    draw(ctx){
+        ctx.beginPath();
+        const img = new Image();
+        if (this.num === 1){
+            img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/racecar1.png";
+        }
+        if (this.num===2){
+
+        }
+        ctx.drawImage(img, this.horizontalPos, this.verticalPos, img.width, 150);
+    }
+
+    move(){
+        if (this.keyEvents.ArrowUp) {   //move up when ArrowUp is pressed & don't let the car move above 70px (height)
+            this.verticalPos -= this.speed;
+        }
+        if (this.keyEvents.ArrowLeft) {   //move left when ArrowLeft is pressed & set minimum horizontal position as 35px (width)
+            this.horizontalPos -= this.speed;
+        }
+
+        if (this.keyEvents.ArrowDown) {  //move down when ArrowDown is pressed & don't let the car move beyond 1000px (height)
+            this.verticalPos += this.speed;
+        }
+        if (this.keyEvents.ArrowRight) {    //move right when the ArrowRight is press & don't let the car move beyond 1020px (width)
+            this.horizontalPos += this.speed;
+        }
+        this.draw(ctx);
+    }
+}
+
+class Fuel {
+    constructor({x,y}) {
+      this.x = x;
+      this.y = y;
+      this.width = 70;
+      this.height = 40;
+    }
+  
+    updatePos(x,y){
+        this.x = x;
+        this.y = y;
+        this.draw(ctx);
+    }
+
+    draw(ctx) {
+      ctx.beginPath();
+      const img = new Image();
+      img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/fuel.png";
+      ctx.drawImage(img, this.x, this.y, img.width, 150);
+    }
+
+    
+}
+
 
 const socket = io(); //initialise a new socket each time a player arrives
 
@@ -99,9 +167,10 @@ socket.on("init", ({id,num, player_list, fuelPoints}) => {
 
     let counter = 0;
     let x,y;
+
     function store() {
         x = Math.random()*620;
-        y = Math.random()*600;
+        y = Math.random()*590;
     };
 
     function draw(){
@@ -109,16 +178,19 @@ socket.on("init", ({id,num, player_list, fuelPoints}) => {
         players.forEach(client => client.draw(ctx));    //draw the updated position of the client on the canvas
 
        
-        if (counter >100 && counter < 450){
-            points.forEach(client => client.draw(ctx, {x: x, y: y})); 
+        if (counter >400 && counter < 700){
+            console.log("new positions" +x+ " " +y);
+            points.x = x; 
+            points.y = y;
+            points.forEach(client => client.updatePos(x,y)); 
             counter++;
-            if (counter === 448) {
+            if (counter === 698) {
                 counter = 0;
                 store();
             }
         }
         counter++;
-        window.requestAnimationFrame(draw); //try adding window.
+        window.requestAnimationFrame(draw); 
     }
     draw();
 });
