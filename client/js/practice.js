@@ -79,7 +79,7 @@ function start(){
 
     let fuelImg = document.createElement("img");    //create an image element, fuelImg
  
-    fuelImg.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/fuel.png"; //add the image source to fuelImg 
+    fuelImg.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/fuel.png"; //add the image source to fuelImg 
     let fuelPoint = document.getElementById("fuelDiv");   //create a parent variable that stores the fuelDiv
      
     fuelPoint.appendChild(fuelImg);    //add fuelImg to the fuelDiv

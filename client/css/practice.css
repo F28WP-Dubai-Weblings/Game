@@ -7,7 +7,7 @@
 .practiceScreen{
   position: relative;
   background-color:black;
-  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/temp.png");  /*temporary game bg*/
+  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/temp.png");  /*temporary game bg*/
   background-size: 100%;
 
 }
@@ -17,7 +17,7 @@
 }
 
 .carVector{
-    background-image:url("https://f28wp-dubai-weblings.github.io/Game/client/media/raceGreen.png");
+    background-image:url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/raceGreen.png");
     position: absolute;
     height:150px;
     width:130px;
@@ -28,7 +28,7 @@
 
 .animateTrack{
 
-    background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/racetrack.png");
+    background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/racetrack.png");
     width:800px;
     height:100vh;
     display:block;
