@@ -15,9 +15,8 @@
 
 #gameScreen{
   position: relative;
-  background-color:black;
-  /*background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/temp.png");  /*temporary game bg*/
-  background-size: 100%;
+  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/background1.png");  /*temporary game bg*/
+  background-size: cover;
   display:flex;
 
 }
