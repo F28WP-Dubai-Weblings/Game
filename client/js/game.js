@@ -31,6 +31,6 @@ var raceGameArea = {
             raceGameArea.key = false;
         })
 
-console.log("the client script is working") ;
+console.log("The CLIENT SCRIPT IS WORKING") ;
 
 
