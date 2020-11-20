@@ -6,7 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multiplayer</title>
     <link rel='stylesheet' href='css/multiplayer.css'/>
-    <script src="/app.js"></script>
+    <script type="module" src="./js/fuel.js"></script>
+    <script type="module" src="./js/liveplayers.js"></script>
+    <script src ="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script type="module" type="module" src="js/multiplayer.js"></script>
+
 </head>
 <body>
    
@@ -16,13 +20,9 @@
                 <div id ="Track">
                     <canvas id="canvas"></canvas>
                 </div>
+                <div id="scoreBoard"></div>
             </div>
-        </div>
-
-        <script src ="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-        <script type="module" src="js/multiplayer.js"></script>
-       
-        
+        </div>        
    
 </body>
 </html>
