@@ -25,6 +25,15 @@
     background-size:contain;
 }
 
+.scoreboard
+{
+  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/scorebaord background1.png");
+  width:235px;
+  height:24vh;
+  position: absolute;
+  background-size:contain;
+}
+
 
 .animateTrack{
 
@@ -40,14 +49,6 @@
     animation: track 21s linear infinite;
 
 
-}
-.scoreboard
-{
-  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/scorebaord background1.png");
-  width:235px;
-  height:24vh;
-  position: absolute;
-  background-size:contain;
 }
 
 @keyframes track {
