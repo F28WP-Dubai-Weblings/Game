@@ -9,7 +9,7 @@ class Fuel {
     draw(ctx) {
       ctx.beginPath();
       const img = new Image();
-          img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/fuel.png";
+          img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/fuel.png";
           ctx.drawImage(img, this.horizontalPos, this.verticalPos, img.width, 150);
     }
 }
