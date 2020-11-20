@@ -5,15 +5,39 @@ const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
 
-app.use(express.static(__dirname + '/client'));
+//These will be used when I(Susan) will do database
+var session = require('express-session');
+const path = require('path');
 
-app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/client'); //set default request path
+//*Rida's static file*
+// app.use(express.static(__dirname + '/client'));
+// app.get('/', function (req, res) {
+//     res.sendFile(__dirname + '/client'); //set default request path
+// });
+
+//*Susan's static file* <---
+//send the static file
+//make a route for homepage
+app.use(express.static('client'));
+app.get('/', (req, res) => {
+    res.sendFile('index.html', { root: __dirname });
+});
+
+//*Rida's port connection*
+//server.listen(5000);
+
+//*Susan's port connection* <---
+//set the port to be 3000
+app.use(express.urlencoded({ extended: false}))
+const port = process.env.PORT || 3000;
+const server = app.listen(port, function() {
+    console.log(`listening on port : ${port}`);
 });
 
 
-
-server.listen(5000);
+// middleware
+app.use(express.json());
+app.use(express.urlencoded());
 
 console.log("server is on");
 
@@ -26,7 +50,9 @@ const Fuel = require('./client/js/fuel');
 
 
 //                                                                  WEBSOCKET COMMUNICATION
-let io = require ('socket.io')(server,{});
+//create a socket for the server
+const io = require('socket.io')(server);
+// let io = require ('socket.io')(server,{});
 let clients =[];  //create an object to store the socket of each client
 let fuelPoints = [];
 let number = 0;
@@ -52,5 +78,13 @@ io.sockets.on('connection',socket => {
     socket.broadcast.emit('playerMoved', {id: socket.id, horizontalPos, verticalPos})});
 });
 
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------
+//                                                                DATABASE (MORE TO BE ADDED)
 
-
+//FOR NOW THESE WILL BE COMMENTED OUT
+//app.post('/register', function (request,response) {
+//const signin = require('./routes/signin');
+//  signin(request,response);
+//  console.log("finished signing in");
+//});
+  
