@@ -65,7 +65,7 @@ function controls(player, socket) {
 
 let players = [];
 let points = [];
-let number = 0;
+let playerNumber = 0;
 //Live Players 
 class Liveplayers{
     constructor({id, num}){
@@ -90,7 +90,10 @@ class Liveplayers{
             img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/racecar1.png";
         }
         if (this.num===2){
-
+            img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/raceGreen.png";
+        }
+        if (this.num===3){
+            img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/racecar1.png";
         }
         ctx.drawImage(img, this.horizontalPos, this.verticalPos, img.width, 150);
     }
@@ -137,6 +140,12 @@ class Fuel {
     
 }
 
+//                                                                 Collision Detection
+function collision(){
+    
+}
+
+
 
 const socket = io(); //initialise a new socket each time a player arrives
 
@@ -168,9 +177,9 @@ socket.on("init", ({id,num, player_list, fuelPoints}) => {
     let counter = 0;
     let x,y;
 
-    function store() {
+    function store() {  //will update x and y to a different value everytime it is called
         x = Math.random()*620;
-        y = Math.random()*590;
+        y = Math.random()*600;
     };
 
     function draw(){

@@ -3,7 +3,7 @@ console.log("This is working");
 
 const express = require('express');
 const app = express();
-const server = require('http').createServer(app);
+//const server = require('http').createServer(app);
 
 //These will be used when I(Susan) will do database
 var session = require('express-session');
@@ -52,10 +52,10 @@ const Fuel = require('./client/js/fuel');
 //                                                                  WEBSOCKET COMMUNICATION
 //create a socket for the server
 const io = require('socket.io')(server);
-// let io = require ('socket.io')(server,{});
+
 let clients =[];  //create an object to store the socket of each client
-let fuelPoints = [];
-let number = 0;
+let fuelPoints = [];  //array to store the fuelPoint : easier to push and delte on collision
+let playerNumber = 0; // unique player number that will determine the car each player gets
 
 for (let i = 1; i<=3; i++) {
   fuelPoints.push(new Fuel({horizontalPos: Math.random() * 620, verticalPos:  Math.random() * 670}));
@@ -64,8 +64,8 @@ for (let i = 1; i<=3; i++) {
 //all socket events go in here
 
 io.sockets.on('connection',socket => {
-  number++;
-  socket.emit('init', {id:socket.id, num:number, player_list: clients, fuelPoints});  //assign a unique id to each client and access to the list of live players
+  playerNumber++;
+  socket.emit('init', {id:socket.id, num:playerNumber, player_list: clients, fuelPoints});  //assign a unique id to each client and access to the list of live players
   
   socket.on('newPlayer', newPlayer => {
     console.log("got the new player message");
