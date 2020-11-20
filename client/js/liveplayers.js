@@ -20,7 +20,7 @@ class Liveplayers{
         ctx.beginPath();
         const img = new Image();
         if (this.num === 1){
-            img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/racecar1.png";
+            img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/racecar1.png";
         }
         if (this.num===2){
 
