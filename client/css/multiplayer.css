@@ -4,25 +4,26 @@
     padding: 0;
 }
 
+body {
+  overflow-x: hidden; /*prevents horizontal scrolling(applicable to the default web browser zoom level)*/
+}
 #scoreBoard{
   position: absolute;
-  background-color:white;
+  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/scorebaord background1.png");
   height:150px;
   width:200px;
-  left:1350px;
-  top:50px;
 }
 
 #gameScreen{
   position: relative;
-  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/background1.png");  /*temporary game bg*/
+  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/background1.png");  /*temporary game bg*/
   background-size: cover;
   display:flex;
 
 }
 
 #Track{
-    background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/racetrack.png");
+    background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/racetrack.png");
     width:700px;
     height:100vh;
     display:block;
@@ -45,7 +46,7 @@
 }
 
 .carVector{
-    background-image:url("https://f28wp-dubai-weblings.github.io/Game/client/media/raceGreen.png");
+    background-image:url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/raceGreen.png");
     position: absolute;
     height:150px;
     width:130px;

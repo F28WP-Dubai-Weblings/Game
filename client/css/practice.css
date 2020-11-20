@@ -1,4 +1,6 @@
-
+body{
+  overflow-x: hidden; /*prevents horizontal scrolling(applicable to the default web browser zoom level)*/
+}
 
 #container{
   position: relative;
