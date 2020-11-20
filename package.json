@@ -2,25 +2,32 @@
   "name": "turbo",
   "version": "1.0.0",
   "description": "An MMO Racing game",
-  "main": "main.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+     "start": "node app.js",
+     "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/F28WP-Dubai-Weblings/Game.git"
   },
-  "author": "Rida Patel",
+  "author": "Rida Patel, Susan D'Souza",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/F28WP-Dubai-Weblings/Game/issues"
   },
   "homepage": "https://github.com/F28WP-Dubai-Weblings/Game#readme",
   "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "ejs": "^3.1.5",
     "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mysql": "^2.18.1",
+    "request": "^2.88.2",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
+    "dotenv": "^8.2.0",
     "nodemon": "^2.0.6"
   }
 }
