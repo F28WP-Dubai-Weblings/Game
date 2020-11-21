@@ -9,7 +9,7 @@ body {
 }
 #scoreBoard{
   position: relative;
-  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/scorebaord background1.png");
+  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/raceGreen.png");
   height:150px;
   width:200px;
 }
