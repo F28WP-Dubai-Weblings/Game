@@ -3,19 +3,45 @@
     margin: 0;
     padding: 0;
 }
+.button{
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: #000000;
+  opacity: 0.6;
+  padding: 14px 28px;
+  font-size:1.5em;
+  cursor: pointer;
+  color: white;
+  font-family: fantasy;
+  text-align: center;
+}
 
 body {
   overflow-x: hidden; /*prevents horizontal scrolling(applicable to the default web browser zoom level)*/
 }
+#left{
+  position: relative;
+  top: 500px;
+  left:50px;
+  width:300px;
+  height: 100vh;
+}
+
+
+
 #scoreBoard{
-  position: absolute;
+  position: relative;
   background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/scorebaord background1.png");
+  /*@xyz: make sure you define the left position as well in order for the board to show up, 
+  refer to how I've coded the attack button using #left and .button*/
   height:150px;
   width:200px;
 }
 
 #gameScreen{
   position: relative;
+  background-color:black;
   background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/background1.png");  /*temporary game bg*/
   background-size: cover;
   display:flex;

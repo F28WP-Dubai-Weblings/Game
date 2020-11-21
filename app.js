@@ -46,26 +46,11 @@ console.log("server is on");
 
 
 //                                                                  FUELPOINTS CLASS
-//const Fuel = require('./client/js/fuel');
+const Fuel = require('./client/js/fuel');
 
 
 //                                                                  WEBSOCKET COMMUNICATION
-//create a socket for the server
-class Fuel {
-  constructor({x,y}) {
-    this.horizontalPos = x;
-    this.verticalPos = y;
-    this.width = 70;
-    this.height = 40;
-  }
 
-  draw(ctx) {
-    ctx.beginPath();
-    const img = new Image();
-    img.src = "../media/icons/fuelupsizsed.png";
-    ctx.drawImage(img, this.horizontalPos, this.verticalPos, img.width, 150);
-  }
-}
 
 const io = require('socket.io')(server);
 
