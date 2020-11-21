@@ -6,7 +6,7 @@
 
 
 body {
-  overflow-x: hidden; /*prevents horizontal scrolling(applicable to the default web browser zoom level)*/
+  overflow-x: hidden; /*Prevents horizontal scrolling(applicable to the default web browser zoom level)*/
 }
 #scoreBoard{
   position: absolute;
@@ -17,7 +17,7 @@ body {
 
 #gameScreen{
   position: relative;
-  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/background1.png");  /*temporary game bg*/
+  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/background1.png");  /*Temporary game bg*/
   background-size: cover;
   display:flex;
 
