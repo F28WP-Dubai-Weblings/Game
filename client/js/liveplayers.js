@@ -1,5 +1,5 @@
 
-
+//Live Players 
 class Liveplayers{
     constructor({id, num}){
         this.id = id;
@@ -20,10 +20,7 @@ class Liveplayers{
         ctx.beginPath();
         const img = new Image();
         if (this.num === 1){
-            img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/racecar1.png";
-        }
-        if (this.num===2){
-
+            img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/racecar1.png";
         }
         ctx.drawImage(img, this.horizontalPos, this.verticalPos, img.width, 150);
     }

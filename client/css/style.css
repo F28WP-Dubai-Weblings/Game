@@ -1,6 +1,8 @@
 body{
-    background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/background.PNG");
+    background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/background.PNG");
     background-size: 100% ;
+    overflow-x: hidden; /*prevents horizontal scrolling(applicable to the default web browser zoom level)*/
+   
 }
   
   html {
