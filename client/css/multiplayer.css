@@ -17,8 +17,9 @@
   text-align: center;
 }
 
+
 body {
-  overflow-x: hidden; /*prevents horizontal scrolling(applicable to the default web browser zoom level)*/
+  overflow-x: hidden; /*Prevents horizontal scrolling(applicable to the default web browser zoom level)*/
 }
 #left{
   position: relative;
@@ -31,18 +32,19 @@ body {
 
 
 #scoreBoard{
+
   position: relative;
   background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/scorebaord background1.png");
   /*@xyz: make sure you define the left position as well in order for the board to show up, 
   refer to how I've coded the attack button using #left and .button*/
+
   height:150px;
   width:200px;
 }
 
 #gameScreen{
   position: relative;
-  background-color:black;
-  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/background1.png");  /*temporary game bg*/
+  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/background1.png");  /*Temporary game bg*/
   background-size: cover;
   display:flex;
 
@@ -50,7 +52,8 @@ body {
 
 #Track{
     background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/racetrack.png");
-    width:650px;
+
+    width:700px;
     height:100vh;
     display:block;
     margin:auto;

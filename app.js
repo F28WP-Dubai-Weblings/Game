@@ -10,17 +10,17 @@ var session = require('express-session');
 const path = require('path');
 
 //*Rida's static file*
-// app.use(express.static(__dirname + '/client'));
-// app.get('/', function (req, res) {
-//     res.sendFile(__dirname + '/client'); //set default request path
-// });
+//  app.use(express.static(__dirname + '/client'));
+//  app.get('/', function (req, res) {
+//      res.sendFile(__dirname + '/client'); //set default request path
+//  });
 
 //*Susan's static file* <---
 //send the static file
 //make a route for homepage
 app.use(express.static('client'));
 app.get('/', (req, res) => {
-    res.sendFile('index.html', { root: __dirname });
+   res.sendFile('index.html', { root: __dirname });
 });
 
 //*Rida's port connection*
@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
 app.use(express.urlencoded({ extended: false}))
 const port = process.env.PORT || 3000;
 const server = app.listen(port, function() {
-    console.log(`listening on port : ${port}`);
+   console.log(`listening on port : ${port}`);
 });
 
 
@@ -41,8 +41,8 @@ app.use(express.urlencoded());
 
 console.log("server is on");
 
-//app.listen(PORT, () => console.log('Server running on port ${PORT}'));
-//app.use(express.static('client'));
+app.listen(PORT, () => console.log('Server running on port ${PORT}'));
+app.use(express.static('client'));
 
 
 //                                                                  FUELPOINTS CLASS

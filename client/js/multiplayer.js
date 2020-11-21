@@ -39,8 +39,6 @@ function fillTrack(canvas){   //make the canvas cover the entire Track div
 //                                                 MODULE AND EVENT LISTENERS FOR PLAYER MOVEMENT
 
 
-
-
 let players = [];
 let points = [];
 let playerNumber = 0;
