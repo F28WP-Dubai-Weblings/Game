@@ -4,12 +4,13 @@
     padding: 0;
 }
 
+
 body {
   overflow-x: hidden; /*prevents horizontal scrolling(applicable to the default web browser zoom level)*/
 }
 #scoreBoard{
   position: absolute;
-  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/scorebaord background1.png");
+  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/scorebaord background1.pn
   height:150px;
   width:200px;
 }
@@ -24,7 +25,8 @@ body {
 
 #Track{
     background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/racetrack.png");
-    width:650px;
+
+    width:700px;
     height:100vh;
     display:block;
     margin:auto;
