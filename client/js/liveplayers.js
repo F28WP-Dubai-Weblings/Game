@@ -1,5 +1,3 @@
-
-//Live Players 
 class Liveplayers{
     constructor({id, num}){
         this.id = id;
@@ -14,6 +12,8 @@ class Liveplayers{
             ArrowLeft: false
         }; 
         this.speed = 10;
+        this.width= undefined;
+        this.height = undefined;
     }
     
     draw(ctx){
@@ -22,6 +22,16 @@ class Liveplayers{
         if (this.num === 1){
             img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/racecar1.png";
         }
+        if (this.num===2){
+            img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/raceGreen.png";
+        }
+        if (this.num===3){
+            img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/racecar1.png";
+        }
+        this.width = img.width;
+        this.height = img.height;
+        //console.log("the cars width is "+ this.width + " " + this.height);
+
         ctx.drawImage(img, this.horizontalPos, this.verticalPos, img.width, 150);
     }
 
@@ -42,5 +52,3 @@ class Liveplayers{
         this.draw(ctx);
     }
 }
-
-module.exports = Liveplayers;
