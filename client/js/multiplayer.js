@@ -48,7 +48,7 @@ function controls(player, socket) {
         event.preventDefault(); //disregrard the inbuilt default representation of the key events
         player.keyEvents[event.key] = true;
 
-        Liveplayers.move();   //try without dir?
+        players.move();   //try without dir?
         socket.emit("playerMoved", {id: player.id, horizontalPos: player.horizontalPos, verticalPos: player.verticalPos});
     }
 
@@ -56,7 +56,7 @@ function controls(player, socket) {
     function upKey(event){
         event.preventDefault();
         player.keyEvents[event.key] = false;
-        Liveplayers.move();
+        players.move();
     }
 
 };
