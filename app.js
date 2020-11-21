@@ -16,8 +16,8 @@ const path = require('path');
 //  });
 
 //*Susan's static file* <---
-send the static file
-make a route for homepage
+//send the static file
+//make a route for homepage
 app.use(express.static('client'));
 app.get('/', (req, res) => {
    res.sendFile('index.html', { root: __dirname });
