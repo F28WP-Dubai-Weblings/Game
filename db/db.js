@@ -11,7 +11,24 @@ function initDB(){
         if (err) throw err;
         //create database
         console.log("Connected the database");
+              const sqlDB = "CREATE DATABASE IF NOT EXISTS `mytable`;";
+        connection.query(sqlDB, function(err, result) {
+            if (err) throw err;
+            console.log('The database has been created');
+        });
         
+        //create table players
+        const sqlUser = "Create table if not exists `mytable`.`users`(" +
+        "`id` int(11) NOT NULL auto_increment," +
+        "`name` varchar(32) NOT NULL default 'Unknown'," +
+        "`pass` varchar(32) NOT NULL," +
+        "PRIMARY KEY (`id`)" +
+        "); ";
+        
+        connection.query(sqlUser, function(err, result) {
+          if (err) throw err;
+          console.log("Users table created");
+        });  
     
         
     });
