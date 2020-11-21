@@ -3,46 +3,46 @@ console.log("This is working");
 
 const express = require('express');
 const app = express();
-//const server = require('http').createServer(app);
+const server = require('http').createServer(app);
 
 //These will be used when I(Susan) will do database
-var session = require('express-session');
-const path = require('path');
+//var session = require('express-session');
+//const path = require('path');
 
 //*Rida's static file*
-// app.use(express.static(__dirname + '/client'));
-// app.get('/', function (req, res) {
-//     res.sendFile(__dirname + '/client'); //set default request path
-// });
+ app.use(express.static(__dirname + '/client'));
+ app.get('/', function (req, res) {
+     res.sendFile(__dirname + '/client'); //set default request path
+ });
 
 //*Susan's static file* <---
 //send the static file
 //make a route for homepage
-app.use(express.static('client'));
-app.get('/', (req, res) => {
-    res.sendFile('index.html', { root: __dirname });
-});
+//app.use(express.static('client'));
+//app.get('/', (req, res) => {
+//    res.sendFile('index.html', { root: __dirname });
+//});
 
 //*Rida's port connection*
-//server.listen(5000);
+server.listen(5000);
 
 //*Susan's port connection* <---
 //set the port to be 3000
-app.use(express.urlencoded({ extended: false}))
-const port = process.env.PORT || 3000;
-const server = app.listen(port, function() {
-    console.log(`listening on port : ${port}`);
-});
+//app.use(express.urlencoded({ extended: false}))
+//const port = process.env.PORT || 3000;
+//const server = app.listen(port, function() {
+//    console.log(`listening on port : ${port}`);
+//});
 
 
 // middleware
-app.use(express.json());
-app.use(express.urlencoded());
+//app.use(express.json());
+//app.use(express.urlencoded());
 
 console.log("server is on");
 
-//app.listen(PORT, () => console.log('Server running on port ${PORT}'));
-//app.use(express.static('client'));
+app.listen(PORT, () => console.log('Server running on port ${PORT}'));
+app.use(express.static('client'));
 
 
 //                                                                  FUELPOINTS CLASS
