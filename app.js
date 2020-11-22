@@ -47,6 +47,7 @@ console.log("server is on");
 
 //                                                                  FUELPOINTS CLASS
 const Fuel = require('./client/js/fuel');
+const Bullet = require('./client/js/bullet');
 
 
 //                                                                  WEBSOCKET COMMUNICATION
@@ -57,16 +58,18 @@ const io = require('socket.io')(server);
 let clients =[];  //create an object to store the socket of each client
 let fuelPoints = [];  //array to store the fuelPoint : easier to push and delte on collision
 let playerNumber = 0; // unique player number that will determine the car each player gets
+let bullets = [];
 
 for (let i = 1; i<=3; i++) {
   fuelPoints.push(new Fuel({horizontalPos: Math.random() * 620, verticalPos:  Math.random() * 670}));
+  bullets.push(new Bullet({horizontalPos: Math.random() * 620, verticalPos:  Math.random() * 670}))
 }
 
 //all socket events go in here
 
 io.sockets.on('connection',socket => {
   playerNumber++;
-  socket.emit('init', {id:socket.id, num:playerNumber, player_list: clients, fuelPoints});  //assign a unique id to each client and access to the list of live players
+  socket.emit('init', {id:socket.id, num:playerNumber, player_list: clients, fuelPoints, bullets});  //assign a unique id to each client and access to the list of live players
   
   socket.on('newPlayer', newPlayer => {
     console.log("got the new player message");

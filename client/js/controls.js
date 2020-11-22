@@ -23,7 +23,7 @@ function controls(player, socket) {
     function attack(){
         console.log("attack is called");
         player.attack = true;
-        player.shoot();
+        socket.emit("playerAttack", {id: player.id})
     }
 
 };

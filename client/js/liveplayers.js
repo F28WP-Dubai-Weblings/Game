@@ -54,19 +54,5 @@ class Liveplayers{
         }
         this.draw(ctx);
     }
-
-    shoot(){
-        if (this.attack){
-            ctx.beginPath();
-            this.horizontalPos++;
-            this.verticalPos++;
-            const img = new Image();
-            img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/bullet.PNG";
-            img.width = this.width;
-            img.height = this.height;
-            ctx.drawImage(img, this.horizontalPos, this.verticalPos, img.width, img.height);
-        }
-    }
-
     
 }
