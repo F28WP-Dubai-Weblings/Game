@@ -50,7 +50,8 @@ const Fuel = require('./client/js/fuel');
 
 
 //                                                                  WEBSOCKET COMMUNICATION
-//create a socket for the server
+
+
 const io = require('socket.io')(server);
 
 let clients =[];  //create an object to store the socket of each client

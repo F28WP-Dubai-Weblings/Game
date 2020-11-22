@@ -6,9 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multiplayer</title>
     <link rel='stylesheet' href='css/multiplayer.css'/>
-   <!-- <script src="./js/fuel.js"></script>    ***Temporarrily commenting this out***
-    <script src="./js/liveplayers.js"></script>-->
     <script src ="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script src="js/liveplayers.js"></script>
+    <script src="js/fuel.js "></script>
+    <script src="js/controls.js "></script>
+    
+
 
 </head>
 <body>
@@ -16,11 +19,21 @@
         <div id ="container">
 <!--             <div id="scoreBoard"></div> -->
             <div id = "gameScreen">
+                <div id = "left">
+                    <div>
+                        <button class="button" type="button" onclick="attack()"> ATTACK!</button>
+                    </div>
+                </div>
                 <div id ="Track">
                     <div id="scoreBoard"></div>
                     <canvas id="canvas"></canvas>
                     <script src="js/multiplayer.js"></script>   <!--multiplayer.js added in the body to make sure it runs after html for canvas is run-->
                 </div>
+
+                <div id="right">
+                    <div id = "scoreBoard">scoreboard</div>
+                </div>
+
             </div>
         </div>        
    
