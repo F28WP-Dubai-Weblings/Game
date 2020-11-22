@@ -2,8 +2,6 @@ class Fuel {
   constructor({x,y}) {
     this.horizontalPos = x;
     this.verticalPos = y;
-    this.width = 70;
-    this.height = 40;
   }
 
   updatePos(x,y){
@@ -15,12 +13,10 @@ class Fuel {
   draw(ctx) {
   ctx.beginPath();
   const img = new Image();
-  img.src = "../media/icons/fuelupsizsed.png";
-  //this.width = img.width;
-  //this.height = img.height;
-  //console.log("the fuels width is " + this.width + " " + this.height);
-
-  ctx.drawImage(img, this.horizontalPos, this.verticalPos, img.width, 150);
+  img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/fuel.png";
+  this.width=img.width;
+  this.height = img.height;
+  ctx.drawImage(img, this.horizontalPos, this.verticalPos, this.width, this.height);
   }
 
   

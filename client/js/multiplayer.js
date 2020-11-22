@@ -38,28 +38,6 @@ function fillTrack(canvas){   //make the canvas cover the entire Track div
 
 //                                                 MODULE AND EVENT LISTENERS FOR PLAYER MOVEMENT
 
-function controls(player, socket) {
-    console.log("here");
-      
-    window.addEventListener("keydown", downKey);
-
-    function downKey(event){
-
-        event.preventDefault(); //disregrard the inbuilt default representation of the key events
-        player.keyEvents[event.key] = true;
-
-        players.move();   //try without dir?
-        socket.emit("playerMoved", {id: player.id, horizontalPos: player.horizontalPos, verticalPos: player.verticalPos});
-    }
-
-    window.addEventListener("keyup", upKey);
-    function upKey(event){
-        event.preventDefault();
-        player.keyEvents[event.key] = false;
-        players.move();
-    }
-
-};
 
 let players = [];
 let points = [];
@@ -99,7 +77,11 @@ socket.on("init", ({id,num, player_list, fuelPoints}) => {
 
     //                                                                 Collision Detection
 function collision(player, object){
-
+    console.log("player height is: " + player.height);
+    console.log("player width is :" + player.width);
+    console.log("object hegith is: "+ object.height);
+    console.log("object width is: " + object.width);
+    
 //CASE 1 -- OPTIONAL
     if (player.horizontalPos>= object.horizontalPos&&    //if the player's horizontal Pos is greater than or equal to the same of the object
         player.horizontalPos<= object.horizontalPos+ object.width &&    //if the player's horizontal Pos is lesser than or equal to the same of the object and
@@ -111,7 +93,7 @@ function collision(player, object){
 
 //CASE 2
     if (player.horizontalPos+ player.width >= object.horizontalPos&&
-        player.horizontalPos+ player.width <= object.horizontalPos+ object.width &&
+        player.horizontalPos+ player.width <= object.horizontalPos+ object.width -10 &&
         player.verticalPos >= object.verticalPos &&
         player.verticalPos <= object.verticalPos + object.height) {
             console.log(2);
@@ -120,10 +102,7 @@ function collision(player, object){
         }
 
 //CASE 3
-        console.log("player height is: " + player.height);
-        console.log("player width is :" + player.width);
-        console.log("object hegith is: "+ object.height);
-        console.log("object width is: " + object.width);
+     
     if (player.horizontalPos>= object.horizontalPos&&
         player.horizontalPos<= object.horizontalPos+ object.width &&
         player.verticalPos + player.height >= object.verticalPos &&
@@ -154,14 +133,15 @@ function collision(player, object){
         }
 
 //CASE 6
-    if (object.horizontalPos+ object.width >= player.horizontalPos&&
-        object.horizontalPos+ object.width <= player.horizontalPos+ player.width &&
+/*
+    if (object.horizontalPos+ object.width-60 >= player.horizontalPos&&
+        object.horizontalPos+ object.width-60 <= player.horizontalPos+ player.width &&
         object.verticalPos >= player.verticalPos &&
         object.verticalPos <= player.verticalPos + player.height) {
             console.log(6);
 
             return true;
-        }
+        }*/
 
 //CASE 7
     if (object.horizontalPos>= player.horizontalPos&&
@@ -172,6 +152,7 @@ function collision(player, object){
 
             return true;
         }
+    /*
 //CASE 8 -- unecessary
     if (object.horizontalPos+ object.width >= player.horizontalPos&&
         object.horizontalPos+ object.width <= player.horizontalPos+ player.width &&
@@ -181,6 +162,7 @@ function collision(player, object){
 
             return true;
         }
+*/
 
 }
 
@@ -195,12 +177,12 @@ function collision(player, object){
     function draw(){
         ctx.clearRect(0,0,canvas.width,canvas.height); //clear the canvas every frame
         players.forEach(client => client.draw(ctx));    //draw the updated position of the client on the canvas
- 
-       
+        
+
         if (counter >100 && counter < 1000){
             points.x = x; 
             points.y = y;
-            points.forEach(client => {client.updatePos(x,y);players.forEach( player => 
+            points.forEach(client => {client.updatePos(x,y);/*players.forEach( player => 
                 {
                     let collided = collision(player,client);
                     if (collided){
@@ -208,7 +190,7 @@ function collision(player, object){
                         player.score +=10;
                         console.log("player"+player.num+" "+ player.score);
                     }
-                })}); 
+                })*/}); 
             counter++;
             if (counter === 698) {
                 counter = 0;
