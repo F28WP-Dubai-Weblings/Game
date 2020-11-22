@@ -19,6 +19,7 @@ function controls(player, socket) {
         player.move();
     }
 
+    document.getElementById("button").addEventListener("click", attack);
     function attack(){
         console.log("attack is called");
         player.attack = true;
