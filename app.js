@@ -47,7 +47,7 @@ console.log("server is on");
 
 //                                                                  FUELPOINTS CLASS
 const Fuel = require('./client/js/fuel');
-const Bullet = require('./client/js/bullet');
+const Bullet = require('./client/js/bullet.js');
 
 
 //                                                                  WEBSOCKET COMMUNICATION
@@ -79,7 +79,15 @@ io.sockets.on('connection',socket => {
   });
 
   socket.on('playerMoved', ({id, horizontalPos, verticalPos}) => {
-    socket.broadcast.emit('playerMoved', {id: socket.id, horizontalPos, verticalPos})});
+    socket.broadcast.emit('playerMoved', {id: socket.id, horizontalPos, verticalPos});
+  });
+
+  socket.on('playerAttack',({id}) =>{
+    console.log("in server side attack");
+    socket.emit('playerAttack', {id: socket.id});
+    console.log("sent it");
+  });
+
 });
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------

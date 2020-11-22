@@ -9,27 +9,33 @@ class Bullet {
     }
      
     update(){
+        console.log("in update");
+
         this.horizontalPos += vx;
         this.verticalPos += vy;
     }
     generatePos(x,y){
+        console.log("in generate");
+
         this.horizontalPos = x;
         this.verticalPos = y;
-        angle = 2 * Math.PI * Math.random();
-        vx = speed * Math.cos(angle);
-        vy = speed * Math.sin(angle);
+        angle = Math.random()*360;//2 * Math.PI * Math.random();
+        vx = 5 * Math.cos(angle/180*Math.PI);
+        vy = 5 * Math.sin(angle/180*Math.PI);
     }
 
     draw(ctx){
-        if (this.attack){
+        //if (this.attack){
+            console.log("in draw");
             ctx.beginPath();
             const bulletImg = new Image();
             bulletImg.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/death.PNG";
-            img.width = this.width;
-            img.height = this.height;
+            bulletImg.width = this.width;
+            bulletImg.height = this.height;
             ctx.drawImage(bulletImg, this.horizontalPos, this.verticalPos, bulletImg.width, bulletImg.height);
             this.update();
-        }
+            console.log("image pos is " + this.horizontalPos + " " + this.verticalPos);
+        //}
     }
 }
 

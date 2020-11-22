@@ -38,16 +38,16 @@ function fillTrack(canvas){   //make the canvas cover the entire Track div
 //                                                 MODULE AND EVENT LISTENERS FOR PLAYER MOVEMENT
 
 
-let players = [];   
-let points = [];    //client side list for points
-let playerNumber = 0;
-let attacks = [] //client side list for bullets
-let bulletx, bullety;
 
 
 
 
 const socket = io(); //initialise a new socket each time a player arrives
+let players = [];   
+let points = [];    //client side list for points
+let playerNumber = 0;
+let attacks = [] //client side list for bullets
+let bulletx, bullety;
 
 socket.on("init", ({id,num, player_list, fuelPoints, bullets}) => {
 
@@ -64,23 +64,26 @@ socket.on("init", ({id,num, player_list, fuelPoints, bullets}) => {
     
 
     socket.on('playerMoved', ({id, horizontalPos, verticalPos}) => {
-        console.log("the horizontal Pos recieved here in multiplayer.js "+ horizontalPos);
+        console.log("moving now");
         players.find(elem => elem.id === id).horizontalPos = horizontalPos;
-        players.find(elem => elem.id === id).verticalPos = verticalPos;
+        players.find(elem => elem.id === id).verticalPos = verticalPos; 
+    });
+
+    console.log("about to recieve");    
+    socket.on('playerAttack', ({id}) => {
+        console.log("client knows player has attacced");
+        console.log("player list is: " + players);
+        console.log("bullet list is: " + attacks); //check if the bug is bc bullet is undefined?
+    });
+    
+    console.log("shouldve recieved it");
 
     
-    socket.on('playerAttack', ({id}) => {
-        console.log("player has attacced");
-        players.find(elem => elem.id === id).horizontalPos = bulletx;
-        players.find(elem => elem.id === id).verticalPos = bullety;
-    }
-    )
-
-    });
 
     players = player_list.map(element => new Liveplayers(element)).concat(player);  //make a copy of the list of players sent by the server on the client browser
     points = fuelPoints.map(element => new Fuel(element));  //make a copy of the list of fuelPoints sent by the server on the client browser
-    attacks = bullets.map(element => new Bullet(element)); 
+    attacks = bullets.map(element => new Bullet(element));
+
     //                                                                 Collision Detection
 
 
@@ -90,7 +93,6 @@ function collision(player, object){
     ((player.horizontalPos+ player.width)-30) > object.horizontalPos &&
     player.verticalPos < ( (object.verticalPos + object.height) -30) &&
     (player.verticalPos + player.height) > object.verticalPos - 30) {
-    console.log(player.horizontalPos+player.height);
     return true;
  
     }
@@ -107,12 +109,15 @@ function collision(player, object){
 
     function draw(){
         ctx.clearRect(0,0,canvas.width,canvas.height); //clear the canvas every frame
-        players.forEach(client => client.draw(ctx));    //draw the updated position of the client on the canvas
+        players.forEach(client => {
+            client.draw(ctx)
+            if (client.attack === true){
+                attacks.forEach(attacc => {
+                    attacc.draw(ctx);
+                });
+            }
+        });    //draw the updated position of the client on the canvas
         
-        bullets.forEach(attacc => {
-            attacc.generatePos(bulletx, bullety);
-            attacc.draw(ctx);
-            });
 
         if (counter >100 && counter < 500){
             counter++;
