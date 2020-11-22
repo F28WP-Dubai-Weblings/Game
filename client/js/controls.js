@@ -22,8 +22,13 @@ function controls(player, socket) {
     document.getElementById("button").addEventListener("click", attack);
     function attack(){
         console.log("attack is called");
+        bulletx = player.horizontalPos;
+        bullety=player.verticalPos;
         player.attack = true;
-        socket.emit("playerAttack", {id: player.id})
+        attacks.forEach(attacc => {
+            attacc.generatePos(bulletx,bullety);
+        });
+        socket.emit("playerAttack", {id: player.id});
     }
 
 };
