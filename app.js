@@ -41,8 +41,8 @@ app.use(express.urlencoded());
 
 console.log("server is on");
 
-app.listen(PORT, () => console.log('Server running on port ${PORT}'));
-app.use(express.static('client'));
+//app.listen(PORT, () => console.log('Server running on port ${PORT}'));
+//app.use(express.static('client'));
 
 
 //                                                                  FUELPOINTS CLASS

@@ -34,8 +34,6 @@ function fillTrack(canvas){   //make the canvas cover the entire Track div
     canvas.height = canvas.offsetHeight;
 }
 
-
-
 //                                                 MODULE AND EVENT LISTENERS FOR PLAYER MOVEMENT
 
 
@@ -76,93 +74,18 @@ socket.on("init", ({id,num, player_list, fuelPoints}) => {
     points = fuelPoints.map(element => new Fuel(element));  //make a copy of the list of fuelPoints sent by the server on the client browser
 
     //                                                                 Collision Detection
+
+
 function collision(player, object){
-    console.log("player height is: " + player.height);
-    console.log("player width is :" + player.width);
-    console.log("object hegith is: "+ object.height);
-    console.log("object width is: " + object.width);
-    
-//CASE 1 -- OPTIONAL
-    if (player.horizontalPos>= object.horizontalPos&&    //if the player's horizontal Pos is greater than or equal to the same of the object
-        player.horizontalPos<= object.horizontalPos+ object.width &&    //if the player's horizontal Pos is lesser than or equal to the same of the object and
-        player.verticalPos >= object.verticalPos &&   //if the car has an equal or greater verticalposition as the object (if the car is above the object vertically)
-        player.verticalPos <= object.verticalPos + object.height){
-            console.log(1);
-            return true;
-        }
 
-//CASE 2
-    if (player.horizontalPos+ player.width >= object.horizontalPos&&
-        player.horizontalPos+ player.width <= object.horizontalPos+ object.width -10 &&
-        player.verticalPos >= object.verticalPos &&
-        player.verticalPos <= object.verticalPos + object.height) {
-            console.log(2);
-
-            return true;
-        }
-
-//CASE 3
-     
-    if (player.horizontalPos>= object.horizontalPos&&
-        player.horizontalPos<= object.horizontalPos+ object.width &&
-        player.verticalPos + player.height >= object.verticalPos &&
-        player.verticalPos + player.height <= object.verticalPos + object.height){
-            console.log(3);
-
-            return true;
-        }
-
-//CASE 4
-    if (player.horizontalPos+ player.width >= object.horizontalPos&&
-        player.horizontalPos+ player.width <= object.horizontalPos+ object.width &&
-        player.verticalPos + player.height >= object.verticalPos &&
-        player.verticalPos + player.height <= object.verticalPos + object.height){
-            console.log(4);
-
-            return true;
-        }
-
-//CASE 5
-    if (object.horizontalPos>= player.horizontalPos&&
-        object.horizontalPos<= player.horizontalPos+ player.width &&
-        object.verticalPos >= player.verticalPos &&
-        object.verticalPos <= player.verticalPos + player.height) {
-            console.log(5);
-
-            return true;
-        }
-
-//CASE 6
-/*
-    if (object.horizontalPos+ object.width-60 >= player.horizontalPos&&
-        object.horizontalPos+ object.width-60 <= player.horizontalPos+ player.width &&
-        object.verticalPos >= player.verticalPos &&
-        object.verticalPos <= player.verticalPos + player.height) {
-            console.log(6);
-
-            return true;
-        }*/
-
-//CASE 7
-    if (object.horizontalPos>= player.horizontalPos&&
-        object.horizontalPos<= player.horizontalPos+ player.width &&
-        object.verticalPos + object.height >= player.verticalPos &&
-        object.verticalPos + object.height <= player.verticalPos + player.height){
-            console.log(7);
-
-            return true;
-        }
-    /*
-//CASE 8 -- unecessary
-    if (object.horizontalPos+ object.width >= player.horizontalPos&&
-        object.horizontalPos+ object.width <= player.horizontalPos+ player.width &&
-        object.verticalPos + object.height >= player.verticalPos &&
-        object.verticalPos + object.height <= player.verticalPos + player.height){
-            console.log(8);
-
-            return true;
-        }
-*/
+   if (player.horizontalPos < ((object.horizontalPos + object.width) -30) &&
+    ((player.horizontalPos+ player.width)-30) > object.horizontalPos &&
+    player.verticalPos < ( (object.verticalPos + object.height) -30) &&
+    (player.verticalPos + player.height) > object.verticalPos - 30) {
+    console.log(player.horizontalPos+player.height);
+    return true;
+ 
+    }
 
 }
 
@@ -170,8 +93,8 @@ function collision(player, object){
     let x,y;
 
     function store() {  //will update horizontalPosand y to a different value everytime it is called
-        x = 100;//Math.random()*620;
-        y = 100;//Math.random()*600;
+        x = Math.random()*620;
+        y = Math.random()*600;
     };
 
     function draw(){
@@ -179,20 +102,19 @@ function collision(player, object){
         players.forEach(client => client.draw(ctx));    //draw the updated position of the client on the canvas
         
 
-        if (counter >100 && counter < 1000){
-            points.x = x; 
-            points.y = y;
-            points.forEach(client => {client.updatePos(x,y);/*players.forEach( player => 
+        if (counter >100 && counter < 500){
+            counter++;
+            points.forEach(client => {client.updatePos(x,y);players.forEach( player => 
                 {
                     let collided = collision(player,client);
                     if (collided){
                         console.log("collided!");
                         player.score +=10;
-                        console.log("player"+player.num+" "+ player.score);
                     }
-                })*/}); 
-            counter++;
-            if (counter === 698) {
+                
+                })}); 
+            
+            if (counter === 448) {
                 counter = 0;
                 store();
             }

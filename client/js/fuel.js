@@ -2,6 +2,8 @@ class Fuel {
   constructor({x,y}) {
     this.horizontalPos = x;
     this.verticalPos = y;
+    this.width = 80;
+    this.height= 100;
   }
 
   updatePos(x,y){
@@ -13,10 +15,10 @@ class Fuel {
   draw(ctx) {
   ctx.beginPath();
   const img = new Image();
-  img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/fuel.png";
-  this.width=img.width;
-  this.height = img.height;
-  ctx.drawImage(img, this.horizontalPos, this.verticalPos, this.width, this.height);
+  img.src = "../media/icons/final fuel.png";
+  img.width = this.width;
+  img.height = this.height;
+  ctx.drawImage(img, this.horizontalPos, this.verticalPos, img.width, img.height);
   }
 
   
