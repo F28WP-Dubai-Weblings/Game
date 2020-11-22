@@ -22,6 +22,7 @@ function updateGameArea() //this function : stops the music when the car hits an
 
 
 
+
 const canvas = document.getElementById("canvas"),
 ctx = canvas.getContext("2d");
 
@@ -37,19 +38,18 @@ function fillTrack(canvas){   //make the canvas cover the entire Track div
 //                                                 MODULE AND EVENT LISTENERS FOR PLAYER MOVEMENT
 
 
-let players = [];
-let points = [];
+let players = [];   
+let points = [];    //client side list for points
 let playerNumber = 0;
-//Live Players 
-
+let attacks = [] //client side list for bullets
+let bulletx, bullety;
 
 
 
 
 const socket = io(); //initialise a new socket each time a player arrives
 
-socket.on("init", ({id,num, player_list, fuelPoints}) => {
-    console.log("there is a player connected" + players.length);
+socket.on("init", ({id,num, player_list, fuelPoints, bullets}) => {
 
     console.log("got the init message");
     const player = new Liveplayers({id, num}); //instantiate an object of the 'liveplayers' class
@@ -68,11 +68,19 @@ socket.on("init", ({id,num, player_list, fuelPoints}) => {
         players.find(elem => elem.id === id).horizontalPos = horizontalPos;
         players.find(elem => elem.id === id).verticalPos = verticalPos;
 
+    
+    socket.on('playerAttack', ({id}) => {
+        console.log("player has attacced");
+        players.find(elem => elem.id === id).horizontalPos = bulletx;
+        players.find(elem => elem.id === id).verticalPos = bullety;
+    }
+    )
+
     });
 
     players = player_list.map(element => new Liveplayers(element)).concat(player);  //make a copy of the list of players sent by the server on the client browser
     points = fuelPoints.map(element => new Fuel(element));  //make a copy of the list of fuelPoints sent by the server on the client browser
-
+    attacks = bullets.map(element => new Bullet(element)); 
     //                                                                 Collision Detection
 
 
@@ -101,6 +109,10 @@ function collision(player, object){
         ctx.clearRect(0,0,canvas.width,canvas.height); //clear the canvas every frame
         players.forEach(client => client.draw(ctx));    //draw the updated position of the client on the canvas
         
+        bullets.forEach(attacc => {
+            attacc.generatePos(bulletx, bullety);
+            attacc.draw(ctx);
+            });
 
         if (counter >100 && counter < 500){
             counter++;
