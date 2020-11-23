@@ -91,12 +91,12 @@ io.sockets.on('connection',socket => {
 });
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
-//                                                                DATABASE (MORE TO BE ADDED)
+//                                                                           DATABASE 
 
 //FOR NOW THESE WILL BE COMMENTED OUT
-//app.post('/register', function (request,response) {
-//const signin = require('./routes/signin');
-//  signin(request,response);
-//  console.log("finished signing in");
-//});
+app.post('/register', function (request,response) {
+const signin = require('./routes/signin');
+  signin(request,response);
+  console.log("finished signing in");
+});
   
