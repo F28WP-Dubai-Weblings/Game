@@ -59,11 +59,16 @@ let clients =[];  //create an object to store the socket of each client
 let fuelPoints = [];  //array to store the fuelPoint : easier to push and delte on collision
 let playerNumber = 0; // unique player number that will determine the car each player gets
 let bullets = [];
-
-for (let i = 1; i<=3; i++) {
+let x,y;
+for (let i = 1; i<40; i++) {
   fuelPoints.push(new Fuel({horizontalPos: Math.random() * 620, verticalPos:  Math.random() * 670}));
   bullets.push(new Bullet({horizontalPos: Math.random() * 620, verticalPos:  Math.random() * 670}))
 }
+
+function store() {  //will update horizontalPosand y to a different value everytime it is called
+        x = Math.random()*620;
+        y = Math.random()*600;
+  };
 
 //all socket events go in here
 
@@ -82,9 +87,13 @@ io.sockets.on('connection',socket => {
     socket.broadcast.emit('playerMoved', {id: socket.id, horizontalPos, verticalPos});
   });
 
+  socket.on('newFuel', (x,y) => {
+    store();
+    socket.broadcast.emit('newFuel', (x,y));
+  })
   socket.on('playerAttack',({id}) =>{
     console.log("in server side attack");
-    socket.emit('playerAttack', {id: socket.id});
+    socket.broadcast.emit('playerAttack', {id: socket.id});
     console.log("sent it");
   });
 

@@ -69,11 +69,11 @@ socket.on("init", ({id,num, player_list, fuelPoints, bullets}) => {
         players.find(elem => elem.id === id).verticalPos = verticalPos; 
     });
 
-    console.log("about to recieve");    
     socket.on('playerAttack', ({id}) => {
         console.log("client knows player has attacced");
         console.log("player list is: " + players);
         console.log("bullet list is: " + attacks); //check if the bug is bc bullet is undefined?
+
     });
     
     console.log("shouldve recieved it");
@@ -102,10 +102,7 @@ function collision(player, object){
     let counter = 0;
     let x,y;
 
-    function store() {  //will update horizontalPosand y to a different value everytime it is called
-        x = Math.random()*620;
-        y = Math.random()*600;
-    };
+  
 
     function draw(){
         ctx.clearRect(0,0,canvas.width,canvas.height); //clear the canvas every frame
@@ -121,20 +118,20 @@ function collision(player, object){
 
         if (counter >100 && counter < 500){
             counter++;
-            points.forEach(client => {client.updatePos(x,y);players.forEach( player => 
-                {
-                    let collided = collision(player,client);
-                    if (collided){
-                        console.log("collided!");
-                        player.score +=10;
-                    }
-                
-                })}); 
+            points.forEach(client => {client.draw(ctx);players.forEach( player => 
+                    {
+                        let collided = collision(player,client);
+                        if (collided){
+                            console.log("collided!");
+                            player.score +=10;
+                        }
+                    
+                    })}); 
+                if (counter === 448) {
+                    counter = 0;
+                }
+           
             
-            if (counter === 448) {
-                counter = 0;
-                store();
-            }
         }
         counter++;
         window.requestAnimationFrame(draw); 

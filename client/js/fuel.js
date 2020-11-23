@@ -1,5 +1,6 @@
 class Fuel {
-  constructor({x,y}) {
+  constructor({x,y, id}) {
+    this.id = id;
     this.horizontalPos = x;
     this.verticalPos = y;
     this.width = 80;
@@ -9,7 +10,6 @@ class Fuel {
   updatePos(x,y){
       this.horizontalPos = x;
       this.verticalPos = y;
-      this.draw(ctx);
   }
 
   draw(ctx) {
@@ -19,7 +19,8 @@ class Fuel {
   img.width = this.width;
   img.height = this.height;
   ctx.drawImage(img, this.horizontalPos, this.verticalPos, img.width, img.height);
-  }
+
+}
 
   
 }
