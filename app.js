@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 //*Susan's port connection* <---
 //set the port to be 3000
 app.use(express.urlencoded({ extended: false}))
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 const server = app.listen(port, function() {
    console.log(`listening on port : ${port}`);
 });
@@ -59,11 +59,22 @@ let clients =[];  //create an object to store the socket of each client
 let fuelPoints = [];  //array to store the fuelPoint : easier to push and delte on collision
 let playerNumber = 0; // unique player number that will determine the car each player gets
 let bullets = [];
+let x,y;
 
-for (let i = 1; i<=3; i++) {
+for (let i = 0; i<=30; i++) {
   fuelPoints.push(new Fuel({horizontalPos: Math.random() * 620, verticalPos:  Math.random() * 670}));
-  bullets.push(new Bullet({horizontalPos: Math.random() * 620, verticalPos:  Math.random() * 670}))
+  fuelPoints.forEach(fuel => {
+    console.log(fuel.horizontalPos);
+    console.log(fuel.verticalPos);
+  }
+    )
+  //bullets.push(new Bullet({horizontalPos: Math.random() * 620, verticalPos:  Math.random() * 670}))
 }
+
+/*function store() {  //will update horizontalPosand y to a different value everytime it is called
+        x = Math.random()*620;
+        y = Math.random()*600;
+  };*/
 
 //all socket events go in here
 
@@ -82,9 +93,10 @@ io.sockets.on('connection',socket => {
     socket.broadcast.emit('playerMoved', {id: socket.id, horizontalPos, verticalPos});
   });
 
+  
   socket.on('playerAttack',({id}) =>{
     console.log("in server side attack");
-    socket.emit('playerAttack', {id: socket.id});
+    socket.broadcast.emit('playerAttack', {id: socket.id});
     console.log("sent it");
   });
 

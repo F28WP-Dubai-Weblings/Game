@@ -20,6 +20,7 @@ function controls(player, socket) {
     }
 
     document.getElementById("button").addEventListener("click", attack);
+    
     function attack(){
         console.log("attack is called");
         bulletx = player.horizontalPos;

@@ -43,11 +43,13 @@ function fillTrack(canvas){   //make the canvas cover the entire Track div
 
 
 const socket = io(); //initialise a new socket each time a player arrives
+
 let players = [];   
 let points = [];    //client side list for points
 let playerNumber = 0;
 let attacks = [] //client side list for bullets
 let bulletx, bullety;
+let index = 0;
 
 socket.on("init", ({id,num, player_list, fuelPoints, bullets}) => {
 
@@ -59,30 +61,29 @@ socket.on("init", ({id,num, player_list, fuelPoints, bullets}) => {
 
     socket.emit('newPlayer', player);   //emit to the server that a new player has joined 
     socket.on('newPlayer', newPlayer => {
-        console.log("pushing the player onto screen");
+        //console.log("pushing the player onto screen");
         players.push(new Liveplayers(newPlayer))});  //update the 'clients' list on the browser when a newPlayer message is recieved
     
 
     socket.on('playerMoved', ({id, horizontalPos, verticalPos}) => {
-        console.log("moving now");
         players.find(elem => elem.id === id).horizontalPos = horizontalPos;
         players.find(elem => elem.id === id).verticalPos = verticalPos; 
     });
 
-    console.log("about to recieve");    
     socket.on('playerAttack', ({id}) => {
         console.log("client knows player has attacced");
-        console.log("player list is: " + players);
-        console.log("bullet list is: " + attacks); //check if the bug is bc bullet is undefined?
+        //console.log("player list is: " + players);
+        //console.log("bullet list is: " + attacks); //check if the bug is bc bullet is undefined?
     });
-    
-    console.log("shouldve recieved it");
 
     
-
     players = player_list.map(element => new Liveplayers(element)).concat(player);  //make a copy of the list of players sent by the server on the client browser
+
     points = fuelPoints.map(element => new Fuel(element));  //make a copy of the list of fuelPoints sent by the server on the client browser
-    attacks = bullets.map(element => new Bullet(element));
+
+    console.log('here');
+        
+    //attacks = bullets.map(element => new Bullet(element));
 
     //                                                                 Collision Detection
 
@@ -100,15 +101,17 @@ function collision(player, object){
 }
 
     let counter = 0;
-    let x,y;
+    let x,y;  
 
-    function store() {  //will update horizontalPosand y to a different value everytime it is called
-        x = Math.random()*620;
-        y = Math.random()*600;
-    };
 
     function draw(){
         ctx.clearRect(0,0,canvas.width,canvas.height); //clear the canvas every frame
+        
+    
+        /*points.forEach(v=>{
+            v.draw(ctx)
+        });*/
+        
         players.forEach(client => {
             client.draw(ctx)
             if (client.attack === true){
@@ -118,23 +121,26 @@ function collision(player, object){
             }
         });    //draw the updated position of the client on the canvas
         
-
+        
         if (counter >100 && counter < 500){
             counter++;
-            points.forEach(client => {client.updatePos(x,y);players.forEach( player => 
-                {
-                    let collided = collision(player,client);
-                    if (collided){
-                        console.log("collided!");
-                        player.score +=10;
-                    }
-                
-                })}); 
+            let currentPoint = points[index];
+            currentPoint.draw(ctx);
+
+            players.forEach( player => {
+                let collided = collision(player,currentPoint);
+                if (collided){
+                    console.log("collided!");
+                    player.score +=10;
+                }
+            })
+                   
+                if (counter === 448) {
+                    counter = 0;
+                    index++;
+                }
+           
             
-            if (counter === 448) {
-                counter = 0;
-                store();
-            }
         }
         counter++;
         window.requestAnimationFrame(draw); 
