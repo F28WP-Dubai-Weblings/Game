@@ -5,6 +5,7 @@ class Liveplayers{
         this.num = num;
         this.horizontalPos = 10;
         this.verticalPos = 10;
+        this.finalScore = 0;
         this.score = 0;
         this.keyEvents = {  //set the default values of all relevant key events to false
             ArrowUp:   false,
@@ -16,7 +17,15 @@ class Liveplayers{
         this.width= undefined;
         this.height = 200;
         this.width = 150;
+        
+        this.health = 100; //set default health
+        this.crash = false;
+
+        //player attack properties
         this.attack = false;
+        this.bull_angle = 10; //player's default shoot angle
+        this.bull_vx = 0; //set player bullet's default horizontal velocity
+        this.bull_vy = 0; //set player bullet's default vertical velocity
     }
     
     draw(ctx){
@@ -31,6 +40,10 @@ class Liveplayers{
         if (this.num===3){
             img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/racecar1.png";
         }
+        /*if (this.crash = true){
+            img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/explosion.GIF";
+            }*/
+            
         img.width = this.width;
         img.height = this.height;
         //console.log("the cars width is "+ this.width + " " + this.height);

@@ -19,6 +19,8 @@ function updateGameArea() //this function : stops the music when the car hits an
     }
 }*/
 
+//const Bullet = require("./bullet");
+
 
 
 
@@ -48,7 +50,6 @@ let players = [];
 let points = [];    //client side list for points
 let playerNumber = 0;
 let attacks = [] //client side list for bullets
-let bulletx, bullety;
 let index = 0;
 
 socket.on("init", ({id,num, player_list, fuelPoints, bullets}) => {
@@ -70,21 +71,26 @@ socket.on("init", ({id,num, player_list, fuelPoints, bullets}) => {
         players.find(elem => elem.id === id).verticalPos = verticalPos; 
     });
 
-    socket.on('playerAttack', ({id}) => {
-        console.log("client knows player has attacced");
-        //console.log("player list is: " + players);
-        //console.log("bullet list is: " + attacks); //check if the bug is bc bullet is undefined?
+    socket.on('playerAttack', ({id, bull_angle }) => {
+        console.log("in mult attack");
+        reqPlayer = players.find(elem => elem.id===id); //find the player that just attacked
+
+        players.find(elem => elem.id===id).attack = true;   //set his attack flag to true
+
+        attacks[1].setup({angle:bull_angle});
+        attacks[1].horizontalPos = reqPlayer.horizontalPos;
+        attacks[1].verticalPos = reqPlayer.verticalPos;
+
+        console.log("bullet angle in mult is" +bull_angle);        
     });
 
     
     players = player_list.map(element => new Liveplayers(element)).concat(player);  //make a copy of the list of players sent by the server on the client browser
-
     points = fuelPoints.map(element => new Fuel(element));  //make a copy of the list of fuelPoints sent by the server on the client browser
+    attacks = bullets.map(shoot => new Bullet(shoot));
 
     console.log('here');
         
-    //attacks = bullets.map(element => new Bullet(element));
-
     //                                                                 Collision Detection
 
 
@@ -105,21 +111,20 @@ function collision(player, object){
 
 
     function draw(){
-        ctx.clearRect(0,0,canvas.width,canvas.height); //clear the canvas every frame
-        
-    
-        /*points.forEach(v=>{
-            v.draw(ctx)
-        });*/
-        
+        ctx.clearRect(0,0,canvas.width,canvas.height); //clear the canvas every frame        
+
         players.forEach(client => {
             client.draw(ctx)
             if (client.attack === true){
-                attacks.forEach(attacc => {
-                    attacc.draw(ctx);
-                });
+                attacks[1].draw(ctx)
+                }
+
+            let carCrash = collision(client, attacks[1]);
+            if (carCrash) {
+                console.log("player has crashed");
             }
-        });    //draw the updated position of the client on the canvas
+                
+        });    
         
         
         if (counter >100 && counter < 500){
@@ -132,17 +137,17 @@ function collision(player, object){
                 if (collided){
                     console.log("collided!");
                     player.score +=10;
-                }
+                    currentPoint.used = true; 
+                    currentPoint.draw(ctx);                }
             })
-                   
                 if (counter === 448) {
                     counter = 0;
                     index++;
                 }
-           
-            
         }
         counter++;
+
+        
         window.requestAnimationFrame(draw); 
     }
     draw();
