@@ -34,12 +34,31 @@ body {
 #scoreBoard{
 
   position: relative;
-  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/scorebaord background1.png");
-  /*@xyz: make sure you define the left position as well in order for the board to show up, 
-  refer to how I've coded the attack button using #left and .button*/
-
+  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/scorebaord background1.png")
+  /*temporary positions*/
   height:150px;
   width:200px;
+  left:50px;
+  top:50px;
+}
+#scoreboardHeading{
+    
+position: relative;
+  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/scorebaordheading.png");
+  /*temporary positions*/
+  height:100px; 
+  width:200px;
+  left:50px;
+  top:50px;
+}
+#rankheading{
+  position: relative;
+  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/rank heading.png");
+  /*temporary positions*/
+  height:75px; 
+  width:200px;
+  left:50px;
+  top:50px;
 }
 
 #gameScreen{
