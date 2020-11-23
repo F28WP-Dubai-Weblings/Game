@@ -49,6 +49,7 @@ let points = [];    //client side list for points
 let playerNumber = 0;
 let attacks = [] //client side list for bullets
 let bulletx, bullety;
+let index = 0;
 
 socket.on("init", ({id,num, player_list, fuelPoints, bullets}) => {
 
@@ -102,14 +103,14 @@ function collision(player, object){
     let counter = 0;
     let x,y;  
 
+
     function draw(){
         ctx.clearRect(0,0,canvas.width,canvas.height); //clear the canvas every frame
         
-        points.forEach(v=>{
-            console.log(v.horizontalPos);
-            console.log(v.verticalPos);
+    
+        /*points.forEach(v=>{
             v.draw(ctx)
-        });
+        });*/
         
         players.forEach(client => {
             client.draw(ctx)
@@ -121,24 +122,27 @@ function collision(player, object){
         });    //draw the updated position of the client on the canvas
         
         
-        /*if (counter >100 && counter < 500){
+        if (counter >100 && counter < 500){
             counter++;
-            points.forEach(client => {client.draw(ctx);players.forEach( player => 
-                    {
-                        let collided = collision(player,client);
-                        if (collided){
-                            console.log("collided!");
-                            player.score +=10;
-                        }
-                    
-                    })}); 
+            let currentPoint = points[index];
+            currentPoint.draw(ctx);
+
+            players.forEach( player => {
+                let collided = collision(player,currentPoint);
+                if (collided){
+                    console.log("collided!");
+                    player.score +=10;
+                }
+            })
+                   
                 if (counter === 448) {
                     counter = 0;
+                    index++;
                 }
            
             
-        }*/
-        //counter++;
+        }
+        counter++;
         window.requestAnimationFrame(draw); 
     }
     draw();

@@ -9,7 +9,7 @@ class Fuel {
   draw(ctx) {
   ctx.beginPath();
   const fuelImg = new Image();
-  fuelImg.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/death.PNG";
+  fuelImg.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/fuel.png";
   fuelImg.width = this.width;
   fuelImg.height = this.height;
 
