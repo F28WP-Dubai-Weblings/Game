@@ -1,0 +1,67 @@
+body{
+    margin:0;
+    padding:0;
+    background-color: black;
+    display:flex;
+}
+
+#left{
+    margin:0;
+    padding:0;
+    background-color: white;
+    margin-left: 0;
+    margin-right: auto;
+    width: 10px; 
+    height:100vh
+}
+
+#right{
+    margin:0;
+    padding:0;
+    background-color: white;
+    margin-left: auto;
+    margin-right: 0;
+    width: 10px; 
+    height:100vh
+}
+
+h2{
+    animation: glow 1s ease-in-out infinite alternate;
+    border: 0;
+    text-align:center;
+    color: white;
+    font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
+}
+h1{
+    padding:40px 0;
+    border: 0;
+    text-align:center;
+    color: white;
+    font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
+}
+.wrapper {
+    font-size: large;
+    padding: 50px 0;
+    border: 0;
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20em;
+    
+}
+
+@keyframes glow{
+    from {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #d1abbe, 0 0 30px #a38896, 0 0 40px #dfb6ca, 0 0 50px #bb6c93, 0 0 60px #9e195c;
+      }
+      
+      to {
+        text-shadow: 0 0 9px #fff, 0 0 13px #ff4da6, 0 0 23px #ff4da6, 0 0 30px #ff4da6, 0 0 43px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6;
+      }
+}
+
+p {
+
+    text-align:center;
+    color: white;
+}
