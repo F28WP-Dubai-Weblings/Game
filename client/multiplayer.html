@@ -9,7 +9,8 @@
     <script src ="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
     <script src="js/liveplayers.js"></script>
     <script src="js/fuel.js "></script>
-    <script src="js/controls.js "></script>
+    <script src="js/bullet.js"></script>
+    <!--<script src="js/controls.js "></script>-->
     
 
 
@@ -21,13 +22,14 @@
             <div id = "gameScreen">
                 <div id = "left">
                     <div>
-                        <button class="button" type="button" onclick="attack()"> ATTACK!</button>
+                        <button id="button"> ATTACK!</button>
                     </div>
                 </div>
                 <div id ="Track">
                     <div id="scoreBoard"></div>
                     <canvas id="canvas"></canvas>
                     <script src="js/multiplayer.js"></script>   <!--multiplayer.js added in the body to make sure it runs after html for canvas is run-->
+                    <script src="js/controls.js "></script>
                 </div>
 
                 <div id="right">

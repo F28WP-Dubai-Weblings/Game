@@ -14,7 +14,8 @@ class Liveplayers{
         }; 
         this.speed = 10;
         this.width= undefined;
-        this.height = 150;
+        this.height = 200;
+        this.width = 150;
         this.attack = false;
     }
     
@@ -30,8 +31,8 @@ class Liveplayers{
         if (this.num===3){
             img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/racecar1.png";
         }
-        this.width = img.width;
-        this.height = img.height;
+        img.width = this.width;
+        img.height = this.height;
         //console.log("the cars width is "+ this.width + " " + this.height);
 
         ctx.drawImage(img, this.horizontalPos, this.verticalPos, img.width, img.height);
@@ -53,19 +54,5 @@ class Liveplayers{
         }
         this.draw(ctx);
     }
-
-    shoot(){
-        if (this.attack){
-            ctx.beginPath();
-            this.horizontalPos++;
-            this.verticalPos++;
-            const img = new Image();
-            img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/bullet.PNG";
-            this.width = img.width;
-            this.height = img.height;
-            ctx.drawImage(img, this.horizontalPos, this.verticalPos, img.width, img.height);
-        }
-    }
-
     
 }

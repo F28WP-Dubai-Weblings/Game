@@ -22,6 +22,7 @@ function updateGameArea() //this function : stops the music when the car hits an
 
 
 
+
 const canvas = document.getElementById("canvas"),
 ctx = canvas.getContext("2d");
 
@@ -34,24 +35,21 @@ function fillTrack(canvas){   //make the canvas cover the entire Track div
     canvas.height = canvas.offsetHeight;
 }
 
-
-
 //                                                 MODULE AND EVENT LISTENERS FOR PLAYER MOVEMENT
 
-
-let players = [];
-let points = [];
-let playerNumber = 0;
-//Live Players 
 
 
 
 
 
 const socket = io(); //initialise a new socket each time a player arrives
+let players = [];   
+let points = [];    //client side list for points
+let playerNumber = 0;
+let attacks = [] //client side list for bullets
+let bulletx, bullety;
 
-socket.on("init", ({id,num, player_list, fuelPoints}) => {
-    console.log("there is a player connected" + players.length);
+socket.on("init", ({id,num, player_list, fuelPoints, bullets}) => {
 
     console.log("got the init message");
     const player = new Liveplayers({id, num}); //instantiate an object of the 'liveplayers' class
@@ -66,103 +64,38 @@ socket.on("init", ({id,num, player_list, fuelPoints}) => {
     
 
     socket.on('playerMoved', ({id, horizontalPos, verticalPos}) => {
-        console.log("the horizontal Pos recieved here in multiplayer.js "+ horizontalPos);
+        console.log("moving now");
         players.find(elem => elem.id === id).horizontalPos = horizontalPos;
-        players.find(elem => elem.id === id).verticalPos = verticalPos;
-
+        players.find(elem => elem.id === id).verticalPos = verticalPos; 
     });
+
+    console.log("about to recieve");    
+    socket.on('playerAttack', ({id}) => {
+        console.log("client knows player has attacced");
+        console.log("player list is: " + players);
+        console.log("bullet list is: " + attacks); //check if the bug is bc bullet is undefined?
+    });
+    
+    console.log("shouldve recieved it");
+
+    
 
     players = player_list.map(element => new Liveplayers(element)).concat(player);  //make a copy of the list of players sent by the server on the client browser
     points = fuelPoints.map(element => new Fuel(element));  //make a copy of the list of fuelPoints sent by the server on the client browser
+    attacks = bullets.map(element => new Bullet(element));
 
     //                                                                 Collision Detection
+
+
 function collision(player, object){
-    console.log("player height is: " + player.height);
-    console.log("player width is :" + player.width);
-    console.log("object hegith is: "+ object.height);
-    console.log("object width is: " + object.width);
-    
-//CASE 1 -- OPTIONAL
-    if (player.horizontalPos>= object.horizontalPos&&    //if the player's horizontal Pos is greater than or equal to the same of the object
-        player.horizontalPos<= object.horizontalPos+ object.width &&    //if the player's horizontal Pos is lesser than or equal to the same of the object and
-        player.verticalPos >= object.verticalPos &&   //if the car has an equal or greater verticalposition as the object (if the car is above the object vertically)
-        player.verticalPos <= object.verticalPos + object.height){
-            console.log(1);
-            return true;
-        }
 
-//CASE 2
-    if (player.horizontalPos+ player.width >= object.horizontalPos&&
-        player.horizontalPos+ player.width <= object.horizontalPos+ object.width -10 &&
-        player.verticalPos >= object.verticalPos &&
-        player.verticalPos <= object.verticalPos + object.height) {
-            console.log(2);
-
-            return true;
-        }
-
-//CASE 3
-     
-    if (player.horizontalPos>= object.horizontalPos&&
-        player.horizontalPos<= object.horizontalPos+ object.width &&
-        player.verticalPos + player.height >= object.verticalPos &&
-        player.verticalPos + player.height <= object.verticalPos + object.height){
-            console.log(3);
-
-            return true;
-        }
-
-//CASE 4
-    if (player.horizontalPos+ player.width >= object.horizontalPos&&
-        player.horizontalPos+ player.width <= object.horizontalPos+ object.width &&
-        player.verticalPos + player.height >= object.verticalPos &&
-        player.verticalPos + player.height <= object.verticalPos + object.height){
-            console.log(4);
-
-            return true;
-        }
-
-//CASE 5
-    if (object.horizontalPos>= player.horizontalPos&&
-        object.horizontalPos<= player.horizontalPos+ player.width &&
-        object.verticalPos >= player.verticalPos &&
-        object.verticalPos <= player.verticalPos + player.height) {
-            console.log(5);
-
-            return true;
-        }
-
-//CASE 6
-/*
-    if (object.horizontalPos+ object.width-60 >= player.horizontalPos&&
-        object.horizontalPos+ object.width-60 <= player.horizontalPos+ player.width &&
-        object.verticalPos >= player.verticalPos &&
-        object.verticalPos <= player.verticalPos + player.height) {
-            console.log(6);
-
-            return true;
-        }*/
-
-//CASE 7
-    if (object.horizontalPos>= player.horizontalPos&&
-        object.horizontalPos<= player.horizontalPos+ player.width &&
-        object.verticalPos + object.height >= player.verticalPos &&
-        object.verticalPos + object.height <= player.verticalPos + player.height){
-            console.log(7);
-
-            return true;
-        }
-    /*
-//CASE 8 -- unecessary
-    if (object.horizontalPos+ object.width >= player.horizontalPos&&
-        object.horizontalPos+ object.width <= player.horizontalPos+ player.width &&
-        object.verticalPos + object.height >= player.verticalPos &&
-        object.verticalPos + object.height <= player.verticalPos + player.height){
-            console.log(8);
-
-            return true;
-        }
-*/
+   if (player.horizontalPos < ((object.horizontalPos + object.width) -30) &&
+    ((player.horizontalPos+ player.width)-30) > object.horizontalPos &&
+    player.verticalPos < ( (object.verticalPos + object.height) -30) &&
+    (player.verticalPos + player.height) > object.verticalPos - 30) {
+    return true;
+ 
+    }
 
 }
 
@@ -170,29 +103,35 @@ function collision(player, object){
     let x,y;
 
     function store() {  //will update horizontalPosand y to a different value everytime it is called
-        x = 100;//Math.random()*620;
-        y = 100;//Math.random()*600;
+        x = Math.random()*620;
+        y = Math.random()*600;
     };
 
     function draw(){
         ctx.clearRect(0,0,canvas.width,canvas.height); //clear the canvas every frame
-        players.forEach(client => client.draw(ctx));    //draw the updated position of the client on the canvas
+        players.forEach(client => {
+            client.draw(ctx)
+            if (client.attack === true){
+                attacks.forEach(attacc => {
+                    attacc.draw(ctx);
+                });
+            }
+        });    //draw the updated position of the client on the canvas
         
 
-        if (counter >100 && counter < 1000){
-            points.x = x; 
-            points.y = y;
-            points.forEach(client => {client.updatePos(x,y);/*players.forEach( player => 
+        if (counter >100 && counter < 500){
+            counter++;
+            points.forEach(client => {client.updatePos(x,y);players.forEach( player => 
                 {
                     let collided = collision(player,client);
                     if (collided){
                         console.log("collided!");
                         player.score +=10;
-                        console.log("player"+player.num+" "+ player.score);
                     }
-                })*/}); 
-            counter++;
-            if (counter === 698) {
+                
+                })}); 
+            
+            if (counter === 448) {
                 counter = 0;
                 store();
             }
