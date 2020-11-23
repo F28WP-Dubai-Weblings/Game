@@ -118,7 +118,13 @@ function collision(player, object){
             if (client.attack === true){
                 attacks[1].draw(ctx)
                 }
-        });    //draw the updated position of the client on the canvas
+
+            let carCrash = collision(client, attacks[1]);
+            if (carCrash) {
+                console.log("player has crashed");
+            }
+                
+        });    
         
         
         if (counter >100 && counter < 500){
@@ -131,15 +137,17 @@ function collision(player, object){
                 if (collided){
                     console.log("collided!");
                     player.score +=10;
-                }
+                    currentPoint.used = true; 
+                    currentPoint.draw(ctx);                }
             })
                 if (counter === 448) {
                     counter = 0;
                     index++;
                 }
-           
         }
         counter++;
+
+        
         window.requestAnimationFrame(draw); 
     }
     draw();

@@ -18,6 +18,9 @@ class Liveplayers{
         this.height = 200;
         this.width = 150;
         
+        this.health = 100; //set default health
+        this.crash = false;
+
         //player attack properties
         this.attack = false;
         this.bull_angle = 10; //player's default shoot angle
@@ -37,6 +40,10 @@ class Liveplayers{
         if (this.num===3){
             img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/racecar1.png";
         }
+        /*if (this.crash = true){
+            img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/explosion.GIF";
+            }*/
+            
         img.width = this.width;
         img.height = this.height;
         //console.log("the cars width is "+ this.width + " " + this.height);
