@@ -88,12 +88,11 @@ io.sockets.on('connection',socket => {
     socket.broadcast.emit('playerMoved', {id: socket.id, horizontalPos, verticalPos});
   });
 
-  socket.on('playerAttack',({id, bull_vx, bull_vy}) =>{
+  socket.on('playerAttack',({id, bull_angle}) =>{
     console.log("in server side attack");
-    console.log("bullet vx in server:" + bull_vy);
-    console.log("bullet vy in server:" + bull_vx);
+    console.log("bullet angle in server:" + bull_angle);
 
-    socket.broadcast.emit('playerAttack', ({id:socket.id, bull_vx, bull_vy}));
+    socket.broadcast.emit('playerAttack', ({id:socket.id, bull_angle}));
   });
 
 });

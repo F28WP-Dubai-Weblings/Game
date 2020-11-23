@@ -71,19 +71,17 @@ socket.on("init", ({id,num, player_list, fuelPoints, bullets}) => {
         players.find(elem => elem.id === id).verticalPos = verticalPos; 
     });
 
-    socket.on('playerAttack', ({id, bull_vx, bull_vy }) => {
+    socket.on('playerAttack', ({id, bull_angle }) => {
         console.log("in mult attack");
-        reqPlayer = players.find(elem => elem.id===id)
-        players.find(elem => elem.id===id).attack = true;
-        
-        attacks[1].generatePos(players.find(elem => elem.id === id).horizontalPos, 
-        players.find(elem => elem.id === id).verticalPos);
+        reqPlayer = players.find(elem => elem.id===id); //find the player that just attacked
 
-        attacks[1].setup({vx:bull_vx, vy: bull_vy});
+        players.find(elem => elem.id===id).attack = true;   //set his attack flag to true
 
-        console.log("bullet vx in mult is" + bull_vx);
-        console.log("bullet vy in mult is" + bull_vy);
-        
+        attacks[1].setup({angle:bull_angle});
+        attacks[1].horizontalPos = reqPlayer.horizontalPos;
+        attacks[1].verticalPos = reqPlayer.verticalPos;
+
+        console.log("bullet angle in mult is" +bull_angle);        
     });
 
     
@@ -113,13 +111,7 @@ function collision(player, object){
 
 
     function draw(){
-        ctx.clearRect(0,0,canvas.width,canvas.height); //clear the canvas every frame
-        
-    
-        /*points.forEach(v=>{
-            v.draw(ctx)
-        });*/
-        
+        ctx.clearRect(0,0,canvas.width,canvas.height); //clear the canvas every frame        
 
         players.forEach(client => {
             client.draw(ctx)
@@ -129,7 +121,7 @@ function collision(player, object){
         });    //draw the updated position of the client on the canvas
         
         
-        /*if (counter >100 && counter < 500){
+        if (counter >100 && counter < 500){
             counter++;
             let currentPoint = points[index];
             currentPoint.draw(ctx);
@@ -147,7 +139,7 @@ function collision(player, object){
                 }
            
         }
-        counter++;*/
+        counter++;
         window.requestAnimationFrame(draw); 
     }
     draw();

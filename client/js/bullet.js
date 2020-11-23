@@ -24,13 +24,13 @@ class Bullet {
         vx = 5 * Math.cos(angle/180*Math.PI);
         vy = 5 * Math.sin(angle/180*Math.PI);
         console.log("vx in generate is"+ vx);
-        console.log("vy in gen is "+ vy);
+        console.log("angle in gen is "+ angle);
         return angle;
     }
 
-    setup({vx, vy}){
-        vx = vx;
-        vy = vy;
+    setup({angle}){
+        vx = 5 * Math.cos(angle/180*Math.PI);
+        vy = 5 * Math.sin(angle/180*Math.PI);
     }
 
     draw(ctx){
