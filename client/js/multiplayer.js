@@ -109,7 +109,6 @@ function collision(player, object){
     let counter = 0;
     let x,y;  
 
-
     function draw(){
         ctx.clearRect(0,0,canvas.width,canvas.height); //clear the canvas every frame        
 
@@ -122,8 +121,7 @@ function collision(player, object){
             let carCrash = collision(client, attacks[1]);
             if (carCrash) {
                 console.log("player has crashed");
-            }
-                
+            }     
         });    
         
         
@@ -150,5 +148,9 @@ function collision(player, object){
         
         window.requestAnimationFrame(draw); 
     }
-    draw();
+
+    setTimeout(draw,10000); //drawing to canvas after 10 seconds
+    setTimeout(function(){alert("Game Over")},90000);//game over alert after 90s
+
+
 });
