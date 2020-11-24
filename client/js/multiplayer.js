@@ -37,6 +37,8 @@ function fillTrack(canvas){   //make the canvas cover the entire Track div
     canvas.height = canvas.offsetHeight;
 }
 
+
+
 //                                                 MODULE AND EVENT LISTENERS FOR PLAYER MOVEMENT
 
 
@@ -144,13 +146,41 @@ function collision(player, object){
                 }
         }
         counter++;
-
-        
+        console.log(players.length);
         window.requestAnimationFrame(draw); 
     }
+    draw();
 
-    setTimeout(draw,10000); //drawing to canvas after 10 seconds
-    setTimeout(function(){alert("Game Over")},90000);//game over alert after 90s
+    const waitScreen = document.getElementById("waitScreen");
+    const gameScreen = document.getElementById("gameScreen");
+    gameScreen.style.display = "none";
 
+    let flag =false;
 
+    function check(){
+        if (players.length === 3 && !flag){
+            flag = true;
+            //waitScreen.style.display = "none";
+            gameScreen.style.display = "flex"; 
+            console.log(flag);
+        }
+    }
+    if (players.length < 4){
+        check();
+    }
+
+    console.log("this player is" + player.num);
+    //tempAlert("close", 5000);
+    if (player.num >3){
+        setTimeout(function(){alert("Sorry this game is full!")},);//game over alert after 90s
+    }
+
+    function start(){
+        if (player.length <= 3 && flag){
+            console.log("in less than");
+            //setTimeout(function(){alert("Game Over")},90000);//game over alert after 90s
+        }
+    }
+
+    
 });

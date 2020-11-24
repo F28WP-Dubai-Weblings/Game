@@ -3,8 +3,17 @@ class Liveplayers{
     constructor({id, num}){
         this.id = id;
         this.num = num;
-        this.horizontalPos = 10;
-        this.verticalPos = 10;
+        if (this.num === 1){
+            this.horizontalPos = 57;
+        }
+        if (this.num===2){
+            this.horizontalPos = 275;
+        }
+        if (this.num===3){
+            this.horizontalPos = 506;
+        }
+
+        this.verticalPos = 680;
         this.finalScore = 0;
         this.score = 0;
         this.keyEvents = {  //set the default values of all relevant key events to false
