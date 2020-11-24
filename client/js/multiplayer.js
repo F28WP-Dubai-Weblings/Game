@@ -133,7 +133,8 @@ function collision(player, object){
                 attacker = client;
                 attacks[1].draw(ctx);
                 console.log("client is attacker" + (client===attacker) +" " +client.num);
-                setTimeout(()=> {client.attack=false;},6000);   //reset the client's attack state after 5 seconds.
+                client.score -= 30 // reduce client's running score after theyve attacked.
+                setTimeout(()=> {client.attack=false;},7000);   //reset the client's attack state after 5 seconds.
                 }
                 
         });    
@@ -146,9 +147,9 @@ function collision(player, object){
                 client.crash =true;
                 client.draw(ctx); //player's car dissapears.
                 if(client === player){
-                    setTimeout(function(){alert("Game Over")},2000);    //player's game is over
+                    setTimeout(function(){alert("Game Over")},1000);    //player's game is over
                 }
-            }
+            } 
 
         })
 
@@ -161,7 +162,8 @@ function collision(player, object){
             players.forEach( player => {
                 let collided = collision(player,currentPoint);
                 if (collided){
-                    player.score +=10;  //increase the score of the player
+                    player.score +=10;  //increase the running score of the player
+                    player.finalScore +=10; //increase the total score of the player
                     currentPoint.used = true; 
                     currentPoint.draw(ctx);}
             })
