@@ -40,9 +40,7 @@ class Liveplayers{
     }
     
     draw(ctx){
-        console.log("this.nim" + this.num + "this.draw" + this.notDraw);
-
-        
+       
             ctx.beginPath();
             const img = new Image();
             if (this.crash) {

@@ -117,8 +117,9 @@ function collision(player, object){
     let x,y;  
 
     function draw(){
+
         if (players.length === 3 ){
-        setTimeout(function(){alert("Game Over")},90000);
+        setTimeout(function(){alert("Game Over"+ "Your score was: " + player.score)},90000);
 
         waitScreen.style.display = "none";
         gameScreen.style.display = "flex"; 
@@ -133,10 +134,8 @@ function collision(player, object){
                 attacker = client;
                 attacks[1].draw(ctx);
                 console.log("client is attacker" + (client===attacker) +" " +client.num);
-                client.score -= 30 // reduce client's running score after theyve attacked.
-                setTimeout(()=> {client.attack=false;},7000);   //reset the client's attack state after 5 seconds.
-                }
-                
+                //reduce client's running score after theyve attacked.
+            }
         });    
         
         let carCrash;
@@ -144,13 +143,12 @@ function collision(player, object){
         players.forEach(client=> {
             carCrash = collision(client,attacks[1]);
             if (carCrash && client != attacker){
-                client.crash =true;
+                client.crash = true;
                 client.draw(ctx); //player's car dissapears.
                 if(client === player){
-                    setTimeout(function(){alert("Game Over")},1000);    //player's game is over
+                    setTimeout(function(){alert("Game Over" + "Your score was: " + player.score)},1000);    //player's game is over
                 }
             } 
-
         })
 
         if (counter >100 && counter < 500){
@@ -159,22 +157,28 @@ function collision(player, object){
             currentPoint.draw(ctx); //draw the fuel
 
             //check if any player has collected the fuel
+            let collided = collision(player,currentPoint);
             players.forEach( player => {
-                let collided = collision(player,currentPoint);
                 if (collided){
-                    player.score +=10;  //increase the running score of the player
-                    player.finalScore +=10; //increase the total score of the player
+                    //increase the running score of the player
+                    //increase the total score of the player
                     currentPoint.used = true; 
                     currentPoint.draw(ctx);}
             })
                 if (counter === 448) {
+                    if (collided){
+                        player.score +=20;
+                    }
+                    collided = false; //reset collision state
                     counter = 0;
                     index++;
                 }
         }
         counter++; }
-       
         window.requestAnimationFrame(draw); 
+    }
+    if (player.num > 4){
+        setTimeout(function(){alert("Sorry this game is full!")},500);//game over alert after 90s
     }
     draw();
 
@@ -207,9 +211,7 @@ function collision(player, object){
 
     console.log("this player is" + player.num);
     //tempAlert("close", 5000);
-    if (player.num >3){
-        setTimeout(function(){alert("Sorry this game is full!")},);//game over alert after 90s
-    }
+    
 
     function start(){
         if (players.length <= 3 && flag){

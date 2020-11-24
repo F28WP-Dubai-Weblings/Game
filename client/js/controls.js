@@ -25,19 +25,16 @@ function controls(player, socket) {
     function attack(){
         console.log("attack is called");
 
-        if (player.score >= 30){
+        console.log("the players score is " + player.score);
+
+        if (player.score >= 100){
             player.attack = true;
             let angle= attacks[1].generatePos(player.horizontalPos, player.verticalPos);
             //update player's attack properties
             
             player.bull_angle = angle; 
             
-            socket.emit("playerAttack", ({id:player.id, bull_angle: player.bull_angle}));
-
-            player.score -=30;
-
-            setTimeout(()=> {client.attack=false;},5000);   //reset the client's attack state after 5 seconds.
-            
+            socket.emit("playerAttack", ({id:player.id, bull_angle: player.bull_angle}));            
         }
         
     }
