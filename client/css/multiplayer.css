@@ -3,6 +3,20 @@
     margin: 0;
     padding: 0;
 }
+
+.hide {
+  display: none;
+}
+#waitScreen{
+  background-color:black;
+  font-size: large;
+  border: 0;
+  color: white;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100vh;
+  text-align:center;
+}
 #button{
   display: block;
   width: 100%;
@@ -28,44 +42,39 @@ body {
   width:300px;
   height: 100vh;
 }
-
-
-
 #scoreBoard{
 
   position: relative;
-  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/scorebaord background1.png")
-  /*temporary positions*/
+  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/scorebaord background1.png");
   height:150px;
-  width:200px;
-  left:50px;
+  width:80px;
+  right:15px;
   top:50px;
 }
 #scoreboardHeading{
     
 position: relative;
   background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/scorebaordheading.png");
-  /*temporary positions*/
   height:100px; 
-  width:200px;
-  left:50px;
+  width:80px;
+  right:15px;
   top:50px;
 }
 #rankheading{
   position: relative;
   background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/rank heading.png");
-  /*temporary positions*/
   height:75px; 
   width:200px;
-  left:50px;
+  right:15px;
   top:50px;
 }
-
 #gameScreen{
   position: relative;
   background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/background1.png");  /*Temporary game bg*/
   background-size: cover;
-  display:flex;
+  display:flex;/*
+  opacity: 0;
+  pointer-events: none;*/
 
 }
 

@@ -6,12 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multiplayer</title>
     <link rel='stylesheet' href='css/multiplayer.css'/>
+    
+    <style>
+        #waitScreen {
+          display: none;
+        }
+    </style>
     <script src ="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <!---<script src = "js/alerts.js"></script>-->
     <script src="js/liveplayers.js"></script>
     <script src="js/fuel.js "></script>
     <script src="js/bullet.js"></script>
-    <!--<script src="js/controls.js "></script>-->
+    <script src="js/controls.js "></script>
     
+    <script>function tempAlert(msg,duration)
+        {
+         var el = document.createElement("div");
+         el.setAttribute("style","position:absolute;top:40%;left:20%;background-color:white;");
+         el.innerHTML = msg;
+         setTimeout(function(){
+          el.parentNode.removeChild(el);
+         },duration);
+         document.body.appendChild(el);
+        }</script>
 
 
 </head>
@@ -19,6 +36,9 @@
    
         <div id ="container">
 <!--             <div id="scoreBoard"></div> -->
+           <div id ="waitScreen">
+               Waiting For Other Players...
+           </div>
             <div id = "gameScreen">
                 <div id = "left">
                     <div>
@@ -26,14 +46,15 @@
                     </div>
                 </div>
                 <div id ="Track">
-                    <div id="scoreBoard"></div>
                     <canvas id="canvas"></canvas>
                     <script src="js/multiplayer.js"></script>   <!--multiplayer.js added in the body to make sure it runs after html for canvas is run-->
                     <script src="js/controls.js "></script>
                 </div>
 
                 <div id="right">
-                    <div id = "scoreBoard">scoreboard</div>
+                    <div id = "rankheading"></div>
+                    <div id = "scoreboardHeading"></div>
+                    <div id = "scoreBoard"></div>
                 </div>
 
             </div>

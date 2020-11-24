@@ -19,6 +19,8 @@ function updateGameArea() //this function : stops the music when the car hits an
     }
 }*/
 
+//const Bullet = require("./bullet");
+
 
 
 
@@ -35,6 +37,8 @@ function fillTrack(canvas){   //make the canvas cover the entire Track div
     canvas.height = canvas.offsetHeight;
 }
 
+
+
 //                                                 MODULE AND EVENT LISTENERS FOR PLAYER MOVEMENT
 
 
@@ -43,11 +47,12 @@ function fillTrack(canvas){   //make the canvas cover the entire Track div
 
 
 const socket = io(); //initialise a new socket each time a player arrives
+
 let players = [];   
 let points = [];    //client side list for points
 let playerNumber = 0;
 let attacks = [] //client side list for bullets
-let bulletx, bullety;
+let index = 0;
 
 socket.on("init", ({id,num, player_list, fuelPoints, bullets}) => {
 
@@ -64,26 +69,29 @@ socket.on("init", ({id,num, player_list, fuelPoints, bullets}) => {
     
 
     socket.on('playerMoved', ({id, horizontalPos, verticalPos}) => {
-        console.log("moving now");
         players.find(elem => elem.id === id).horizontalPos = horizontalPos;
         players.find(elem => elem.id === id).verticalPos = verticalPos; 
     });
 
-    console.log("about to recieve");    
-    socket.on('playerAttack', ({id}) => {
-        console.log("client knows player has attacced");
-        console.log("player list is: " + players);
-        console.log("bullet list is: " + attacks); //check if the bug is bc bullet is undefined?
+    socket.on('playerAttack', ({id, bull_angle }) => {
+        console.log("in mult attack");
+        reqPlayer = players.find(elem => elem.id===id); //find the player that just attacked
+
+        players.find(elem => elem.id===id).attack = true;   //set his attack flag to true
+
+        attacks[1].setup({angle:bull_angle});
+        attacks[1].horizontalPos = reqPlayer.horizontalPos;
+        attacks[1].verticalPos = reqPlayer.verticalPos;
+
+        console.log("bullet angle in mult is" +bull_angle);        
     });
-    
-    console.log("shouldve recieved it");
 
     
-
     players = player_list.map(element => new Liveplayers(element)).concat(player);  //make a copy of the list of players sent by the server on the client browser
     points = fuelPoints.map(element => new Fuel(element));  //make a copy of the list of fuelPoints sent by the server on the client browser
-    attacks = bullets.map(element => new Bullet(element));
+    attacks = bullets.map(shoot => new Bullet(shoot));
 
+        
     //                                                                 Collision Detection
 
 
@@ -94,50 +102,123 @@ function collision(player, object){
     player.verticalPos < ( (object.verticalPos + object.height) -30) &&
     (player.verticalPos + player.height) > object.verticalPos - 30) {
     return true;
- 
     }
-
+    return false; //else return false - no collision.
 }
 
-    let counter = 0;
-    let x,y;
+    const gameScreen = document.getElementById("gameScreen");
+    gameScreen.style.display = "none";
 
-    function store() {  //will update horizontalPosand y to a different value everytime it is called
-        x = Math.random()*620;
-        y = Math.random()*600;
-    };
+    const waitScreen = document.getElementById("waitScreen");
+    waitScreen.style.display = "block";
+
+    let flag =false;
+    let counter = 0;
+    let x,y;  
 
     function draw(){
-        ctx.clearRect(0,0,canvas.width,canvas.height); //clear the canvas every frame
+
+        if (players.length === 3 ){
+        setTimeout(function(){alert("Game Over"+ "Your score was: " + player.score)},90000);
+
+        waitScreen.style.display = "none";
+        gameScreen.style.display = "flex"; 
+        
+        ctx.clearRect(0,0,canvas.width,canvas.height); //clear the canvas every frame        
+
+        let attacker;
+        //draw the player attacks on the canvas
         players.forEach(client => {
             client.draw(ctx)
             if (client.attack === true){
-                attacks.forEach(attacc => {
-                    attacc.draw(ctx);
-                });
+                attacker = client;
+                attacks[1].draw(ctx);
+                console.log("client is attacker" + (client===attacker) +" " +client.num);
+                //reduce client's running score after theyve attacked.
             }
-        });    //draw the updated position of the client on the canvas
+        });    
         
+        let carCrash;
+        //check if a player has crashed
+        players.forEach(client=> {
+            carCrash = collision(client,attacks[1]);
+            if (carCrash && client != attacker){
+                client.crash = true;
+                client.draw(ctx); //player's car dissapears.
+                if(client === player){
+                    setTimeout(function(){alert("Game Over" + "Your score was: " + player.score)},1000);    //player's game is over
+                }
+            } 
+        })
 
         if (counter >100 && counter < 500){
             counter++;
-            points.forEach(client => {client.updatePos(x,y);players.forEach( player => 
-                {
-                    let collided = collision(player,client);
+            let currentPoint = points[index];
+            currentPoint.draw(ctx); //draw the fuel
+
+            //check if any player has collected the fuel
+            let collided = collision(player,currentPoint);
+            players.forEach( player => {
+                if (collided){
+                    //increase the running score of the player
+                    //increase the total score of the player
+                    currentPoint.used = true; 
+                    currentPoint.draw(ctx);}
+            })
+                if (counter === 448) {
                     if (collided){
-                        console.log("collided!");
-                        player.score +=10;
+                        player.score +=20;
                     }
-                
-                })}); 
-            
-            if (counter === 448) {
-                counter = 0;
-                store();
-            }
+                    collided = false; //reset collision state
+                    counter = 0;
+                    index++;
+                }
         }
-        counter++;
+        counter++; }
         window.requestAnimationFrame(draw); 
     }
+    if (player.num > 4){
+        setTimeout(function(){alert("Sorry this game is full!")},500);//game over alert after 90s
+    }
     draw();
+
+    /*const waitScreen = document.getElementById("waitScreen");
+    const gameScreen = document.getElementById("gameScreen");
+    gameScreen.style.display = "none";
+
+
+    function check(){
+        if (players.length === 3 && !flag){
+            console.log("in check");
+            flag = true;
+            //waitScreen.style.display = "none";
+            
+            console.log(flag);
+        }
+        else{
+            console.log("players.length is"+players.length);}
+          
+    }
+
+    
+
+    if (players.length < 4){
+        console.log("in call to check");
+        check();
+    }
+
+    setInterval(check(),10000);
+
+    console.log("this player is" + player.num);
+    //tempAlert("close", 5000);
+    
+
+    function start(){
+        if (players.length <= 3 && flag){
+            console.log("in less than");
+            //setTimeout(function(){alert("Game Over")},90000);//game over alert after 90s
+        }
+    }*/
+
+    
 });

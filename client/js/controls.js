@@ -1,3 +1,4 @@
+
 function controls(player, socket) {
     console.log("here");
       
@@ -20,15 +21,22 @@ function controls(player, socket) {
     }
 
     document.getElementById("button").addEventListener("click", attack);
+    
     function attack(){
         console.log("attack is called");
-        bulletx = player.horizontalPos;
-        bullety=player.verticalPos;
-        player.attack = true;
-        attacks.forEach(attacc => {
-            attacc.generatePos(bulletx,bullety);
-        });
-        socket.emit("playerAttack", {id: player.id});
+
+        console.log("the players score is " + player.score);
+
+        if (player.score >= 100){
+            player.attack = true;
+            let angle= attacks[1].generatePos(player.horizontalPos, player.verticalPos);
+            //update player's attack properties
+            
+            player.bull_angle = angle; 
+            
+            socket.emit("playerAttack", ({id:player.id, bull_angle: player.bull_angle}));            
+        }
+        
     }
 
 };
