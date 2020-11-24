@@ -12,10 +12,10 @@ class Bullet {
     }
      
     update(){ 
-        console.log("in update");
         this.horizontalPos += vx;
         this.verticalPos += vy;
     }
+
     generatePos(x,y){
         console.log("in generate"); 
         this.horizontalPos = x;
@@ -23,8 +23,8 @@ class Bullet {
         angle = Math.random()*360;//2 * Math.PI * Math.random();
         vx = 5 * Math.cos(angle/180*Math.PI);
         vy = 5 * Math.sin(angle/180*Math.PI);
-        console.log("vx in generate is"+ vx);
-        console.log("angle in gen is "+ angle);
+        //console.log("vx in generate is"+ vx);
+        //console.log("angle in gen is "+ angle);
         return angle;
     }
 

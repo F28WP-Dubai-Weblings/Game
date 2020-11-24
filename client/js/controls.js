@@ -25,21 +25,18 @@ function controls(player, socket) {
     function attack(){
         console.log("attack is called");
 
-        player.attack = true;
-        //player.score = 0; //reset player's running score
+        console.log("the players score is " + player.score);
 
-        let angle= attacks[1].generatePos(player.horizontalPos, player.verticalPos);
-        console.log("angle in control is " + angle);
-        //update player's attack properties
+        if (player.score >= 100){
+            player.attack = true;
+            let angle= attacks[1].generatePos(player.horizontalPos, player.verticalPos);
+            //update player's attack properties
+            
+            player.bull_angle = angle; 
+            
+            socket.emit("playerAttack", ({id:player.id, bull_angle: player.bull_angle}));            
+        }
         
-        player.bull_angle = angle; 
-
-        console.log("attacks1 in controls is " + attacks[1]);
-        
-        console.log("bullet vx in controls:" + player.bull_vx);
-        console.log("bullet vy in controls:" + player.bull_vy);
-
-        socket.emit("playerAttack", ({id:player.id, bull_angle: player.bull_angle}));
     }
 
 };

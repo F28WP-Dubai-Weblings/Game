@@ -3,6 +3,20 @@
     margin: 0;
     padding: 0;
 }
+
+.hide {
+  display: none;
+}
+#waitScreen{
+  background-color:black;
+  font-size: large;
+  border: 0;
+  color: white;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100vh;
+  text-align:center;
+}
 #button{
   display: block;
   width: 100%;
@@ -58,7 +72,9 @@ position: relative;
   position: relative;
   background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/background1.png");  /*Temporary game bg*/
   background-size: cover;
-  display:flex;
+  display:flex;/*
+  opacity: 0;
+  pointer-events: none;*/
 
 }
 
