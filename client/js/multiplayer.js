@@ -91,7 +91,6 @@ socket.on("init", ({id,num, player_list, fuelPoints, bullets}) => {
     points = fuelPoints.map(element => new Fuel(element));  //make a copy of the list of fuelPoints sent by the server on the client browser
     attacks = bullets.map(shoot => new Bullet(shoot));
 
-    console.log('here');
         
     //                                                                 Collision Detection
 
@@ -103,9 +102,8 @@ function collision(player, object){
     player.verticalPos < ( (object.verticalPos + object.height) -30) &&
     (player.verticalPos + player.height) > object.verticalPos - 30) {
     return true;
- 
     }
-
+    return false; //else return false - no collision.
 }
 
     const gameScreen = document.getElementById("gameScreen");
@@ -120,34 +118,50 @@ function collision(player, object){
 
     function draw(){
         if (players.length === 3 ){
+        setTimeout(function(){alert("Game Over")},90000);
+
         waitScreen.style.display = "none";
         gameScreen.style.display = "flex"; 
         
         ctx.clearRect(0,0,canvas.width,canvas.height); //clear the canvas every frame        
 
+        let attacker;
+        //draw the player attacks on the canvas
         players.forEach(client => {
             client.draw(ctx)
             if (client.attack === true){
-                attacks[1].draw(ctx)
+                attacker = client;
+                attacks[1].draw(ctx);
+                console.log("client is attacker" + (client===attacker) +" " +client.num);
+                setTimeout(()=> {client.attack=false;},6000);   //reset the client's attack state after 5 seconds.
                 }
-
-            let carCrash = collision(client, attacks[1]);
-            if (carCrash) {
-                console.log("player has crashed");
-            }     
+                
         });    
         
-        
+        let carCrash;
+        //check if a player has crashed
+        players.forEach(client=> {
+            carCrash = collision(client,attacks[1]);
+            if (carCrash && client != attacker){
+                client.crash =true;
+                client.draw(ctx); //player's car dissapears.
+                if(client === player){
+                    setTimeout(function(){alert("Game Over")},2000);    //player's game is over
+                }
+            }
+
+        })
+
         if (counter >100 && counter < 500){
             counter++;
             let currentPoint = points[index];
-            currentPoint.draw(ctx);
+            currentPoint.draw(ctx); //draw the fuel
 
+            //check if any player has collected the fuel
             players.forEach( player => {
                 let collided = collision(player,currentPoint);
                 if (collided){
-                    console.log("collided!");
-                    player.score +=10;
+                    player.score +=10;  //increase the score of the player
                     currentPoint.used = true; 
                     currentPoint.draw(ctx);}
             })
@@ -156,8 +170,8 @@ function collision(player, object){
                     index++;
                 }
         }
-        counter++;
-        console.log(players.length);}
+        counter++; }
+       
         window.requestAnimationFrame(draw); 
     }
     draw();

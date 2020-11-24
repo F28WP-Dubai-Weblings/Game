@@ -33,12 +33,7 @@ function controls(player, socket) {
         //update player's attack properties
         
         player.bull_angle = angle; 
-
-        console.log("attacks1 in controls is " + attacks[1]);
         
-        console.log("bullet vx in controls:" + player.bull_vx);
-        console.log("bullet vy in controls:" + player.bull_vy);
-
         socket.emit("playerAttack", ({id:player.id, bull_angle: player.bull_angle}));
     }
 

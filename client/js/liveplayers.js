@@ -1,3 +1,4 @@
+
 class Liveplayers{
 
     constructor({id, num}){
@@ -27,8 +28,9 @@ class Liveplayers{
         this.height = 200;
         this.width = 150;
         
-        this.health = 100; //set default health
+        //this.health = 100; //set default health
         this.crash = false;
+        this.notDraw = false;
 
         //player attack properties
         this.attack = false;
@@ -38,26 +40,33 @@ class Liveplayers{
     }
     
     draw(ctx){
-        ctx.beginPath();
-        const img = new Image();
-        if (this.num === 1){
-            img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/racecar1.png";
-        }
-        if (this.num===2){
-            img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/raceGreen.png";
-        }
-        if (this.num===3){
-            img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/racecar1.png";
-        }
-        /*if (this.crash = true){
-            img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/explosion.GIF";
-            }*/
-            
-        img.width = this.width;
-        img.height = this.height;
-        //console.log("the cars width is "+ this.width + " " + this.height);
+        console.log("this.nim" + this.num + "this.draw" + this.notDraw);
 
-        ctx.drawImage(img, this.horizontalPos, this.verticalPos, img.width, img.height);
+        
+            ctx.beginPath();
+            const img = new Image();
+            if (this.crash) {
+                img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/explosion.GIF";
+            }
+            else {
+                if (this.num === 1){
+                    img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/racecar1.png";
+                }
+                if (this.num===2){
+                    img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/raceGreen.png";
+                }
+                if (this.num===3){
+                    img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/racecar1.png";
+                }
+
+                img.width = this.width;
+                img.height = this.height;
+                //console.log("the cars width is "+ this.width + " " + this.height);
+        
+                ctx.drawImage(img, this.horizontalPos, this.verticalPos, img.width, img.height);
+            }
+        
+            
     }
 
     move(){
