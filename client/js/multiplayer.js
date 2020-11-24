@@ -64,7 +64,7 @@ socket.on("init", ({id,num, player_list, fuelPoints, bullets}) => {
 
     socket.emit('newPlayer', player);   //emit to the server that a new player has joined 
     socket.on('newPlayer', newPlayer => {
-        //console.log("pushing the player onto screen");
+        console.log("pushing the player onto screen");
         players.push(new Liveplayers(newPlayer))});  //update the 'clients' list on the browser when a newPlayer message is recieved
     
 
@@ -108,10 +108,21 @@ function collision(player, object){
 
 }
 
+    const gameScreen = document.getElementById("gameScreen");
+    gameScreen.style.display = "none";
+
+    const waitScreen = document.getElementById("waitScreen");
+    waitScreen.style.display = "block";
+
+    let flag =false;
     let counter = 0;
     let x,y;  
 
     function draw(){
+        if (players.length === 3 ){
+        waitScreen.style.display = "none";
+        gameScreen.style.display = "flex"; 
+        
         ctx.clearRect(0,0,canvas.width,canvas.height); //clear the canvas every frame        
 
         players.forEach(client => {
@@ -138,7 +149,7 @@ function collision(player, object){
                     console.log("collided!");
                     player.score +=10;
                     currentPoint.used = true; 
-                    currentPoint.draw(ctx);                }
+                    currentPoint.draw(ctx);}
             })
                 if (counter === 448) {
                     counter = 0;
@@ -146,28 +157,37 @@ function collision(player, object){
                 }
         }
         counter++;
-        console.log(players.length);
+        console.log(players.length);}
         window.requestAnimationFrame(draw); 
     }
     draw();
 
-    const waitScreen = document.getElementById("waitScreen");
+    /*const waitScreen = document.getElementById("waitScreen");
     const gameScreen = document.getElementById("gameScreen");
     gameScreen.style.display = "none";
 
-    let flag =false;
 
     function check(){
         if (players.length === 3 && !flag){
+            console.log("in check");
             flag = true;
             //waitScreen.style.display = "none";
-            gameScreen.style.display = "flex"; 
+            
             console.log(flag);
         }
+        else{
+            console.log("players.length is"+players.length);}
+          
     }
+
+    
+
     if (players.length < 4){
+        console.log("in call to check");
         check();
     }
+
+    setInterval(check(),10000);
 
     console.log("this player is" + player.num);
     //tempAlert("close", 5000);
@@ -176,11 +196,11 @@ function collision(player, object){
     }
 
     function start(){
-        if (player.length <= 3 && flag){
+        if (players.length <= 3 && flag){
             console.log("in less than");
             //setTimeout(function(){alert("Game Over")},90000);//game over alert after 90s
         }
-    }
+    }*/
 
     
 });
