@@ -10,8 +10,6 @@ const path = require('path');
 
 //These will be used when doing database
 
-var session = require('express-session');
-const path = require('path');
 
 //*Rida's static file* 
 //  app.use(express.static(__dirname + '/client')); //app.use(express.static('client'));

@@ -80,7 +80,7 @@ socket.on("init", ({id,num, player_list, fuelPoints, bullets}) => {
     attacks = bullets.map(shoot => new Bullet(shoot));  //make a copy of the array containing bullet sent by the server on the client browser
 
         
-    //                                                                 Collision Detection
+//                                                                 Collision Detection
 
 
 function collision(player, object){

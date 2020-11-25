@@ -47,13 +47,13 @@ class Liveplayers{
             }
             else {
                 if (this.num === 1){
-                    img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/racecar1.png";
+                    img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/blackCar.png";
                 }
                 if (this.num===2){
-                    img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/raceGreen.png";
+                    img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/blueCar.png";
                 }
                 if (this.num===3){
-                    img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/racecar1.png";
+                    img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/redCar.png";
                 }
 
                 img.width = this.width;
