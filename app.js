@@ -7,8 +7,6 @@ const app = express();
 
 //These will be used when doing database
 
-var session = require('express-session');
-const path = require('path');
 
 //define a session
 app.use(session({

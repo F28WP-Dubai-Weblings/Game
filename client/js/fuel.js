@@ -11,7 +11,7 @@ class Fuel {
   if (!this.used){
     ctx.beginPath();
     const fuelImg = new Image();
-    fuelImg.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/fuel.png";
+    fuelImg.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/bluePoint.png";
     fuelImg.width = this.width;
     fuelImg.height = this.height;
 

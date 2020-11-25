@@ -10,7 +10,7 @@ function initDB(){
       });
     
       connection.connect(function(err) {
-        if (err) throw err;
+        if (err) throw err; 
         //create database
         console.log("Connected the database");
           
