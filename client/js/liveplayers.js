@@ -24,9 +24,8 @@ class Liveplayers{
             ArrowLeft: false
         }; 
         this.speed = 10;
-        this.width= undefined;
-        this.height = 200;
-        this.width = 150;
+        this.height = 110;
+        this.width = 110;
         
         //this.health = 100; //set default health
         this.crash = false;
@@ -47,13 +46,13 @@ class Liveplayers{
             }
             else {
                 if (this.num === 1){
-                    img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/blackCar.png";
+                    img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/racecar1.png";
                 }
                 if (this.num===2){
-                    img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/blueCar.png";
+                    img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/greenCar.png";
                 }
                 if (this.num===3){
-                    img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/redCar.png";
+                    img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/yellowCar.png";
                 }
 
                 img.width = this.width;

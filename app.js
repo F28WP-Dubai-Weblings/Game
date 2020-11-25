@@ -9,13 +9,12 @@ const app = express();
 
 
 //define a session
-app.use(session({
+/*app.use(session({
   secret: 'your secrete word goes here',
   cookie: { maxAge: 60000 },
   resave: false,
   saveUninitialized: false
-}));
-
+}));*/
 //*Rida's static file* 
 //  app.use(express.static(__dirname + '/client')); //app.use(express.static('client'));
 //  app.get('/', function (req, res) {

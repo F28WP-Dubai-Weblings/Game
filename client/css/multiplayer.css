@@ -17,6 +17,7 @@
   height: 100vh;
   text-align:center;
 }
+
 #button{
   display: block;
   width: 100%;
@@ -76,8 +77,9 @@ body {
 
 #Track{
     background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/racetrack.png");
-
-    width:800px;
+    margin: auto;
+    width: 50%;
+    border: 3px;
     height:100vh;
     display:block;
     margin:auto;
