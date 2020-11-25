@@ -131,6 +131,7 @@ section
   display: flex;
   align-items: left;
   justify-content: left;
+    background-size:contain
     background-repeat:no-repeat ;
     top=100px;
 }
