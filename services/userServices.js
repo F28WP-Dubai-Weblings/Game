@@ -1,4 +1,4 @@
-const { User } = require('../Variables/attributes');
+const { User } = require('../models/objects');
 const playerdb = require('../db/playerdb');
 
 const loginService = (username, password, callback) => {
