@@ -131,6 +131,8 @@ section
   display: flex;
   align-items: left;
   justify-content: left;
+    background-repeat:no-repeat ;
+    top=100px;
 }
 h1 {
   font-family: "Montserrat";
