@@ -2,6 +2,7 @@
 body{
   overflow-x: hidden; /*prevents horizontal scrolling(applicable to the default web browser zoom level)*/
   overflow-y: hidden; 
+  background-color: black;
 }
 
 #container{
@@ -27,7 +28,7 @@ body{
     height:200px;
     width:150px;
     bottom:120px;
-    background-size:100%;
+    background-size:contain;
 }
 
 .fuelDiv{
@@ -35,9 +36,18 @@ body{
   position: absolute;
   height:100px;
   width:80px;
-  bottom:120px;
   background-size:contain;
 }
+
+.coneDiv{
+  background-image:url("../media/icons/cone.png");
+  position: absolute;
+  height:100px;
+  width:80px;
+  background-size:contain;
+}
+
+
 
 
 .police{
@@ -49,37 +59,36 @@ body{
   background-size:contain;
 }
 
-.startNav{
-  position:absolute;
-  background-color: pink;
-  left:50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+.startNav, .end{
+  position: relative;
+  margin: auto;
+  width: 50%;
+  border: 3px;
+  background-color: black;
   color:white;
-  z-index;
+  z-index: 1;
   text-align: center;
-  border: 1px solid black;
   padding: 15px;
-  margin:auto;
-  widows: 50%;
   cursor:pointer;
   font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
   letter-spacing: 5;
   font-size: 20px;
   word-spacing:3;
-  line-height: 30px;
   box-shadow: 0 5px 5px white;
 }
 
 .scoreBoard
 {
   width:235px;
-  height:24vh;
+  height:14vh;
   position: absolute;
   background-size:contain;
-  left:40px;
+  left:60px;
+  line-height: 100px;
   background-color: black;
-  top:15px;
+  top:30px;
+  font-size: 20px;
+  text-align: center;
   color:white;
   font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
   box-shadow:0 5px 5px #777;
