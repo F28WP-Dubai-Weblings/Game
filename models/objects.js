@@ -3,7 +3,13 @@ function User (id, name, pass, score) {
         this.username = name;
         this.password = pass;
         this.score = score;
-    }
+}
+function Session (id, date) {
+        this.id = id;
+        this.startDate = date;     
 }
 
-module.exports = User;
+module.exports = {
+        User,
+        Session
+    }
