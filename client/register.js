@@ -24,6 +24,7 @@ $(document).ready(function(){
               })
              .fail(function() {
                  console.log("error with registration");
+                 response.redirect("register.html");
                  //$.get('register.js');
              });
 
@@ -37,6 +38,9 @@ $(document).ready(function(){
               console.log(result);
               console.log('Welcome back', name);
               //login correct show the game page here using $.get
+              if(request.session.username){
+                location.replace("index.html");
+              }
              })
             .fail(function() {
                 console.log("error with login");
@@ -46,6 +50,7 @@ $(document).ready(function(){
           Cancel: function() {
               //cancel closes the dialog  
               $(this).dialog("close");
+              response.redirect("register.html");
           }
       },
   });

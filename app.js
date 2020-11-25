@@ -4,9 +4,8 @@ console.log("In app.js");
 //Rida's Server Connection
 const express = require('express');
 const app = express();
-
-//These will be used when doing database
-
+var session = require('express-session');
+//didnt put favicon
 
 //define a session
 app.use(session({
