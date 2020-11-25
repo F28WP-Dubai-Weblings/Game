@@ -118,7 +118,7 @@ function collision(player, object){
         waitScreen.style.display = "none";  //remove the wait screen
         gameScreen.style.display = "flex";  //now display the gameScreen
         
-        ScoreBoard.innerHTML="YOUR SCORE IS:  " + player.score; 
+        ScoreBoard.innerHTML="SCORE:  " + player.score; 
 
         ctx.clearRect(0,0,canvas.width,canvas.height); //clear the canvas every frame        
 
@@ -129,7 +129,6 @@ function collision(player, object){
             if (client.attack === true){
                 attacker = client;
                 attacks[0].draw(ctx);
-                console.log("client is attacker" + (client===attacker) +" " +client.num);
                 //reduce client's running score after theyve attacked.
             }
         });    

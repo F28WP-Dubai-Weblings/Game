@@ -158,11 +158,12 @@ function move(){
             racer.horizontalPos += racer.pixelPosition;
         }     
         
+        racer.score+=1;
         car.style.left = racer.horizontalPos + "px";
         car.style.top = racer.verticalPos + "px";
 
     //generate random fuel positions.
-    score.innerText = "YOUR SCORE IS: " + racer.score;
+    score.innerText = "SCORE:  " + racer.score;
     }
     
 
@@ -179,8 +180,6 @@ function start(){
     startBoard.classList.add("hide");    //add classList "hide" to get rid of the start navigation pop-up
     gameScreen.classList.remove("hide");    //remove class list "hide" from gameScreen to make the game screen visible
     
-    //gameScreen.innerHTML="";
-
     window.requestAnimationFrame(move)  //invoke another play()
 
     let car = document.createElement("div"); //create a div element in the dom
