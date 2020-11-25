@@ -5,17 +5,16 @@ class Liveplayers{
         this.id = id;
         this.num = num;
         if (this.num === 1){
-            this.horizontalPos = 57;
-            this.verticalPos = 600;
+            this.horizontalPos = 84;
         }
         if (this.num===2){
-            this.horizontalPos = 275;
+            this.horizontalPos = 334;
         }
         if (this.num===3){
-            this.horizontalPos = 506;
+            this.horizontalPos = 570;
         }
 
-        this.verticalPos = 680;
+        this.verticalPos = 575;
         this.finalScore = 0;
         this.score = 0;
         this.keyEvents = {  //set the default values of all relevant key events to false
@@ -25,7 +24,7 @@ class Liveplayers{
             ArrowLeft: false
         }; 
         this.speed = 10;
-        this.height = 200;
+        this.height = 210;
         this.width = 130;
         
         //this.health = 100; //set default health
@@ -45,10 +44,10 @@ class Liveplayers{
             if (!this.crash) {
           
                 if (this.num === 1){
-                    img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/car1.PNG";
+                    img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/car2.PNG";
                 }
                 if (this.num===2){
-                    img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/car2.PNG";
+                    img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/car1.PNG";
                 }
                 if (this.num===3){
                     img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/car3.PNG";
@@ -71,7 +70,7 @@ class Liveplayers{
             this.horizontalPos -= this.speed;
         }
 
-        if (this.keyEvents.ArrowDown && this.verticalPos <680) {  //move down when ArrowDown is pressed & don't let the car move beyond 1000px (height)
+        if (this.keyEvents.ArrowDown && this.verticalPos <600) {  //move down when ArrowDown is pressed & don't let the car move beyond 1000px (height)
             this.verticalPos += this.speed;
         }
         if (this.keyEvents.ArrowRight && this.horizontalPos <620) {    //move right when the ArrowRight is press & don't let the car move beyond 1020px (width)

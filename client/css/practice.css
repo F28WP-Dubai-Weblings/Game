@@ -27,11 +27,10 @@ body{
 
 
 .carVector{
-    background-image:url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/car1.PNG");
+    background-image:url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/car3.PNG");
     position: absolute;
-    height:200px;
-    width:130px;
-    bottom:120px;
+    height:210px;
+    width:150px;
     background-repeat: no-repeat;
     background-size:contain;
 }

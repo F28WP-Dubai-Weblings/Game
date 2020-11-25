@@ -114,7 +114,7 @@ function collision(player, object){
     function draw(){
 
         if (players.length === 3 ){
-        setTimeout(function(){alert("Game Over"+ "Your score was: " + player.score)},90000);    //game ends after 90 seconds
+        setTimeout(function(){alert("Game Over! "+ "Your score was: " + player.score)},90000);    //game ends after 90 seconds
 
         waitScreen.style.display = "none";  //remove the wait screen
         gameScreen.style.display = "flex";  //now display the gameScreen

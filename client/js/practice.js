@@ -151,7 +151,7 @@ function move(){
             racer.horizontalPos -= racer.pixelPosition;
         }
 
-        if (events.ArrowDown  && racer.verticalPos<700) {  //move down when ArrowDown is pressed & don't let the car move beyond 1000px (height)
+        if (events.ArrowDown  && racer.verticalPos<530) {  //move down when ArrowDown is pressed & don't let the car move beyond 1000px (height)
             racer.verticalPos += racer.pixelPosition;
         }
         if (events.ArrowRight && racer.horizontalPos<675) {    //move right when the ArrowRight is press & don't let the car move beyond 1020px (width)
@@ -186,24 +186,24 @@ function start(){
     car.setAttribute("class", "carVector"); //set class attribute of the div
     road.appendChild(car);    //append the div to the game screen
 
-    racer.horizontalPos = car.offsetLeft;   //initialise the position of the player (x-axis)
-    racer.verticalPos = car.offsetTop+250; //initialise the position of the player (y-axis) 
+    racer.horizontalPos = car.offsetLeft+100;   //initialise the position of the player (x-axis)
+    racer.verticalPos = car.offsetTop+557; //initialise the position of the player (y-axis) 
   
 
     let fuel = document.createElement("div");
     fuel.setAttribute("class", "fuelDiv");     
     road.appendChild(fuel);    //add fuelImg to the fuelDiv
     
-    fuelObj.horizontalPos = (Math.random() * 670);
-    fuelObj.verticalPos = (Math.random() * 620);
+    fuelObj.horizontalPos = 1000;
+    fuelObj.verticalPos = 1000;
 
     //set up cone obstacles
     let cone = document.createElement("div");
     cone.setAttribute("class", "coneDiv");
     road.appendChild(cone);
 
-    coneObj.horizontalPos = (Math.random() * 670);
-    coneObj.verticalPos = (Math.random() * 620);
+    coneObj.horizontalPos = 1000;
+    coneObj.verticalPos = 1000;
 
 
 
