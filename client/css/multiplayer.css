@@ -1,170 +1,170 @@
 
 *{
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .hide {
-  display: none;
+display: none;
 }
 #waitScreen{
-  background-color:black;
-  font-size: large;
-  border: 0;
-  color: white;
-  margin-left: auto;
-  margin-right: auto;
-  height: 100vh;
-  text-align:center;
-  animation: glow 3s ease-in-out infinite alternate;
+background-color:black;
+font-size: large;
+border: 0;
+color: white;
+margin-left: auto;
+margin-right: auto;
+height: 100vh;
+text-align:center;
+animation: glow 3s ease-in-out infinite alternate;
 
 }
 
 #button{
-  display: block;
-  width: 100%;
-  border: none;
-  background-color: #000000;
-  opacity: 0.6;
-  padding: 14px 28px;
-  font-size:1.5em;
-  cursor: pointer;
-  color: black;
-  font-family: fantasy;
-  text-align: center;
-  background-color: transparent;
-  outline: none;
+display: block;
+width: 100%;
+border: none;
+background-color: #000000;
+opacity: 0.6;
+padding: 14px 28px;
+font-size:1.5em;
+cursor: pointer;
+color: black;
+font-family: fantasy;
+text-align: center;
+background-color: transparent;
+outline: none;
 }
 
 #attackBody{
-  background-image:url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/attack.png")
+background-image:url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/attack.png")
 }
 
 body {
-  overflow-x: hidden; /*Prevents horizontal and vertical scrolling(applicable to the default web browser zoom level)*/
-  overflow-y:hidden;
+overflow-x: hidden; /*Prevents horizontal and vertical scrolling(applicable to the default web browser zoom level)*/
+overflow-y:hidden;
 }
 
 #button
 {
-  width:200px;
-  height:7vh;
-  position: absolute;
-  background-size:contain;
+width:200px;
+height:7vh;
+position: absolute;
+background-size:contain;
 
-  left:90px;
-  line-height: 30px;
-  background-color: black;
-  top:550px;
-  font-size: 20px;
-  text-align: center;
-  color:white;
-  font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
-  box-shadow:0 5px 5px #777;
+left:90px;
+line-height: 30px;
+background-color: black;
+top:550px;
+font-size: 20px;
+text-align: center;
+color:white;
+font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
+box-shadow:0 5px 5px #777;
 
 }
 
 #scoreBoard
 {
-  position: absolute;
+position: absolute;
 
-  background-size:contain;
-  left:40px;
-  top:40px;
-  line-height: 250px;
-  font-size: 20px;
-  height:50vh;
-  width:21%;
-  background-image:url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/scoreBoard.png");
-  background-repeat:no-repeat ;
-  text-align: center;
-  color:white;
-  font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
-  animation: glow 3s ease-in-out infinite alternate;
-  
+background-size:contain;
+left:40px;
+top:40px;
+line-height: 250px;
+font-size: 20px;
+height:50vh;
+width:21%;
+background-image:url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/scoreBoard.png");
+background-repeat:no-repeat ;
+text-align: center;
+color:white;
+font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
+animation: glow 3s ease-in-out infinite alternate;
+
 }
 
 @keyframes glow{
-  from {
-      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #d1abbe, 0 0 30px #a38896, 0 0 40px #dfb6ca, 0 0 50px #bb6c93, 0 0 60px #9e195c;
-    }
-    
-    to {
-      text-shadow: 0 0 9px #fff, 0 0 13px #ff4da6, 0 0 23px #ff4da6, 0 0 30px #ff4da6, 0 0 43px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6;
-    }
+from {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #d1abbe, 0 0 30px #a38896, 0 0 40px #dfb6ca, 0 0 50px #bb6c93, 0 0 60px #9e195c;
+  }
+  
+  to {
+    text-shadow: 0 0 9px #fff, 0 0 13px #ff4da6, 0 0 23px #ff4da6, 0 0 30px #ff4da6, 0 0 43px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6;
+  }
 }
 
 
 #gameScreen{
-  position: relative;
-  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/turbobg.png");  /*Temporary game bg*/
-  background-size: cover;
-  display:flex;
+position: relative;
+background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/turbobg.png");  /*Temporary game bg*/
+background-size: cover;
+display:flex;
 }
 
 #Track{
-    background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/racetrack.png");
-    margin: auto;
-    width: 50%;
-    border: 3px;
-    height:100vh;
-    display:block;
-    align-content: center;
-    position: relative;
-    background-size:contain;
-    overflow: hidden;
-    animation: track 21s linear infinite;
-    margin: auto;
-  }
+  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/racetrack.png");
+  margin: auto;
+  width: 50%;
+  border: 3px;
+  height:100vh;
+  display:block;
+  align-content: center;
+  position: relative;
+  background-size:contain;
+  overflow: hidden;
+  animation: track 21s linear infinite;
+  margin: auto;
+}
 
 
 @keyframes track {
-    from 
-    {
-      background-position: 0 0;
-    }
-  
-    to {
-      background-position: 0px 10050px;
-    }
+  from 
+  {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 0px 10050px;
+  }
 }
 
 .carVector{
-    background-image:url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/raceGreen.png");
-    position: absolute;
-    height:150px;
-    width:130px;
-    bottom:120px;
-    background-size:contain;
-    
+  background-image:url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/raceGreen.png");
+  position: absolute;
+  height:150px;
+  width:130px;
+  bottom:120px;
+  background-size:contain;
+  
 }
 
 /* ********************* */
 /* This css Code is for the countdown timer  */
 /* ********************** */
 *{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+margin: 0;
+padding: 0;
+box-sizing: border-box;
 }
 
- 
+
 
 section 
 {
-  height: 100vh;
-  width: 25%;
-  display: flex;
-  background-size:contain;
-  background-repeat:no-repeat ;
-  align-content: left;
-  position: relative;
-  background-size:contain;
-  overflow: hidden;
-   
+height: 100vh;
+width: 25%;
+display: flex;
+background-size:contain;
+background-repeat:no-repeat ;
+align-content: left;
+position: relative;
+background-size:contain;
+overflow: hidden;
+ 
 
 }
 h1 {
-  font-family: "Montserrat";
-  font-size: 76px;
+font-family: "Montserrat";
+font-size: 76px;
 }

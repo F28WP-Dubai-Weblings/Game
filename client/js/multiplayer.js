@@ -42,7 +42,7 @@ let players = [];   //client side list for players/clients
 let points = [];    //client side list for points
 let playerNumber = 0;   //initialise player num
 let attacks = [] //client side list for bullets
-
+let wait = 0;
 socket.on("init", ({id,num, player_list, fuelPoints, bullets}) => {
 
     console.log("got the init message");
@@ -74,11 +74,12 @@ socket.on("init", ({id,num, player_list, fuelPoints, bullets}) => {
         attacks[0].verticalPos = reqPlayer.verticalPos;
     });
 
+
     
     players = player_list.map(element => new Liveplayers(element)).concat(player);  //make a copy of the list of players sent by the server on the client browser
     points = fuelPoints.map(element => new Fuel(element));  //make a copy of the list of fuelPoints sent by the server on the client browser
     attacks = bullets.map(shoot => new Bullet(shoot));  //make a copy of the array containing bullet sent by the server on the client browser
-
+    
         
 const ScoreBoard = document.getElementById("scoreBoard");
 
@@ -129,7 +130,6 @@ function collision(player, object){
             if (client.attack === true){
                 attacker = client;
                 attacks[0].draw(ctx);
-                //reduce client's running score after theyve attacked.
             }
         });    
         
@@ -161,20 +161,17 @@ function collision(player, object){
             players.forEach( player => {
                 collided = collision(player,currentPoint);
                 if (collided){
-                    //increase the running score of the player
-                    //increase the total score of the player
                     currentPoint.used = true; 
-                    currentPoint.draw(ctx);}
+                    currentPoint.draw(ctx);
+                    player.score++}
             })
                 if (counter === 448) {
-                    if (collided){
-                        player.score +=30;
-                    }
                     collided = false; //reset collision state
                     counter = 0;
                     index++;
                 }
         }
+
     counter++; }
         window.requestAnimationFrame(draw); 
         }
