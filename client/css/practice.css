@@ -75,7 +75,10 @@ body{
   font-size: 20px;
   word-spacing:3;
   box-shadow: 0 5px 5px white;
+  animation: glow 3s ease-in-out infinite alternate;
+
 }
+
 
 .scoreBoard
 {
@@ -85,13 +88,25 @@ body{
   background-size:contain;
   left:60px;
   line-height: 100px;
-  background-color: black;
+  background-image:url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/scoreBoard.png");
   top:30px;
   font-size: 20px;
   text-align: center;
   color:white;
   font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
   box-shadow:0 5px 5px #777;
+  animation: glow 3s ease-in-out infinite alternate;
+
+}
+
+@keyframes glow{
+  from {
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #d1abbe, 0 0 30px #a38896, 0 0 40px #dfb6ca, 0 0 50px #bb6c93, 0 0 60px #9e195c;
+    }
+    
+    to {
+      text-shadow: 0 0 9px #fff, 0 0 13px #ff4da6, 0 0 23px #ff4da6, 0 0 30px #ff4da6, 0 0 43px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6;
+    }
 }
 
 

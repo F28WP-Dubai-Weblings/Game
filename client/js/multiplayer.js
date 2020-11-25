@@ -80,6 +80,8 @@ socket.on("init", ({id,num, player_list, fuelPoints, bullets}) => {
     attacks = bullets.map(shoot => new Bullet(shoot));  //make a copy of the array containing bullet sent by the server on the client browser
 
         
+const ScoreBoard = document.getElementById("scoreBoard");
+
 //                                                                 Collision Detection
 
 
@@ -116,6 +118,8 @@ function collision(player, object){
         waitScreen.style.display = "none";  //remove the wait screen
         gameScreen.style.display = "flex";  //now display the gameScreen
         
+        ScoreBoard.innerHTML="YOUR SCORE IS:  " + player.score; 
+
         ctx.clearRect(0,0,canvas.width,canvas.height); //clear the canvas every frame        
 
         let attacker;
