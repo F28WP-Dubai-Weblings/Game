@@ -1,8 +1,5 @@
 const { User } = require('../Variables/attributes');
-const userDB = require('../db/playerdb');
-
-var name =$("#userName").val();
-var pass =$("#Password").val();
+const playerdb = require('../db/playerdb');
 
 const loginService = (username, password, callback) => {
     //check if the user is in the DB
@@ -46,8 +43,8 @@ const searchService = function(callback) {
 
 const searchIDService = function(id, callback) {
     playerdb.findById(id, function(err, rows) {
-        if (rows.length == 0) { //unkown
-            console.log("Unkown user!");
+        if (rows.length == 0) { //unknown user
+            console.log("Unknown user!");
             let user = null;
             calback(null, user);
         } else {
