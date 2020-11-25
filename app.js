@@ -3,9 +3,10 @@ console.log("This is working");
 
 const express = require('express');
 const app = express();
-//const server = require('http').createServer(app);
+var session = require('express-session');
+const path = require('path');
 
-//These will be used when I(Susan) will do database
+//These will be used when doing database
 var session = require('express-session');
 const path = require('path');
 
@@ -26,7 +27,7 @@ app.get('/', (req, res) => {
 //*Rida's port connection*
 //server.listen(5000);
 
-//*Susan's port connection* <---
+
 //set the port to be 3000
 app.use(express.urlencoded({ extended: false}))
 const port = process.env.PORT || 5000;
@@ -97,13 +98,13 @@ io.sockets.on('connection',socket => {
 
 });
 
-//--------------------------------------------------------------------------------------------------------------------------------------------------------------
-//                                                                           DATABASE 
 
-//FOR NOW THESE WILL BE COMMENTED OUT
-app.post('/register', function (request,response) {
-const signin = require('./routes/signin');
-  signin(request,response);
-  console.log("finished signing in");
-});
+//                                                                           DATABASE 
+const router = require('./routes/routes');
+// defining routes
+  app.use(router);
+
+//create database if not exists
+const initDB = require('./db/db');
+initDB();
   
