@@ -1,3 +1,4 @@
+
 const score = document.querySelector("#scoreBoard");
 const startBoard = document.querySelector(".startNav");
 const gameScreen = document.querySelector(".practiceScreen");
@@ -7,8 +8,15 @@ document.addEventListener("keydown", downKey);
 document.addEventListener("keyup", upKey);
 startBoard.addEventListener("click", start);
 
+let counter = 0;
+
+
 console.log("in practice")
 let racer = {
+    pixelPosition:4
+};
+
+let fuelObj = {
     pixelPosition:4
 };
 
@@ -33,11 +41,50 @@ function upKey(event){
 }
 
 
+function collision(racer,fuelObj){
+
+    
+    /* NOTE TO READER: the -35s here are added to make sure the collision is significant, 
+    i.e, the bullet or the fuelPoints have significantly collided with the player, not simply overlapped at their boundaries/borders*/
+   playerRect = racer.getBoundingClientRect();
+   objectRect = fuelObj.getBoundingClientRect();
+
+   return( !((playerRect.bottom < objectRect.top) || (playerRect.top > objectRect.bottom)|| (playerRect.right<objectRect.left) || (playerRect.left > objectRect.right)))
+    console.log("in dissapear");
+   /*
+    //let fuel = document.querySelector(".fuelDiv");
+    let collide = false;
+    let time;
+    console.log("in collide");
+        collide = collision(racer,fuel);
+        if (collide){        
+            fuel.style.backgroundImage = none;
+        }
+        fuel.style.backgroundImage = url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/fuel.png");
+        collide = false;*/
+            
+}
+
 function move(){
 
     let car = document.querySelector(".carVector");
+    let fuel = document.querySelector(".fuelDiv");
+
 
     if(racer.ready){
+        
+        let collide = collision(car,fuel);
+
+        () => {
+            if (collide){
+                console.log("in rmove")
+                fuel.style.backgroundImage = none;
+            }
+            else{
+            fuel.style.backgroundImage = url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/fuel.png");
+            }
+            setTimeout(function(){collide = false}, 2000);
+        }
         if (events.ArrowUp && racer.verticalPos>70) {   //move up when ArrowUp is pressed & don't let the car move above 70px (height)
             racer.verticalPos -= racer.pixelPosition;
         }
@@ -50,11 +97,25 @@ function move(){
         }
         if (events.ArrowRight && racer.horizontalPos<687) {    //move right when the ArrowRight is press & don't let the car move beyond 1020px (width)
             racer.horizontalPos += racer.pixelPosition;
-        }
+        }     
+        
     }
     car.style.left = racer.horizontalPos + "px";
     car.style.top = racer.verticalPos + "px";
 
+    //generate random fuel positions.
+    counter++; 
+    if (counter >100 && counter < 500){
+        counter++;
+    }   
+    if (counter > 399){
+        fuelObj.horizontalPos = (Math.random() * 670);
+        fuelObj.verticalPos = (Math.random() * 620);
+        counter = 0;
+    } 
+    fuel.style.left = fuelObj.horizontalPos + "px";
+    fuel.style.top = fuelObj.verticalPos + "px";
+    
     window.requestAnimationFrame(move);
 }
 
@@ -77,15 +138,14 @@ function start(){
     racer.verticalPos = car.offsetTop; //initialise the position of the player (y-axis) 
   
 
-    let fuelImg = document.createElement("img");    //create an image element, fuelImg
- 
-    fuelImg.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/fuel.png"; //add the image source to fuelImg 
-    let fuelPoint = document.getElementById("fuelDiv");   //create a parent variable that stores the fuelDiv
-     
-    fuelPoint.appendChild(fuelImg);    //add fuelImg to the fuelDiv
+    let fuel = document.createElement("div");
+    fuel.setAttribute("class", "fuelDiv");     
+    road.appendChild(fuel);    //add fuelImg to the fuelDiv
     
+    fuelObj.horizontalPos = (Math.random() * 670);
+    fuelObj.horizontalPos = (Math.random() * 620);
     
-    let currentTop = 0; //initialise currentTop to 0
+    /*let currentTop = 0; //initialise currentTop to 0
     
     
     let initialHeight = road.offsetHeight;  //initialise height on the road
@@ -93,21 +153,14 @@ function start(){
     
     
     let runner = 0;
-    window.setInterval(function() { //generate a fuelPoint at a random position every 3000ms
-        
-        if (runner === 2){
-            runner = 0;
-            currentTop = 0;
-        }
-        if (runner === 1){
-            currentTop = 400;
-        }
-       
-        currentLeft =(0.9 * (initialWidth)-100)+1;
-        
+    let collide = false;
+    let time;
+    window.setInterval(function() {
+        currentTop = (Math.random() * 670);
+        currentLeft =  (Math.random() * 620);
         fuelPoint.style.top = currentTop + "px";    
         fuelPoint.style.left = currentLeft + "px";
         runner = runner +1;
-        }, 3000);      
-
+    },5000);     
+*/
 }

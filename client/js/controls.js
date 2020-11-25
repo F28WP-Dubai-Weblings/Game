@@ -1,16 +1,15 @@
 
 function controls(player, socket) {
-    console.log("here");
       
-    window.addEventListener("keydown", downKey);
-
+    window.addEventListener("keydown", downKey);    //listen for a key pressed
     function downKey(event){
 
         event.preventDefault(); //disregrard the inbuilt default representation of the key events
-        player.keyEvents[event.key] = true;
+        player.keyEvents[event.key] = true; //set required keypress flag to true
+        player.move();   //move the player
 
-        player.move();   
-        socket.emit("playerMoved", {id: player.id, horizontalPos: player.horizontalPos, verticalPos: player.verticalPos});
+        //emit to the server that player has moved
+        socket.emit("playerMoved", {id: player.id, horizontalPos: player.horizontalPos, verticalPos: player.verticalPos});  
     }
 
     window.addEventListener("keyup", upKey);
@@ -20,20 +19,22 @@ function controls(player, socket) {
         player.move();
     }
 
-    document.getElementById("button").addEventListener("click", attack);
-    
+    document.getElementById("button").addEventListener("click", attack);    //listen for when attack button is clicked
     function attack(){
         console.log("attack is called");
 
         console.log("the players score is " + player.score);
 
-        if (player.score >= 100){
+        if (player.score >=100){ //player can only attack if player is score is equal to or greater than 100
             player.attack = true;
-            let angle= attacks[1].generatePos(player.horizontalPos, player.verticalPos);
+
+            //generate a random angle to determine the players horizontal/vertical velocity
+            let angle= attacks[0].generatePos(player.horizontalPos, player.verticalPos);   
+
             //update player's attack properties
-            
             player.bull_angle = angle; 
             
+            //emit to the server that player has attacked
             socket.emit("playerAttack", ({id:player.id, bull_angle: player.bull_angle}));            
         }
         
