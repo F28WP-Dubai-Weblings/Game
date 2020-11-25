@@ -30,7 +30,6 @@ class Liveplayers{
         
         //this.health = 100; //set default health
         this.crash = false;
-        this.notDraw = false;
 
         //player attack properties
         this.attack = false;
@@ -59,7 +58,6 @@ class Liveplayers{
 
                 img.width = this.width;
                 img.height = this.height;
-                //console.log("the cars width is "+ this.width + " " + this.height);
         
                 ctx.drawImage(img, this.horizontalPos, this.verticalPos, img.width, img.height);
             }

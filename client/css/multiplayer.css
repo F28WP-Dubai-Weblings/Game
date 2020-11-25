@@ -72,9 +72,7 @@ position: relative;
   position: relative;
   background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/background1.png");  /*Temporary game bg*/
   background-size: cover;
-  display:flex;/*
-  opacity: 0;
-  pointer-events: none;*/
+  display:flex;
 
 }
 
