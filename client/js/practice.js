@@ -151,10 +151,10 @@ function move(){
             racer.horizontalPos -= racer.pixelPosition;
         }
 
-        if (events.ArrowDown  && racer.verticalPos<1000) {  //move down when ArrowDown is pressed & don't let the car move beyond 1000px (height)
+        if (events.ArrowDown  && racer.verticalPos<700) {  //move down when ArrowDown is pressed & don't let the car move beyond 1000px (height)
             racer.verticalPos += racer.pixelPosition;
         }
-        if (events.ArrowRight && racer.horizontalPos<687) {    //move right when the ArrowRight is press & don't let the car move beyond 1020px (width)
+        if (events.ArrowRight && racer.horizontalPos<675) {    //move right when the ArrowRight is press & don't let the car move beyond 1020px (width)
             racer.horizontalPos += racer.pixelPosition;
         }     
         
@@ -187,7 +187,7 @@ function start(){
     road.appendChild(car);    //append the div to the game screen
 
     racer.horizontalPos = car.offsetLeft;   //initialise the position of the player (x-axis)
-    racer.verticalPos = car.offsetTop; //initialise the position of the player (y-axis) 
+    racer.verticalPos = car.offsetTop+250; //initialise the position of the player (y-axis) 
   
 
     let fuel = document.createElement("div");

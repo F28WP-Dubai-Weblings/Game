@@ -103,10 +103,9 @@ socket.on('playerMoved', ({id, horizontalPos, verticalPos}) => {
 /*if the player has attacked, listen to the emit message sent by the client in (controls.js) and broadcast to other clients
 the angle along with the player id*/
 socket.on('playerAttack',({id, bull_angle}) =>{
-  console.log("in server side attack");
-  console.log("bullet angle in server:" + bull_angle);
   socket.broadcast.emit('playerAttack', ({id:socket.id, bull_angle}));
 });
+
 
 });
 /*
