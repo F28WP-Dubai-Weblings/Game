@@ -33,7 +33,18 @@ function initDB(){
           if (err) throw err;
           console.log("Users table created");
         });  
-    
+        
+         //create table Sessions
+        const sqlSession = "Create table if not exists `database`.`sessions` (" +
+        "`id` int(11) NOT NULL auto_increment," +
+        "`startDate` DATETIME DEFAULT CURRENT_TIMESTAMP," +
+        "PRIMARY KEY(`id`)" +
+        ");";
+  
+        connection.query(sqlSession, function(err, result) {
+        if (err) throw err;
+        console.log("Sessions table created");
+       }); 
         
     });
 }
