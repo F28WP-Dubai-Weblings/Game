@@ -14,24 +14,11 @@ body{
     font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
 }
 
-#left{
-    margin:0;
-    padding:0;
-    background-color: rgb(196, 106, 106);
-    margin-left: 0;
-    margin-right: auto;
-    width: 30px; 
-    height:100vh
-}
-
-#right{
-    margin:0;
-    padding:0;
-    background-color:  rgb(196, 106, 106);
-    margin-left: auto;
-    margin-right: 0;
-    width: 30px; 
-    height:100vh
+#block{
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
 }
 
 h2{
@@ -42,11 +29,13 @@ h2{
     font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
 }
 h1{
-    padding:40px 0;
-    border: 0;
     text-align:center;
     color: white;
     font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
 
 }
 .wrapper {

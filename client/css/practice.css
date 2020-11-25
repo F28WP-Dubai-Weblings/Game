@@ -21,13 +21,13 @@ body{
 }
 
 
-.carVector,.fuelDiv{
+.carVector{
     background-image:url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/raceGreen.png");
     position: absolute;
-    height:150px;
-    width:130px;
+    height:200px;
+    width:150px;
     bottom:120px;
-    background-size:contain;
+    background-size:100%;
 }
 
 .fuelDiv{
@@ -49,14 +49,40 @@ body{
   background-size:contain;
 }
 
+.startNav{
+  position:absolute;
+  background-color: pink;
+  left:50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color:white;
+  z-index;
+  text-align: center;
+  border: 1px solid black;
+  padding: 15px;
+  margin:auto;
+  widows: 50%;
+  cursor:pointer;
+  font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
+  letter-spacing: 5;
+  font-size: 20px;
+  word-spacing:3;
+  line-height: 30px;
+  box-shadow: 0 5px 5px white;
+}
 
-.scoreboard
+.scoreBoard
 {
-  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/scorebaord background1.png");
   width:235px;
   height:24vh;
   position: absolute;
   background-size:contain;
+  left:40px;
+  background-color: black;
+  top:15px;
+  color:white;
+  font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
+  box-shadow:0 5px 5px #777;
 }
 
 
@@ -92,5 +118,4 @@ body{
   height: 100vh;
   
 }
-
 

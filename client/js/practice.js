@@ -1,4 +1,4 @@
-const score = document.querySelector("#scoreBoard");
+const score = document.querySelector(".scoreBoard");
 const startBoard = document.querySelector(".startNav");
 const gameScreen = document.querySelector(".practiceScreen");
 let road = document.querySelector(".animateTrack")
@@ -50,18 +50,6 @@ function collision(racer,fuelObj){
    objectRect = fuelObj.getBoundingClientRect();
 
    return( !((playerRect.bottom < objectRect.top) || (playerRect.top > objectRect.bottom)|| (playerRect.right<objectRect.left) || (playerRect.left > objectRect.right)))
-    console.log("in dissapear");
-   /*
-    //let fuel = document.querySelector(".fuelDiv");
-    let collide = false;
-    let time;
-    console.log("in collide");
-        collide = collision(racer,fuel);
-        if (collide){        
-            fuel.style.backgroundImage = none;
-        }
-        fuel.style.backgroundImage = url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/fuel.png");
-        collide = false;*/
             
 }
 let flag = false;
@@ -100,12 +88,10 @@ function move(){
         let collide = collision(car,fuel);
         if (collide){
             racer.score++;
-            console.log("score is"+racer.score);
             updatePos(true);
             collide = false;         
 
         }
-
 
         if (events.ArrowUp && racer.verticalPos>70) {   //move up when ArrowUp is pressed & don't let the car move above 70px (height)
             racer.verticalPos -= racer.pixelPosition;
@@ -126,7 +112,7 @@ function move(){
     car.style.top = racer.verticalPos + "px";
 
     //generate random fuel positions.
-    
+    score.innerText = racer.score;
 
     window.requestAnimationFrame(move);
 }
@@ -136,9 +122,12 @@ function move(){
 function start(){
 
     racer.ready = true;
+    racer.score = 0;
+    setTimeout(function(){
+        startBoard.classList.remove("hide");
+    },5000)
     gameScreen.classList.remove("hide");    //remove class list "hide" from gameScreen to make the game screen visible
     startBoard.classList.add("hide");    //add classList "hide" to get rid of the start navigation pop-up
-
 
     window.requestAnimationFrame(move)  //invoke another play()
 

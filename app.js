@@ -8,13 +8,12 @@ var session = require('express-session');
 //didnt put favicon
 
 //define a session
-app.use(session({
+/*app.use(session({
   secret: 'your secrete word goes here',
   cookie: { maxAge: 60000 },
   resave: false,
   saveUninitialized: false
-}));
-
+}));*/
 //*Rida's static file* 
 //  app.use(express.static(__dirname + '/client')); //app.use(express.static('client'));
 //  app.get('/', function (req, res) {
@@ -110,7 +109,7 @@ socket.on('playerAttack',({id, bull_angle}) =>{
 });
 
 });
-
+/*
 
 //                                                                           DATABASE 
 const router = require('./routes/routes');
@@ -120,5 +119,5 @@ const router = require('./routes/routes');
 //create database if not exists
 const initDB = require('./db/db');
 initDB();
-  
+  */
 
