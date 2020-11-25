@@ -4,14 +4,19 @@ console.log("In app.js");
 //Rida's Server Connection
 const express = require('express');
 const app = express();
-var session = require('express-session');
-const path = require('path');
-
 
 //These will be used when doing database
 
 var session = require('express-session');
 const path = require('path');
+
+//define a session
+app.use(session({
+  secret: 'your secrete word goes here',
+  cookie: { maxAge: 60000 },
+  resave: false,
+  saveUninitialized: false
+}));
 
 //*Rida's static file* 
 //  app.use(express.static(__dirname + '/client')); //app.use(express.static('client'));
