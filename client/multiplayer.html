@@ -33,9 +33,17 @@
 
 </head>
 <body>
-   
+   <audio controls>
+  
+  <source src="bgm.mp3" type="audio/mpeg"> //Race bg music
+  <source src="bullet.mp3" type="audio/mpeg"> bullet sound
+  <source src="coin sound.mp3" type="audio/mpeg"> //fuel pt collection sound
+  <source src="car bg music 1.mp3" type="audio/mpeg"> //end of the game
+
+</audio>
+
         <div id ="container">
-<!--             <div id="scoreBoard"></div> -->
+
            <div id ="waitScreen">
                Waiting For Other Players...
            </div>
@@ -53,12 +61,17 @@
 
                 <div id="right">
                     <div id = "rankheading"></div>
-                    <div id = "scoreboardHeading"></div>
                     <div id = "scoreBoard"></div>
                 </div>
 
             </div>
         </div>        
-   
+     <section>
+    <div class="container">
+      <h1>00:00</h1>
+    </div>
+    </section>
+    <script src="js/timer.js "></script>
+    <script src="js/scoreboard.js "></script>    
 </body>
 </html>

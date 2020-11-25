@@ -53,7 +53,7 @@ const getUserByUsername = (request, response) => {
         response.json(rows);
         response.end();
     });
-});
+};
 
 const getUserByID = (request, response) => {
     const loginServices = require('../services/userServices');

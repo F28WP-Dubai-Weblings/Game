@@ -1,4 +1,3 @@
-
 const score = document.querySelector("#scoreBoard");
 const startBoard = document.querySelector(".startNav");
 const gameScreen = document.querySelector(".practiceScreen");
@@ -13,7 +12,8 @@ let counter = 0;
 
 console.log("in practice")
 let racer = {
-    pixelPosition:4
+    pixelPosition:4,
+    score:0
 };
 
 let fuelObj = {
@@ -64,27 +64,49 @@ function collision(racer,fuelObj){
         collide = false;*/
             
 }
+let flag = false;
+let fuel;
+function updatePos(flag){
+    if (!flag){
+        fuel = document.querySelector(".fuelDiv");
+        counter++; 
+        if (counter >100 && counter < 600){
+            counter++;
+        }   
+        if (counter > 399){
+            fuelObj.horizontalPos = (Math.random() * 670);
+            fuelObj.verticalPos = (Math.random() * 620);
+            counter = 0;
+        } 
+    }
+    else{
+        fuelObj.horizontalPos = 1000;
+        fuelObj.verticalPos = 1000;
+    }
+    fuel.style.left = fuelObj.horizontalPos + "px";
+    fuel.style.top = fuelObj.verticalPos + "px";
+}
 
 function move(){
 
     let car = document.querySelector(".carVector");
     let fuel = document.querySelector(".fuelDiv");
 
+    updatePos(false);
+    
 
     if(racer.ready){
         
         let collide = collision(car,fuel);
+        if (collide){
+            racer.score++;
+            console.log("score is"+racer.score);
+            updatePos(true);
+            collide = false;         
 
-        () => {
-            if (collide){
-                console.log("in rmove")
-                fuel.style.backgroundImage = none;
-            }
-            else{
-            fuel.style.backgroundImage = url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/fuel.png");
-            }
-            setTimeout(function(){collide = false}, 2000);
         }
+
+
         if (events.ArrowUp && racer.verticalPos>70) {   //move up when ArrowUp is pressed & don't let the car move above 70px (height)
             racer.verticalPos -= racer.pixelPosition;
         }
@@ -104,18 +126,8 @@ function move(){
     car.style.top = racer.verticalPos + "px";
 
     //generate random fuel positions.
-    counter++; 
-    if (counter >100 && counter < 500){
-        counter++;
-    }   
-    if (counter > 399){
-        fuelObj.horizontalPos = (Math.random() * 670);
-        fuelObj.verticalPos = (Math.random() * 620);
-        counter = 0;
-    } 
-    fuel.style.left = fuelObj.horizontalPos + "px";
-    fuel.style.top = fuelObj.verticalPos + "px";
     
+
     window.requestAnimationFrame(move);
 }
 
@@ -144,23 +156,5 @@ function start(){
     
     fuelObj.horizontalPos = (Math.random() * 670);
     fuelObj.horizontalPos = (Math.random() * 620);
-    
-    /*let currentTop = 0; //initialise currentTop to 0
-    
-    
-    let initialHeight = road.offsetHeight;  //initialise height on the road
-    let initialWidth = road.offsetWidth;    //initialise width of the road
-    
-    
-    let runner = 0;
-    let collide = false;
-    let time;
-    window.setInterval(function() {
-        currentTop = (Math.random() * 670);
-        currentLeft =  (Math.random() * 620);
-        fuelPoint.style.top = currentTop + "px";    
-        fuelPoint.style.left = currentLeft + "px";
-        runner = runner +1;
-    },5000);     
-*/
+
 }

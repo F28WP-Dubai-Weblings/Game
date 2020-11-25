@@ -1,5 +1,7 @@
+
 body{
   overflow-x: hidden; /*prevents horizontal scrolling(applicable to the default web browser zoom level)*/
+  overflow-y: hidden; 
 }
 
 #container{
@@ -9,14 +11,15 @@ body{
 .practiceScreen{
   position: relative;
   background-color:black;
-  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/temp.png");  /*temporary game bg*/
+  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/turbobg.png");  /*temporary game bg*/
   background-size: 100%;
-
 }
+
 
 .hide {
     display: none;
 }
+
 
 .carVector,.fuelDiv{
     background-image:url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/raceGreen.png");
@@ -26,6 +29,16 @@ body{
     bottom:120px;
     background-size:contain;
 }
+
+.fuelDiv{
+  background-image:url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/bluePoint.png");
+  position: absolute;
+  height:100px;
+  width:80px;
+  bottom:120px;
+  background-size:contain;
+}
+
 
 .police{
 
@@ -73,10 +86,6 @@ body{
     }
   }
 
-
-
-
-
 .trackContainer{
   display:flex;
   flex-direction: row;
@@ -84,20 +93,4 @@ body{
   
 }
 
-#leftDiv{
-  position:relative;
-  width:235px;
-  left:24px;
-}
 
-#midDiv{
-  position:relative;
-  width:244px;
-  left:40px;
-}
-
-#rightDiv{
-  width:245px;
-  position:relative;
-  left:53px;
-}

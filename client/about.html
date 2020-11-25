@@ -1,34 +1,94 @@
 <!DOCTYPE html>
-<html lang="en'>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
 
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.column {
+  float: left;
+  width: 33.3%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 8px;
+}
+
+.about-section {
+  padding: 50px;
+  text-align: center;
+  background-color: #121212;
+  color: white;
+}
+
+.container {
+  padding: 0 16px;
+}
+
+.container::after, .row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.title {
+  color: grey;
+}
+
+.button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.button:hover {
+  background-color: #555;
+}
+
+@media screen and (max-width: 650px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+}
+</style>
+</head>
 <body>
 
 <div class="about-section">
-  <h1>About TURBO</h1>
-  <p>
-  <label> INSTRUCTIONS</label>
-  <textarea> 1. Choose you choice a)Single player
-                                  b)Multi player
-             2. Use arrow key left or right to move
-             3. Avoid colliding with incoming obstacles.
-             4. Collect fuel points.
-             5.Game over after you complete 3 lives. 
-  </textarea>
-  </p>                        
+<div style="background-image: url('https://i.pinimg.com/originals/01/38/47/013847e254bee2b33d4996894e9933fe.jpg');">
+  <h1>About Turbo</h1>
+  <h2>INSTRUCTIONS:</h2>
+  <p>1. Choose you choice a)Single player
+                          b)Multi player </p>
+  <p>2. Use arrow key left or right to move </p>
+  <p>3. Avoid colliding with incoming obstacles.</p>
+  <p>4. Collect fuel points.</p>
+  <p>5.Game over after you complete 3 lives. </p>
+  
+</div>
 </div>
 
-<h2 style="text-align:center">Turbo</h2>
-<div class="row">
-  <div class="column">
-    <div class="card">
-      <img src="background.PNG" style="width:100%">
-      <div class="container">
-        
-        
-      </div>
-    </div>
-  </div>
-                            
 </body>
-                            
 </html>
+
