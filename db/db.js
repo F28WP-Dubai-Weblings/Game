@@ -4,24 +4,28 @@ function initDB(){
     const connection = mysql.createConnection({
         host: "localhost",
         user: "root",
-        password: "root"
+        password: "root",
+        port: '3306',
+        multipleStatements: true,
       });
     
       connection.connect(function(err) {
         if (err) throw err;
         //create database
         console.log("Connected the database");
-              const sqlDB = "CREATE DATABASE IF NOT EXISTS `mytable`;";
+          
+        const sqlDB = "CREATE DATABASE IF NOT EXISTS `database`;";
         connection.query(sqlDB, function(err, result) {
             if (err) throw err;
             console.log('The database has been created');
         });
         
         //create table players
-        const sqlUser = "Create table if not exists `mytable`.`users`(" +
+        const sqlUser = "Create table if not exists `database`.`users`(" +
         "`id` int(11) NOT NULL auto_increment," +
         "`name` varchar(32) NOT NULL default 'Unknown'," +
         "`pass` varchar(32) NOT NULL," +
+        "`score` int," +
         "PRIMARY KEY (`id`)" +
         "); ";
         
@@ -32,17 +36,6 @@ function initDB(){
     
         
     });
-    // function createUser(name, pass, callback) {
-    //     const insertUser = (SQL `INSERT INTO mytable.users (name, pass) VALUES (${name}, ${pass}) ;`);
-    //     getResult(insertUser, function(err, result) {
-    //         if (!err) {
-    //             callback(null, result.affectedRows, result.insertId);
-    //         } else {
-    //             console.log(err);
-    //         }
-    //     });
-    // };
-      
 }
 module.exports =initDB;
     
