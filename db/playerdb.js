@@ -7,7 +7,7 @@ var pool = mysql.createPool({
     host: "localhost",
     user: "root",
     password: "root",
-    database: "mytable",
+    database: "database",
     debug: true
 });
 
@@ -41,7 +41,7 @@ function getResult(query, callback) {
 }
 
 function find(callback) {
-    const selectUsers = "SELECT * from mytable.users; ";
+    const selectUsers = "SELECT * from database.users; ";
     getResult(selectUsers, function(err, rows) {
         if (!err) {
             callback(null, rows);
@@ -53,8 +53,8 @@ function find(callback) {
 
 
 
-function findByName(name, callback) {
-    const selectUser = (SQL `SELECT * from mytable.users where name like ${name};`);
+function findByUsername(username, callback) {
+    const selectUser = (SQL `SELECT * from database.users WHERE name LIKE ${username};`);//where like
     getResult(selectUser, function(err, rows) {
         if (!err) {
             callback(null, rows);
@@ -65,7 +65,7 @@ function findByName(name, callback) {
 }
 
 function findById(id, callback) {
-    const selectUser = (SQL `SELECT * from groupchat.users where id = ${id};`);
+    const selectUser = (SQL `SELECT * from database.users where id = ${id};`);
     getResult(selectUser, function(err, rows) {
         if (!err) {
             callback(null, rows);
@@ -76,7 +76,7 @@ function findById(id, callback) {
 }
 
 function createUser(name, pass, callback) {
-    const insertUser = (SQL `INSERT INTO mytable.users (name, pass) VALUES (${name}, ${pass}) ;`);
+    const insertUser = (SQL `INSERT INTO database.users (name, pass) VALUES (${name}, ${pass}) ;`);
     getResult(insertUser, function(err, result) {
         if (!err) {
             callback(null, result.affectedRows, result.insertId);
@@ -88,7 +88,7 @@ function createUser(name, pass, callback) {
 
 
 function deleteUser(name, callback) {
-    const insertUser = (SQL `DELETE from groupchat.users where id = ${name};`);
+    const insertUser = (SQL `DELETE from database.users where username = ${name};`);
     getResult(selectUser, function(err, result) {
         if (!err) {
             console.log("Number of users inserted: " + result.affectedRows);
@@ -102,7 +102,7 @@ function deleteUser(name, callback) {
 
 module.exports = {
     find,
-    findByName,
+    findByUsername,
     findById,
     createUser,
     deleteUser

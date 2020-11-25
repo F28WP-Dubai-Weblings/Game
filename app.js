@@ -4,10 +4,12 @@ console.log("In app.js");
 //Rida's Server Connection
 const express = require('express');
 const app = express();
-//const server = require('http').createServer(app);
+var session = require('express-session');
+const path = require('path');
 
 
-//These will be used when I(Susan) will do database
+//These will be used when doing database
+
 var session = require('express-session');
 const path = require('path');
 
@@ -36,7 +38,7 @@ app.use(express.urlencoded({ extended: false}))
 const port = process.env.PORT || 3000;
 
 /*since both our app.listen function impementations were technically the same, 
-i'm(Rida) going to be deleting mine and combining both our inputs: */
+i'm going to be deleting mine and combining both our inputs: */
 const server = app.listen(port, () => {
    console.log(`listening on port : ${port}`);
 });
@@ -107,12 +109,14 @@ socket.on('playerAttack',({id, bull_angle}) =>{
 
 });
 
-//--------------------------------------------------------------------------------------------------------------------------------------------------------------
-//                                                                           DATABASE 
 
-app.post('/register', function (request,response) {
-const signin = require('./routes/signin');
-signin(request,response);
-console.log("finished signing in");
-});
+//                                                                           DATABASE 
+const router = require('./routes/routes');
+// defining routes
+  app.use(router);
+
+//create database if not exists
+const initDB = require('./db/db');
+initDB();
+  
 
