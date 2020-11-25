@@ -1,5 +1,5 @@
 const loginCtrl = (request, response, next) => {
-    const loginServices = require('../searchdb/searching');
+    const loginServices = require('../services/userService');
 
     let name = request.body.username;
     let pass = request.body.password;
@@ -55,16 +55,8 @@ const getUserByUsername = (request, response) => {
     });
 });
 
-const getUsers = (request, response) => {
-    const loginServices = require('../searchdb/searching');
-    loginServices.searchService(function(err, rows) {
-        response.json(rows);
-        response.end();
-    });
-};
-
 const getUserByID = (request, response) => {
-    const loginServices = require('../searchdb/searching');
+    const loginServices = require('../services/userServices');
     let id = request.params.id;
     loginServices.searchIDService(id, function(err, rows) {
         response.json(rows);
