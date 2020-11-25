@@ -106,7 +106,7 @@ socket.on('playerAttack',({id, bull_angle}) =>{
 });
 
 });
-
+/*
 
 //                                                                           DATABASE 
 const router = require('./routes/routes');
@@ -116,5 +116,5 @@ const router = require('./routes/routes');
 //create database if not exists
 const initDB = require('./db/db');
 initDB();
-  
+  */
 
