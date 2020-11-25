@@ -18,7 +18,7 @@ body{
     display: none;
 }
 
-.carVector{
+.carVector,.fuelDiv{
     background-image:url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/raceGreen.png");
     position: absolute;
     height:150px;
@@ -26,6 +26,16 @@ body{
     bottom:120px;
     background-size:contain;
 }
+
+.police{
+
+  position: absolute;
+  height:150px;
+  width:130px;
+  bottom:120px;
+  background-size:contain;
+}
+
 
 .scoreboard
 {
@@ -65,9 +75,6 @@ body{
 
 
 
-#fuelDiv{
-  position: absolute;
-}
 
 
 .trackContainer{

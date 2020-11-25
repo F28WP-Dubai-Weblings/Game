@@ -35,8 +35,8 @@ app.get('/', (req, res) => {
 app.use(express.urlencoded({ extended: false}))
 const port = process.env.PORT || 3000;
 
-//since both our app.listen function impementations were technically the same, 
-//i'm(Rida) going to be deleting mine and combining both our inputs: 
+/*since both our app.listen function impementations were technically the same, 
+i'm(Rida) going to be deleting mine and combining both our inputs: */
 const server = app.listen(port, () => {
    console.log(`listening on port : ${port}`);
 });
