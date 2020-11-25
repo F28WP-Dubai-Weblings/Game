@@ -29,11 +29,16 @@
   padding: 14px 28px;
   font-size:1.5em;
   cursor: pointer;
-  color: white;
+  color: black;
   font-family: fantasy;
   text-align: center;
+  background-color: transparent;
+  outline: none;
 }
 
+#attackBody{
+  background-image:url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/attack.png")
+}
 
 body {
   overflow-x: hidden; /*Prevents horizontal and vertical scrolling(applicable to the default web browser zoom level)*/
