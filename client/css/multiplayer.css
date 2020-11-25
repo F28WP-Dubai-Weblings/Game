@@ -34,6 +34,7 @@
 
 body {
   overflow-x: hidden; /*Prevents horizontal scrolling(applicable to the default web browser zoom level)*/
+  overflow-y:hidden;
 }
 #left{
   position: relative;
@@ -70,7 +71,7 @@ position: relative;
 }
 #gameScreen{
   position: relative;
-  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/background1.png");  /*Temporary game bg*/
+  background-image: url("../media/icons/turbobg.png");  /*Temporary game bg*/
   background-size: cover;
   display:flex;
 
@@ -79,7 +80,7 @@ position: relative;
 #Track{
     background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/racetrack.png");
 
-    width:700px;
+    width:800px;
     height:100vh;
     display:block;
     margin:auto;
