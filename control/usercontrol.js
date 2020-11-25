@@ -1,5 +1,5 @@
 const loginCtrl = (request, response, next) => {
-    const loginServices = require('../services/userService');
+    const loginServices = require('../services/userServices');
 
     let name = request.body.username;
     let pass = request.body.password;

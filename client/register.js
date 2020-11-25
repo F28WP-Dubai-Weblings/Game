@@ -1,4 +1,3 @@
-// var $ = require('jquery');
 $(document).ready(function(){
     $(".n_log_in").dialog({
       closeOnEscape: false,
@@ -8,8 +7,8 @@ $(document).ready(function(){
         height: 150,
         modal: true,
         open: function(event, ui) {
-            //when the dialog displays, we hide the close (x) button
-            //to avoid the user from closing the dialog intempestively
+            
+            //to avoid the user from closing the dialog
             $(".ui-dialog-titlebar-close", ui).hide();
         },
       buttons: {
