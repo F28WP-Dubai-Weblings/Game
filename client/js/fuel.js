@@ -1,3 +1,4 @@
+/*AUTHOR NAME: RIDA @raqp2000 */
 class Fuel {
   constructor({horizontalPos, verticalPos}) {
     this.horizontalPos = horizontalPos;
