@@ -116,7 +116,7 @@ function collision(player, object){
     function draw(){
 
         if (players.length === 3 ){
-        setTimeout(function(){socket.emit("gameOver");players =[]; alert("Game Over! "+ "Your score was: " + player.score)},90000);    //game ends after 90 seconds
+        setTimeout(function(){alert("Game Over! "+ "Your score was: " + player.score)},90000);    //game ends after 90 seconds
 
         waitScreen.style.display = "none";  //remove the wait screen
         gameScreen.style.display = "flex";  //now display the gameScreen
@@ -180,7 +180,9 @@ function collision(player, object){
     
     draw();
 
+    /*
+        This was temporarily setup until susan finishes the game room/game session/disconnect implementation
     if (players.length > 3){
         setTimeout(function(){alert("Sorry this game is full!")},500);//game over alert after 90s
-    }
+    }*/
 });
