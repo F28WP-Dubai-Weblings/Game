@@ -31,13 +31,13 @@ overflow-y:hidden;
 
 #button
 {
-background-color: rgb(77, 17, 17);
+background-color: rgb(48, 5, 5);
 width:200px;
 height:7vh;
 position: absolute;
 background-size:contain;
 outline: none;
-left:90px;
+left:95px;
 line-height: 30px;
 top:550px;
 font-size: 20px;
