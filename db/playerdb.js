@@ -1,4 +1,3 @@
-//const { Player } = require('../models/entities');
 var SQL = require('sql-template-strings');
 const mysql = require('mysql');
 
@@ -10,6 +9,8 @@ var pool = mysql.createPool({
     database: "database",
     debug: true
 });
+// //for when the server disconnects
+// pool.query('select 1 + 1', (err, rows) => { /* */ });
 
 function executeQuery(query, callback) {
     pool.getConnection(function(err, connection) {
@@ -41,7 +42,7 @@ function getResult(query, callback) {
 }
 
 function find(callback) {
-    const selectUsers = "SELECT * from database.users; ";
+    const selectUsers = "SELECT * from database.users; ";//database.user
     getResult(selectUsers, function(err, rows) {
         if (!err) {
             callback(null, rows);
@@ -51,11 +52,31 @@ function find(callback) {
     });
 }
 
+function findRows(callback) {
+    const selectUsers = "SELECT COUNT(score) from database.users; ";//database.user
+    getResult(selectUsers, function(err, rows) {
+        if (!err) {
+            callback(null, rows);
+        } else {
+            console.log(err);
+        }
+    });
+}
 
+function findScore(callback) {
+    const selectUsers = "SELECT score FROM database.users; ";//score
+    getResult(selectUsers, function(err, rows) {
+        if (!err) {
+            callback(null, rows);
+        } else {
+            console.log(err);
+        }
+    });
+}
 
 function findByUsername(username, callback) {
     const selectUser = (SQL `SELECT * from database.users WHERE name LIKE ${username};`);//where like
-    getResult(selectUser, function(err, rows) {
+    getResult(selectUser, function(err, result) {
         if (!err) {
             callback(null, rows);
         } else {
@@ -75,8 +96,9 @@ function findById(id, callback) {
     });
 }
 
-function createUser(name, pass, callback) {
-    const insertUser = (SQL `INSERT INTO database.users (name, pass) VALUES (${name}, ${pass}) ;`);
+function createUser(name, pass, callback) {//score
+    console.log('CREATE USER ; ' + name + ', ' + pass) //score
+    const insertUser = (SQL `INSERT INTO database.users (name, pass, score) VALUES (${name}, ${pass}, 0) ;`);//score
     getResult(insertUser, function(err, result) {
         if (!err) {
             callback(null, result.affectedRows, result.insertId);
@@ -85,7 +107,6 @@ function createUser(name, pass, callback) {
         }
     });
 }
-
 
 function deleteUser(name, callback) {
     const insertUser = (SQL `DELETE from database.users where username = ${name};`);
@@ -105,5 +126,7 @@ module.exports = {
     findByUsername,
     findById,
     createUser,
-    deleteUser
+    deleteUser,
+    findScore,
+    findRows
 };
