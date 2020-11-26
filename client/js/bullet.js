@@ -1,3 +1,4 @@
+//AUTHOR NAME: RIDA @raqp2000
 let angle,vx,vy;
 
 class Bullet {
