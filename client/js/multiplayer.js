@@ -80,14 +80,15 @@ function collision(player, object){
     return false; //else return false - no collision.
 }
 
-/* TEMPORARILY SET UP AS A SUBSTITUTE TO 'ENTER GAME SESSION CODE PAGE'. Will now be commented out
+/* TEMPORARILY SET UP AS A SUBSTITUTE TO 'ENTER GAME SESSION CODE PAGE'. Will now be commented out.
+    ....temporary wait screen will now be reset since Session will not be implemented by susan due to varoius issues
     Note to Reader: the game screen is hidden once multiplayer.js is run AS SOON AS the canvas is created to prevent
-    any sneaky bugs, in terms of players being drawn to the game canvas
+    any sneaky bugs, in terms of players being drawn to the game canvas*/
     const gameScreen = document.getElementById("gameScreen");
     gameScreen.style.display = "none"; //hide the game screen
 
     const waitScreen = document.getElementById("waitScreen");
-    waitScreen.style.display = "block"; //display the wait screen*/
+    waitScreen.style.display = "block"; //display the wait screen
 
 
     let counter = 0;  
@@ -97,9 +98,9 @@ function collision(player, object){
 
         if (players.length === 3 ){
         setTimeout(function(){alert("Game Over! "+ "Your score was: " + player.score)},90000);    //game ends after 90 seconds
-        /*Look at previous note/comment
+        
         waitScreen.style.display = "none";  //remove the wait screen
-        gameScreen.style.display = "flex";  //now display the gameScreen*/
+        gameScreen.style.display = "flex";  //now display the gameScreen
         
         ScoreBoard.innerHTML="SCORE:  " + player.score; 
 
@@ -161,10 +162,12 @@ function collision(player, object){
     draw();
 
     /*
-        This was temporarily setup until susan finishes the game room/game session/disconnect implementation
+        This was temporarily setup until Susan finishes the game room/game session/disconnect implementation. 
+        .....since session was not implemented due to issues, this will temporarily be reset*/
+        issues
     if (players.length > 3){
         setTimeout(function(){alert("Sorry this game is full!")},500);//game over alert after 90s
-    }*/
+    }
 });
 
 
