@@ -21,11 +21,9 @@ function controls(player, socket) {
 
     document.getElementById("button").addEventListener("click", attack);    //listen for when attack button is clicked
     function attack(){
-        console.log("attack is called");
 
-        console.log("the players score is " + player.score);
 
-        if (player.score >=100){ //player can only attack if player is score is equal to or greater than 100
+        if (player.score >=200){ //player can only attack if player is score is equal to or greater than 100
             player.attack = true;
 
             //generate a random angle to determine the players horizontal/vertical velocity

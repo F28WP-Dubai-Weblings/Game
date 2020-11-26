@@ -8,13 +8,12 @@ var session = require('express-session');
 //didnt put favicon
 
 //define a session
-app.use(session({
+/*app.use(session({
   secret: 'your secrete word goes here',
   cookie: { maxAge: 60000 },
   resave: false,
   saveUninitialized: false
-}));
-
+}));*/
 //*Rida's static file* 
 //  app.use(express.static(__dirname + '/client')); //app.use(express.static('client'));
 //  app.get('/', function (req, res) {
@@ -42,7 +41,7 @@ const port = process.env.PORT || 3000;
 /*since both our app.listen function impementations were technically the same, 
 i'm going to be deleting mine and combining both our inputs: */
 const server = app.listen(port, () => {
-   console.log(`listening on port : ${port}`);
+   console.log(`server listening on port : ${port}`);
 });
 
 
@@ -88,7 +87,6 @@ io.sockets.on('connection',socket => {
   
 //when a new player has joined, broadcast it to all other clients
 socket.on('newPlayer', newPlayer => {
-  console.log("got the new player message");
   newPlayer.id = socket.id;
   clients.push(newPlayer);  //add new player to the server side client list
   socket.broadcast.emit("newPlayer", newPlayer);
@@ -104,15 +102,14 @@ socket.on('playerMoved', ({id, horizontalPos, verticalPos}) => {
 /*if the player has attacked, listen to the emit message sent by the client in (controls.js) and broadcast to other clients
 the angle along with the player id*/
 socket.on('playerAttack',({id, bull_angle}) =>{
-  console.log("in server side attack");
-  console.log("bullet angle in server:" + bull_angle);
   socket.broadcast.emit('playerAttack', ({id:socket.id, bull_angle}));
 });
 
+
 });
+/*
 
-
-//                                                                           DATABASE 
+//                                                                           DATABASE (to be implemented by susan)
 const router = require('./routes/routes');
 // defining routes
   app.use(router);
@@ -120,5 +117,5 @@ const router = require('./routes/routes');
 //create database if not exists
 const initDB = require('./db/db');
 initDB();
-  
+  */
 

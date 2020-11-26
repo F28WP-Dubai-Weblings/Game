@@ -1,4 +1,7 @@
-#Timer Code here
+/*is not implemented correctly so will be commented to avoid any errors or warnings*
+
+Sumaiyah:
+//Timer Code here
     
 let timeSecond = 90;
 const timeH = document.querySelector("h1");
@@ -29,6 +32,8 @@ function displayTime(second) {​​​​​
 function endCount() {​​​​​
   timeH.innerHTML = "BOOM,TIMES UP";
 }​​​​​
+*/
+
 
 
 

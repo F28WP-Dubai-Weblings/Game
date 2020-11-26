@@ -2,8 +2,7 @@ body{
   margin:0;
   padding:0;
   background-color: black;
-  display:flex;
-  background-image:url("../media/icons/turbobg.png");
+  background-image:url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/turbobg.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -17,23 +16,44 @@ body::-webkit-scrollbar {
 }
 
 
+
 #block{
   margin: auto;
-  width: 60%;
-  height:90vh;
-  padding:0;
+  width: 50%;
+  border: 3px;
+
+}
+
+#selectBlock{
+  margin: auto;
+  width: 50%;
+  border: 3px green;
+}
+
+.seperator{
+  margin: auto;
+  width: 50%;
+  border: 3px;
+  height:100px;
 }
 
 #box{
-  padding:100px;
-  margin:0px;
+  margin: auto;
+  width: 50%;
+  border: 3px;
+  padding: 10px;
 }
-
+#top{
+  height:160px;
+}
+#bottom{
+  height:150px;
+}
 #about{
   text-align:center;
   color:white;
-  margin:10;
-  padding: 70px 0;
+  margin:auto;
+  
   font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
 }
 
@@ -48,12 +68,16 @@ h2{
 
 #head{
   font-size: 70px;
-  border: 0;
   text-align:center;
   color: white;
   font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
   font-weight: 500;
-  font-stretch: ultra-expanded;
+  margin: auto;
+  width: 50%;
+  border: 3px;
+  padding: 10px;
+  animation: glow 3s ease-in-out infinite alternate;
+
 
 }
 .choice {
