@@ -21,8 +21,6 @@ animation: glow 3s ease-in-out infinite alternate;
 }
 
 
-
-
 body {
 overflow-x: hidden; /*Prevents horizontal and vertical scrolling(applicable to the default web browser zoom level)*/
 overflow-y:hidden;
@@ -124,9 +122,13 @@ display:flex;
   
 }
 
-/* ********************* */
-/* This css Code is for the countdown timer  */
-/* ********************** */
+/*is not implemented correctly so will be commented to avoid any errors or warnings
+Sumaiyah:
+
+CSS code for countdown timer:
+
+
+
 *{
 margin: 0;
 padding: 0;
@@ -152,4 +154,4 @@ overflow: hidden;
 h1 {
 font-family: "Montserrat";
 font-size: 76px;
-}
+}*/
