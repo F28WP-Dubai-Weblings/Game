@@ -21,7 +21,6 @@ animation: glow 3s ease-in-out infinite alternate;
 }
 
 
-
 body {
 overflow-x: hidden; /*Prevents horizontal and vertical scrolling(applicable to the default web browser zoom level)*/
 overflow-y:hidden;
