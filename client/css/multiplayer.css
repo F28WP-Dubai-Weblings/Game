@@ -31,7 +31,7 @@ overflow-y:hidden;
 
 #button
 {
-background-color: transparent;
+background-color: rgb(77, 17, 17);
 width:200px;
 height:7vh;
 position: absolute;
@@ -52,7 +52,6 @@ box-shadow:0 5px 5px  rgb(71, 8, 43);
 #scoreBoard
 {
 position: absolute;
-
 background-size:contain;
 left:40px;
 top:40px;
