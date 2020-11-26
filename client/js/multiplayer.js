@@ -101,13 +101,14 @@ function collision(player, object){
     return false; //else return false - no collision.
 }
 
-    /*Note to Reader: the game screen is hidden once multiplayer.js is run AS SOON AS the canvas is created to prevent
-    any sneaky bugs, in terms of players being drawn to the game canvas*/
+/* TEMPORARILY SET UP AS A SUBSTITUTE TO 'ENTER GAME SESSION CODE PAGE'. Will now be commented out
+    Note to Reader: the game screen is hidden once multiplayer.js is run AS SOON AS the canvas is created to prevent
+    any sneaky bugs, in terms of players being drawn to the game canvas
     const gameScreen = document.getElementById("gameScreen");
     gameScreen.style.display = "none"; //hide the game screen
 
     const waitScreen = document.getElementById("waitScreen");
-    waitScreen.style.display = "block"; //display the wait screen
+    waitScreen.style.display = "block"; //display the wait screen*/
 
 
     let counter = 0;  
@@ -117,9 +118,9 @@ function collision(player, object){
 
         if (players.length === 3 ){
         setTimeout(function(){alert("Game Over! "+ "Your score was: " + player.score)},90000);    //game ends after 90 seconds
-
+        /*Look at previous note/comment
         waitScreen.style.display = "none";  //remove the wait screen
-        gameScreen.style.display = "flex";  //now display the gameScreen
+        gameScreen.style.display = "flex";  //now display the gameScreen*/
         
         ScoreBoard.innerHTML="SCORE:  " + player.score; 
 
