@@ -6,13 +6,14 @@ const loginService = (username, password, callback) => {
     playerdb.findByUsername(username, function(err, rows) {
         if (rows.length == 0) {
             //the user is not in the DB
-            console.log("no user found with this name");
-            callback(true,null);
-        }else{
-               console.log(`Selected user; ${rows[0].id}, ${rows[0].username}, ${rows[0].password}, ${rows[0].score} `);
-               user = {id:rows[0].id, username:rows[0].username, password:rows[0].password, score:rows[0].score};
-               callback(null, user);
-         }
+            console.log("no  user found with this name");
+            callback(true, null);
+        } else {
+            console.log(`Selected user; ${rows[0].id}, ${rows[0].username}, ${rows[0].password}, ${rows[0].score} `);
+            user = {id:rows[0].id, username:rows[0].username, password:rows[0].password, score:rows[0].score};
+            
+            callback(null, user);
+        }
     });
 };
 
@@ -31,6 +32,7 @@ const registerService = (username, password, callback) => {
     });
 };
 
+
 const searchService = function(callback) {
     playerdb.find(function(err, rows) {
         if (rows.length == 0) {
@@ -41,12 +43,32 @@ const searchService = function(callback) {
     });
 };
 
+const searchScore = function(callback) {
+    playerdb.findScore(function(err, rows) {
+        if (rows.length == 0) {
+            console.log("No users!");
+        } else {
+            callback(null, rows);
+        }
+    });
+};
+
+const noOfRows = function(callback) {
+    playerdb.findScore(function(err, rows) {
+        if (rows.length == 0) {
+            console.log("No users!");
+        } else {
+            callback(null, rows);
+        }
+    });
+};
+
 const searchIDService = function(id, callback) {
     playerdb.findById(id, function(err, rows) {
-        if (rows.length == 0) { //unknown user
+        if (rows.length == 0) { //unkown
             console.log("Unknown user!");
             let user = null;
-            calback(null, user);
+            callback(null, user);
         } else {
 
             let user = new User(rows[0].id, rows[0].name, rows[0].pass);
@@ -70,6 +92,8 @@ module.exports = {
     loginService,
     searchIDService,
     searchService,
+    searchScore,
     deleteService,
-    registerService
+    registerService,
+    noOfRows
 };
