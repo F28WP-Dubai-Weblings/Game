@@ -45,14 +45,12 @@ let attacks = [] //client side list for bullets
 let wait = 0;
 socket.on("init", ({id,num, player_list, fuelPoints, bullets}) => {
 
-    console.log("got the init message");
     const player = new Liveplayers({id, num}); //instantiate an object of the 'liveplayers' class
 
     controls(player, socket);   //call controls in controls.js to keep track of player movement
 
     socket.emit('newPlayer', player);   //emit to the server that a new player has joined 
     socket.on('newPlayer', newPlayer => {
-        console.log("pushing the player onto screen");
         players.push(new Liveplayers(newPlayer))});  //update the 'clients' list on the browser when a newPlayer message is recieved
     
     //if another player has moved, update the position of that player on the client side
@@ -63,7 +61,6 @@ socket.on("init", ({id,num, player_list, fuelPoints, bullets}) => {
 
     //if another player(attacker) has attacked, update the angle of the bullet to the randomly generated angle given by the attacker to the server
     socket.on('playerAttack', ({id, bull_angle }) => {
-        console.log("in mult attack");
         reqPlayer = players.find(elem => elem.id===id); //find the player that just attacked
 
         players.find(elem => elem.id===id).attack = true;   //set his attack flag to true

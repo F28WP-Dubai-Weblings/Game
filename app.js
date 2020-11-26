@@ -41,7 +41,7 @@ const port = process.env.PORT || 3000;
 /*since both our app.listen function impementations were technically the same, 
 i'm going to be deleting mine and combining both our inputs: */
 const server = app.listen(port, () => {
-   console.log(`listening on port : ${port}`);
+   console.log(`server listening on port : ${port}`);
 });
 
 
@@ -87,7 +87,6 @@ io.sockets.on('connection',socket => {
   
 //when a new player has joined, broadcast it to all other clients
 socket.on('newPlayer', newPlayer => {
-  console.log("got the new player message");
   newPlayer.id = socket.id;
   clients.push(newPlayer);  //add new player to the server side client list
   socket.broadcast.emit("newPlayer", newPlayer);

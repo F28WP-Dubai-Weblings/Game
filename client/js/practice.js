@@ -1,7 +1,7 @@
 const score = document.querySelector(".scoreBoard");
 const startBoard = document.querySelector(".startNav");
-const gameScreen = document.querySelector(".practiceScreen");
-const end = document.querySelector(".end");
+const gameScreen = document.querySelector(".practiceScreen");   
+const end = document.querySelector(".end"); //game over alert
 
 let road = document.querySelector(".animateTrack")
 
@@ -12,19 +12,14 @@ startBoard.addEventListener("click", start);
 let counter = 0;
 let coneCounter = 0;
 
-console.log("in practice")
 let racer = {
     pixelPosition:4,
     score:0
 };
 
-let fuelObj = {
-    pixelPosition:4
-};
+let fuelObj, coneObj = {};   //declare empty dictionary/objects
 
-let coneObj = {
-    pixelPosition:5
-}
+
 
 let events = {  //set the default values of all relevant key events to false
     ArrowUp:   false,
@@ -35,9 +30,7 @@ let events = {  //set the default values of all relevant key events to false
 
 function downKey(event){
     event.preventDefault(); //disregrard the inbuilt default representation of the key events
-    events[event.key] = true;
-    console.log(event.key);
-    
+    events[event.key] = true;    
 }
 
 function upKey(event){
@@ -50,7 +43,7 @@ function upKey(event){
 function collision(racer,fuelObj){
 
     
-    /* NOTE TO READER: the -35s here are added to make sure the collision is significant, 
+    /* NOTE TO READER: the +40s here are added to make sure the collision is significant, 
     i.e, the bullet or the fuelPoints have significantly collided with the player, not simply overlapped at their boundaries/borders*/
    playerRect = racer.getBoundingClientRect();
    objectRect = fuelObj.getBoundingClientRect();
@@ -59,15 +52,13 @@ function collision(racer,fuelObj){
             
 }
 
-function gameOver(){
+function gameOver(){    //call when player has collided with a cone
     racer.ready = false;
     road.style.animationPlayState = "paused";
     end.classList.remove("hide");    //add classList "hide" to get rid of the start navigation pop-up
-
- 
 }
 
-let flag = false;
+let flag = false;   
 let fuel;
 function updatePos(flag){
     if (!flag){
@@ -194,9 +185,7 @@ function start(){
     fuel.setAttribute("class", "fuelDiv");     
     road.appendChild(fuel);    //add fuelImg to the fuelDiv
     
-    fuelObj.horizontalPos = 1000;
-    fuelObj.verticalPos = 1000;
-
+    
     //set up cone obstacles
     let cone = document.createElement("div");
     cone.setAttribute("class", "coneDiv");
