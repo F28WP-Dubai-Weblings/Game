@@ -42,17 +42,18 @@ let players = [];   //client side list for players/clients
 let points = [];    //client side list for points
 let playerNumber = 0;   //initialise player num
 let attacks = [] //client side list for bullets
-
+let wait = 0;
 socket.on("init", ({id,num, player_list, fuelPoints, bullets}) => {
 
-    console.log("got the init message");
     const player = new Liveplayers({id, num}); //instantiate an object of the 'liveplayers' class
 
     controls(player, socket);   //call controls in controls.js to keep track of player movement
 
+    
+    
     socket.emit('newPlayer', player);   //emit to the server that a new player has joined 
+    
     socket.on('newPlayer', newPlayer => {
-        console.log("pushing the player onto screen");
         players.push(new Liveplayers(newPlayer))});  //update the 'clients' list on the browser when a newPlayer message is recieved
     
     //if another player has moved, update the position of that player on the client side
@@ -63,7 +64,6 @@ socket.on("init", ({id,num, player_list, fuelPoints, bullets}) => {
 
     //if another player(attacker) has attacked, update the angle of the bullet to the randomly generated angle given by the attacker to the server
     socket.on('playerAttack', ({id, bull_angle }) => {
-        console.log("in mult attack");
         reqPlayer = players.find(elem => elem.id===id); //find the player that just attacked
 
         players.find(elem => elem.id===id).attack = true;   //set his attack flag to true
@@ -74,12 +74,13 @@ socket.on("init", ({id,num, player_list, fuelPoints, bullets}) => {
         attacks[0].verticalPos = reqPlayer.verticalPos;
     });
 
-    
     players = player_list.map(element => new Liveplayers(element)).concat(player);  //make a copy of the list of players sent by the server on the client browser
     points = fuelPoints.map(element => new Fuel(element));  //make a copy of the list of fuelPoints sent by the server on the client browser
     attacks = bullets.map(shoot => new Bullet(shoot));  //make a copy of the array containing bullet sent by the server on the client browser
-
+    
         
+const ScoreBoard = document.getElementById("scoreBoard");
+
 //                                                                 Collision Detection
 
 
@@ -111,11 +112,13 @@ function collision(player, object){
     function draw(){
 
         if (players.length === 3 ){
-        setTimeout(function(){alert("Game Over"+ "Your score was: " + player.score)},90000);    //game ends after 90 seconds
+        setTimeout(function(){socket.emit("gameOver");players =[]; alert("Game Over! "+ "Your score was: " + player.score)},90000);    //game ends after 90 seconds
 
         waitScreen.style.display = "none";  //remove the wait screen
         gameScreen.style.display = "flex";  //now display the gameScreen
         
+        ScoreBoard.innerHTML="SCORE:  " + player.score; 
+
         ctx.clearRect(0,0,canvas.width,canvas.height); //clear the canvas every frame        
 
         let attacker;
@@ -125,8 +128,6 @@ function collision(player, object){
             if (client.attack === true){
                 attacker = client;
                 attacks[0].draw(ctx);
-                console.log("client is attacker" + (client===attacker) +" " +client.num);
-                //reduce client's running score after theyve attacked.
             }
         });    
         
@@ -158,27 +159,24 @@ function collision(player, object){
             players.forEach( player => {
                 collided = collision(player,currentPoint);
                 if (collided){
-                    //increase the running score of the player
-                    //increase the total score of the player
                     currentPoint.used = true; 
-                    currentPoint.draw(ctx);}
+                    currentPoint.draw(ctx);
+                    player.score++}
             })
                 if (counter === 448) {
-                    if (collided){
-                        player.score +=30;
-                    }
                     collided = false; //reset collision state
                     counter = 0;
                     index++;
                 }
         }
+
     counter++; }
         window.requestAnimationFrame(draw); 
         }
-    if (player.num > 4){
-        setTimeout(function(){alert("Sorry this game is full!")},500);//game over alert after 90s
-    }
+    
     draw();
 
-    
+    if (players.length > 3){
+        setTimeout(function(){alert("Sorry this game is full!")},500);//game over alert after 90s
+    }
 });
