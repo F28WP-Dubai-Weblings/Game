@@ -1,68 +1,108 @@
 body{
-    background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/background.PNG");
-    background-size: 100% ;
-    overflow-x: hidden; /*prevents horizontal scrolling(applicable to the default web browser zoom level)*/
-   
+  margin:0;
+  padding:0;
+  background-color: black;
+  background-image:url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/turbobg.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  height: 100%;
+  overflow-y: hidden;
 }
-  
-  html {
-    scroll-behavior: smooth;
+
+body::-webkit-scrollbar {
+  width: 0em;
+
 }
+
+
+
+#block{
+  margin: auto;
+  width: 50%;
+  border: 3px;
+
+}
+
+#selectBlock{
+  margin: auto;
+  width: 50%;
+  border: 3px green;
+}
+
+.seperator{
+  margin: auto;
+  width: 50%;
+  border: 3px;
+  height:100px;
+}
+
+#box{
+  margin: auto;
+  width: 50%;
+  border: 3px;
+  padding: 10px;
+}
+#top{
+  height:160px;
+}
+#bottom{
+  height:150px;
+}
+#about{
+  text-align:center;
+  color:white;
+  margin:auto;
   
-  .header{
+  font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
+}
+
+
+h2{
+  animation: glow 1s ease-in-out infinite alternate;
+  border: 0;
+  text-align:center;
+  color: white;
+  font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
+}
+
+#head{
+  font-size: 70px;
+  text-align:center;
+  color: white;
+  font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
+  font-weight: 500;
+  margin: auto;
+  width: 50%;
+  border: 3px;
+  padding: 10px;
+  animation: glow 3s ease-in-out infinite alternate;
+
+
+}
+.choice {
+  font-size: 20px;
+  padding: 5px 0;
+  border: 0;
+  color: white;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20em;
+  
+}
+
+@keyframes glow{
+  from {
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #d1abbe, 0 0 30px #a38896, 0 0 40px #dfb6ca, 0 0 50px #bb6c93, 0 0 60px #9e195c;
+    }
     
-    position:relative;
-    margin: 2px 0px 40px 0px;
-    padding: 0px 17px 5px 17px;
-    border-width: 3px;
-    height:150px;
-  }
-  
-.game{
-    position: relative;
-    color:white;
-    background-color: black;
-    height:500px;
-    border: solid;
-    border-width: 1px;
-    border-color: black;
-    margin: 0px 15px 40px 15px;
-    padding: 0px 17px 40px 17px;
-    border-radius: 25px;
-    font-family: fantasy;
-    top:230px;
+    to {
+      text-shadow: 0 0 9px #fff, 0 0 13px #ff4da6, 0 0 23px #ff4da6, 0 0 30px #ff4da6, 0 0 43px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6;
+    }
 }
-  
-#leaderboard{
-    position: relative;
-    color:white;
-    background-color: black;
-    height:200px;
-    border: solid;
-    border-width: 1px;
-    border-color: black;
-    margin: 0px 15px 40px 15px;
-    padding: 0px 17px 40px 17px;
-    border-radius: 25px;
-    font-family: fantasy;
-    top:230px;
+
+p {
+
+  text-align:center;
+  color: white;
 }
-  
-#PLAY{
-    position: relative;
-    color:white;
-    background-color: rgb(8, 1, 8);
-    height:20px;
-    width:200px;
-    text-align:center;
-    top:5px;
-    border: solid;
-    border-width: 1px;
-    border-color: rgb(100, 97, 97);
-    margin: 30px 200px 20px 550px;
-    padding: 10px 17px 40px 17px;
-    border-radius: 17px;
-    font-family: fantasy;
-    font-size: 30px;
-}
-  

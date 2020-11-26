@@ -20,8 +20,6 @@ function updateGameArea() //this function : stops the music when the car hits an
 }*/
 
 
-
-
 const canvas = document.getElementById("canvas"),
 ctx = canvas.getContext("2d");
 
@@ -35,269 +33,150 @@ function fillTrack(canvas){   //make the canvas cover the entire Track div
 }
 
 
-
-//                                                 MODULE AND EVENT LISTENERS FOR PLAYER MOVEMENT
-
-function controls(player, socket) {
-    console.log("here");
-      
-    window.addEventListener("keydown", downKey);
-
-    function downKey(event){
-
-        event.preventDefault(); //disregrard the inbuilt default representation of the key events
-        player.keyEvents[event.key] = true;
-
-        players.move();   //try without dir?
-        socket.emit("playerMoved", {id: player.id, horizontalPos: player.horizontalPos, verticalPos: player.verticalPos});
-    }
-
-    window.addEventListener("keyup", upKey);
-    function upKey(event){
-        event.preventDefault();
-        player.keyEvents[event.key] = false;
-        players.move();
-    }
-
-};
-
-let players = [];
-let points = [];
-let playerNumber = 0;
-//Live Players 
-class Liveplayers{
-    constructor({id, num}){
-        this.id = id;
-        this.num = num;
-        this.horizontalPos = 10;
-        this.verticalPos = 10;
-        this.score = 0;
-        this.keyEvents = {  //set the default values of all relevant key events to false
-            ArrowUp:   false,
-            ArrowDown:  false,
-            ArrowRight: false,
-            ArrowLeft: false
-        }; 
-        this.speed = 10;
-        this.width= undefined;
-        this.height = undefined;
-    }
-    
-    draw(ctx){
-        ctx.beginPath();
-        const img = new Image();
-        if (this.num === 1){
-            img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/racecar1.png";
-        }
-        if (this.num===2){
-            img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/raceGreen.png";
-        }
-        if (this.num===3){
-            img.src = "https://f28wp-dubai-weblings.github.io/Game/client/media/icons/racecar1.png";
-        }
-        this.width = img.width;
-        this.height = img.height;
-        //console.log("the cars width is "+ this.width + " " + this.height);
-
-        ctx.drawImage(img, this.horizontalPos, this.verticalPos, img.width, 150);
-    }
-
-    move(){
-        if (this.keyEvents.ArrowUp) {   //move up when ArrowUp is pressed & don't let the car move above 70px (height)
-            this.verticalPos -= this.speed;
-        }
-        if (this.keyEvents.ArrowLeft) {   //move left when ArrowLeft is pressed & set minimum horizontal position as 35px (width)
-            this.horizontalPos -= this.speed;
-        }
-
-        if (this.keyEvents.ArrowDown) {  //move down when ArrowDown is pressed & don't let the car move beyond 1000px (height)
-            this.verticalPos += this.speed;
-        }
-        if (this.keyEvents.ArrowRight) {    //move right when the ArrowRight is press & don't let the car move beyond 1020px (width)
-            this.horizontalPos += this.speed;
-        }
-        this.draw(ctx);
-    }
-}
-
-class Fuel {
-    constructor({x,y}) {
-      this.horizontalPos = x;
-      this.verticalPos = y;
-      this.width = 70;
-      this.height = 40;
-    }
-  
-    updatePos(x,y){
-        this.horizontalPos = x;
-        this.verticalPos = y;
-        this.draw(ctx);
-    }
-
-    draw(ctx) {
-    ctx.beginPath();
-    const img = new Image();
-    img.src = "../media/icons/fuelupsizsed.png";
-    //this.width = img.width;
-    //this.height = img.height;
-    //console.log("the fuels width is " + this.width + " " + this.height);
-
-    ctx.drawImage(img, this.horizontalPos, this.verticalPos, img.width, 150);
-    }
-
-    
-}
-
-
+//                                                          CLIENT SIDE EVENTS
 
 
 const socket = io(); //initialise a new socket each time a player arrives
 
-socket.on("init", ({id,num, player_list, fuelPoints}) => {
-    console.log("there is a player connected" + players.length);
+let players = [];   //client side list for players/clients
+let points = [];    //client side list for points
+let playerNumber = 0;   //initialise player num
+let attacks = [] //client side list for bullets
+let wait = 0;
+socket.on("init", ({id,num, player_list, fuelPoints, bullets}) => {
 
-    console.log("got the init message");
     const player = new Liveplayers({id, num}); //instantiate an object of the 'liveplayers' class
 
-    controls(player, socket);
-    //playerNumber++;
+    controls(player, socket);   //call controls in controls.js to keep track of player movement
 
+    
+    
     socket.emit('newPlayer', player);   //emit to the server that a new player has joined 
+    
     socket.on('newPlayer', newPlayer => {
-        console.log("pushing the player onto screen");
         players.push(new Liveplayers(newPlayer))});  //update the 'clients' list on the browser when a newPlayer message is recieved
     
-
+    //if another player has moved, update the position of that player on the client side
     socket.on('playerMoved', ({id, horizontalPos, verticalPos}) => {
-        console.log("the horizontal Pos recieved here in multiplayer.js "+ horizontalPos);
         players.find(elem => elem.id === id).horizontalPos = horizontalPos;
-        players.find(elem => elem.id === id).verticalPos = verticalPos;
+        players.find(elem => elem.id === id).verticalPos = verticalPos; 
+    });
 
+    //if another player(attacker) has attacked, update the angle of the bullet to the randomly generated angle given by the attacker to the server
+    socket.on('playerAttack', ({id, bull_angle }) => {
+        reqPlayer = players.find(elem => elem.id===id); //find the player that just attacked
+
+        players.find(elem => elem.id===id).attack = true;   //set his attack flag to true
+
+        attacks[0].setup({angle:bull_angle});   //call setup() on the bullet to set it's vertical and horizontal velocity to be the same as the attacker's
+        //find the exact position of the attacker so the bullet that will be drawn on the client screen will be shot from the attackr's position
+        attacks[0].horizontalPos = reqPlayer.horizontalPos; 
+        attacks[0].verticalPos = reqPlayer.verticalPos;
     });
 
     players = player_list.map(element => new Liveplayers(element)).concat(player);  //make a copy of the list of players sent by the server on the client browser
     points = fuelPoints.map(element => new Fuel(element));  //make a copy of the list of fuelPoints sent by the server on the client browser
+    attacks = bullets.map(shoot => new Bullet(shoot));  //make a copy of the array containing bullet sent by the server on the client browser
+    
+        
+const ScoreBoard = document.getElementById("scoreBoard");
 
-    //                                                                 Collision Detection
+//                                                                 Collision Detection
+
+
 function collision(player, object){
 
-//CASE 1 -- OPTIONAL
-    if (player.horizontalPos>= object.horizontalPos&&    //if the player's horizontal Pos is greater than or equal to the same of the object
-        player.horizontalPos<= object.horizontalPos+ object.width &&    //if the player's horizontal Pos is lesser than or equal to the same of the object and
-        player.verticalPos >= object.verticalPos &&   //if the car has an equal or greater verticalposition as the object (if the car is above the object vertically)
-        player.verticalPos <= object.verticalPos + object.height){
-            console.log(1);
-            return true;
-        }
-
-//CASE 2
-    if (player.horizontalPos+ player.width >= object.horizontalPos&&
-        player.horizontalPos+ player.width <= object.horizontalPos+ object.width &&
-        player.verticalPos >= object.verticalPos &&
-        player.verticalPos <= object.verticalPos + object.height) {
-            console.log(2);
-
-            return true;
-        }
-
-//CASE 3
-        console.log("player height is: " + player.height);
-        console.log("player width is :" + player.width);
-        console.log("object hegith is: "+ object.height);
-        console.log("object width is: " + object.width);
-    if (player.horizontalPos>= object.horizontalPos&&
-        player.horizontalPos<= object.horizontalPos+ object.width &&
-        player.verticalPos + player.height >= object.verticalPos &&
-        player.verticalPos + player.height <= object.verticalPos + object.height){
-            console.log(3);
-
-            return true;
-        }
-
-//CASE 4
-    if (player.horizontalPos+ player.width >= object.horizontalPos&&
-        player.horizontalPos+ player.width <= object.horizontalPos+ object.width &&
-        player.verticalPos + player.height >= object.verticalPos &&
-        player.verticalPos + player.height <= object.verticalPos + object.height){
-            console.log(4);
-
-            return true;
-        }
-
-//CASE 5
-    if (object.horizontalPos>= player.horizontalPos&&
-        object.horizontalPos<= player.horizontalPos+ player.width &&
-        object.verticalPos >= player.verticalPos &&
-        object.verticalPos <= player.verticalPos + player.height) {
-            console.log(5);
-
-            return true;
-        }
-
-//CASE 6
-    if (object.horizontalPos+ object.width >= player.horizontalPos&&
-        object.horizontalPos+ object.width <= player.horizontalPos+ player.width &&
-        object.verticalPos >= player.verticalPos &&
-        object.verticalPos <= player.verticalPos + player.height) {
-            console.log(6);
-
-            return true;
-        }
-
-//CASE 7
-    if (object.horizontalPos>= player.horizontalPos&&
-        object.horizontalPos<= player.horizontalPos+ player.width &&
-        object.verticalPos + object.height >= player.verticalPos &&
-        object.verticalPos + object.height <= player.verticalPos + player.height){
-            console.log(7);
-
-            return true;
-        }
-//CASE 8 -- unecessary
-    if (object.horizontalPos+ object.width >= player.horizontalPos&&
-        object.horizontalPos+ object.width <= player.horizontalPos+ player.width &&
-        object.verticalPos + object.height >= player.verticalPos &&
-        object.verticalPos + object.height <= player.verticalPos + player.height){
-            console.log(8);
-
-            return true;
-        }
-
+    /* NOTE TO READER: the -35s here are added to make sure the collision is significant, 
+    i.e, the bullet or the fuelPoints have significantly collided with the player, not simply overlapped at their boundaries/borders*/
+   if (player.horizontalPos < ((object.horizontalPos + object.width) -35) &&
+    ((player.horizontalPos+ player.width)-35) > object.horizontalPos &&
+    player.verticalPos < ( (object.verticalPos + object.height) -35) &&
+    (player.verticalPos + player.height) > object.verticalPos - 35) {
+        return true;
+    }
+    return false; //else return false - no collision.
 }
 
-    let counter = 0;
-    let x,y;
+    /*Note to Reader: the game screen is hidden once multiplayer.js is run AS SOON AS the canvas is created to prevent
+    any sneaky bugs, in terms of players being drawn to the game canvas*/
+    const gameScreen = document.getElementById("gameScreen");
+    gameScreen.style.display = "none"; //hide the game screen
 
-    function store() {  //will update horizontalPosand y to a different value everytime it is called
-        x = 100;//Math.random()*620;
-        y = 100;//Math.random()*600;
-    };
+    const waitScreen = document.getElementById("waitScreen");
+    waitScreen.style.display = "block"; //display the wait screen
+
+
+    let counter = 0;  
+    let index = 0;  //initialise index counter (this will be used to draw a new fuel point at a new position on the screen)
 
     function draw(){
-        ctx.clearRect(0,0,canvas.width,canvas.height); //clear the canvas every frame
-        players.forEach(client => client.draw(ctx));    //draw the updated position of the client on the canvas
- 
-       
-        if (counter >100 && counter < 1000){
-            points.x = x; 
-            points.y = y;
-            points.forEach(client => {client.updatePos(x,y);players.forEach( player => 
-                {
-                    let collided = collision(player,client);
-                    if (collided){
-                        console.log("collided!");
-                        player.score +=10;
-                        console.log("player"+player.num+" "+ player.score);
-                    }
-                })}); 
-            counter++;
-            if (counter === 698) {
-                counter = 0;
-                store();
+
+        if (players.length === 3 ){
+        setTimeout(function(){socket.emit("gameOver");players =[]; alert("Game Over! "+ "Your score was: " + player.score)},90000);    //game ends after 90 seconds
+
+        waitScreen.style.display = "none";  //remove the wait screen
+        gameScreen.style.display = "flex";  //now display the gameScreen
+        
+        ScoreBoard.innerHTML="SCORE:  " + player.score; 
+
+        ctx.clearRect(0,0,canvas.width,canvas.height); //clear the canvas every frame        
+
+        let attacker;
+        //draw the player attacks on the canvas
+        players.forEach(client => {
+            client.draw(ctx)
+            if (client.attack === true){
+                attacker = client;
+                attacks[0].draw(ctx);
             }
+        });    
+        
+        let carCrash;
+        //check if a player has crashed
+        players.forEach(client=> {
+            carCrash = collision(client,attacks[0]);
+            if (carCrash && client != attacker){
+                client.crash = true;
+                client.draw(ctx); //player's car dissapears.
+                if(client === player){
+                    setTimeout(function(){alert("Game Over!" + "Your score was: " + player.score)},1000);    //player's game is over
+                }
+            } 
+        })
+
+        /*NOTE TO READER: I am not using a SetInterval function here as there are multiple functionalities and cases to be handled. 
+        We want to avoid any time errors/bugs. 
+        For example, it is important to have a counter as we want to make sure score is only increased once during a collision, when counter = 448.
+        Using a setinterval along with the counter will increase code complexity unneccesarily*/
+
+        if (counter >100 && counter < 500){
+            counter++;
+            let currentPoint = points[index];   //a new fuel point position for every point in the array
+            currentPoint.draw(ctx); //draw the fuel
+
+            //check if any player has collected the fuel
+            let collided = false;
+            players.forEach( player => {
+                collided = collision(player,currentPoint);
+                if (collided){
+                    currentPoint.used = true; 
+                    currentPoint.draw(ctx);
+                    player.score++}
+            })
+                if (counter === 448) {
+                    collided = false; //reset collision state
+                    counter = 0;
+                    index++;
+                }
         }
-        counter++;
+
+    counter++; }
         window.requestAnimationFrame(draw); 
-    }
+        }
+    
     draw();
+
+    if (players.length > 3){
+        setTimeout(function(){alert("Sorry this game is full!")},500);//game over alert after 90s
+    }
 });

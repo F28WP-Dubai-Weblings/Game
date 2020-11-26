@@ -1,5 +1,12 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
 body{
   overflow-x: hidden; /*prevents horizontal scrolling(applicable to the default web browser zoom level)*/
+  overflow-y: hidden; 
+  background-color: black;
 }
 
 #container{
@@ -9,31 +16,89 @@ body{
 .practiceScreen{
   position: relative;
   background-color:black;
-  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/temp.png");  /*temporary game bg*/
+  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/turbobg.png");  /*temporary game bg*/
   background-size: 100%;
-
 }
+
 
 .hide {
     display: none;
 }
 
+
 .carVector{
-    background-image:url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/raceGreen.png");
+    background-image:url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/car3.PNG");
     position: absolute;
-    height:150px;
-    width:130px;
-    bottom:120px;
+    height:210px;
+    width:150px;
+    background-repeat: no-repeat;
     background-size:contain;
 }
 
-.scoreboard
+.fuelDiv{
+  background-image:url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/bluePoint.png");
+  position: absolute;
+  height:100px;
+  width:80px;
+  background-size:100%;
+}
+
+.coneDiv{
+  background-image:url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/cone.png");
+  position: absolute;
+  height:110px;
+  width:100px;
+  background-size:100%;
+}
+
+
+.startNav, .end{
+  position: relative;
+  margin: auto;
+  width: 50%;
+  border: 3px;
+  background-color: black;
+  color:white;
+  z-index: 1;
+  text-align: center;
+  padding: 15px;
+  cursor:pointer;
+  font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
+  letter-spacing: 5;
+  font-size: 20px;
+  word-spacing:3;
+  box-shadow: 0 5px 5px white;
+  animation: glow 3s ease-in-out infinite alternate;
+
+}
+
+
+.scoreBoard
 {
-  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/scorebaord background1.png");
-  width:235px;
-  height:24vh;
   position: absolute;
   background-size:contain;
+  left:40px;
+  top:40px;
+  line-height: 250px;
+  font-size: 20px;
+  height:50vh;
+  width:21%;
+  background-image:url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/scoreBoard.png");
+  background-repeat:no-repeat ;
+  text-align: center;
+  color:white;
+  font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
+  animation: glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes glow{
+  from {
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #d1abbe, 0 0 30px #a38896, 0 0 40px #dfb6ca, 0 0 50px #bb6c93, 0 0 60px #9e195c;
+    }
+    
+    to {
+      text-shadow: 0 0 9px #fff, 0 0 13px #ff4da6, 0 0 23px #ff4da6, 0 0 30px #ff4da6, 0 0 43px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6;
+    }
 }
 
 
@@ -63,13 +128,6 @@ body{
     }
   }
 
-
-
-#fuelDiv{
-  position: absolute;
-}
-
-
 .trackContainer{
   display:flex;
   flex-direction: row;
@@ -77,20 +135,3 @@ body{
   
 }
 
-#leftDiv{
-  position:relative;
-  width:235px;
-  left:24px;
-}
-
-#midDiv{
-  position:relative;
-  width:244px;
-  left:40px;
-}
-
-#rightDiv{
-  width:245px;
-  position:relative;
-  left:53px;
-}

@@ -2,7 +2,7 @@
   "name": "turbo",
   "version": "1.0.0",
   "description": "An MMO Racing game",
-  "main": "main.js",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js"
