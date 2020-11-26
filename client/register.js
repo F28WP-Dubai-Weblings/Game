@@ -7,8 +7,7 @@ $(document).ready(function(){
         height: 150,
         modal: true,
         open: function(event, ui) {
-            
-            //to avoid the user from closing the dialog
+            //aviod user from closing
             $(".ui-dialog-titlebar-close", ui).hide();
         },
       buttons: {
@@ -21,11 +20,12 @@ $(document).ready(function(){
              $.post('/api/register', user, function(result) {
                //allow access to game using dollar get index html 
                console.log(result);
+               request.session.username = username;
+               location.replace("index.html");
               })
              .fail(function() {
                  console.log("error with registration");
-                 response.redirect("register.html");
-                 //$.get('register.js');
+                 location.replace("register.html");
              });
 
           },
@@ -38,19 +38,24 @@ $(document).ready(function(){
               console.log(result);
               console.log('Welcome back', name);
               //login correct show the game page here using $.get
-              if(request.session.username){
-                location.replace("index.html");
+              //request.session.username = name;
+              console.log("value from regis:", sessionName);
+             // if(request.session.username){
+              if(sessionName){
+                  response.redirect("index.html");
+                  location.replace("register.html");
               }
-             })
+  
+            })
             .fail(function() {
                 console.log("error with login");
+                location.replace("register.html");
             });
 
-         },
+          },
           Cancel: function() {
               //cancel closes the dialog  
               $(this).dialog("close");
-              response.redirect("register.html");
           }
       },
   });
