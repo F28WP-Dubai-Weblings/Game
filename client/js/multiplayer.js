@@ -1,6 +1,7 @@
-//background music
 
-/* *is not implemented correctly so will be commented to avoid any errors or warnings*
+/* 
+THE FOLLOWING IS SHERICA'S CONTRIBUTION TO THE GAME MUSIC:
+*is not implemented correctly so will be commented to avoid any errors or warnings*
 Sherica's: 
 
 function startGame() {
@@ -23,6 +24,8 @@ function updateGameArea() //this function : stops the music when the car hits an
     }
 }*/
 
+//MULTIPLAYER.JS FUNCTIONAL GAME CODE:
+/*AUTHOR NAME: RIDA @raqp2000*/
 
 const canvas = document.getElementById("canvas"),
 ctx = canvas.getContext("2d");
