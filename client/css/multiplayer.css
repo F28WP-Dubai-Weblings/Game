@@ -124,9 +124,13 @@ display:flex;
   
 }
 
-/* ********************* */
-/* This css Code is for the countdown timer  */
-/* ********************** */
+/*is not implemented correctly so will be commented to avoid any errors or warnings
+Sumaiyah:
+
+CSS code for countdown timer:
+
+
+
 *{
 margin: 0;
 padding: 0;
@@ -152,4 +156,4 @@ overflow: hidden;
 h1 {
 font-family: "Montserrat";
 font-size: 76px;
-}
+}*/

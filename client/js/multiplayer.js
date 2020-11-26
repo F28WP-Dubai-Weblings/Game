@@ -1,5 +1,9 @@
 //background music
-/*function startGame() {
+
+/* *is not implemented correctly so will be commented to avoid any errors or warnings*
+Sherica's: 
+
+function startGame() {
     
     
     myMusic = new sound("car bg music 1.mp3");
@@ -42,7 +46,7 @@ let players = [];   //client side list for players/clients
 let points = [];    //client side list for points
 let playerNumber = 0;   //initialise player num
 let attacks = [] //client side list for bullets
-let wait = 0;
+
 socket.on("init", ({id,num, player_list, fuelPoints, bullets}) => {
 
     const player = new Liveplayers({id, num}); //instantiate an object of the 'liveplayers' class

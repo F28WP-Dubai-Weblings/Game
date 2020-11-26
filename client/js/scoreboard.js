@@ -1,3 +1,6 @@
+/*is not implemented correctly so will be commented to avoid any errors or warnings*/
+//Aarathi
+/*
 var score = 0;
 
 var scoreBoard = function () {
@@ -10,4 +13,4 @@ var scoreBoard = function () {
 	}
 
 };
-scoreBoard();
+scoreBoard();*/
