@@ -1,4 +1,4 @@
-
+/*AUTHOR NAME: RIDA @raqp2000 */
 class Liveplayers{
 
     constructor({id, num}){
