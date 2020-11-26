@@ -1,3 +1,5 @@
+//JS CODE FOR SINGLE PLAYER MODE
+/*AUTHOR NAME: RIDA @raqp2000*/
 
 const score = document.querySelector(".scoreBoard");
 const startBoard = document.querySelector(".startNav");
