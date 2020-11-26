@@ -1,4 +1,4 @@
-//AUTHOR NAME: RIDA @raqp2000
+/*AUTHOR NAME: RIDA @raqp2000*/
 let angle,vx,vy;
 
 class Bullet {
