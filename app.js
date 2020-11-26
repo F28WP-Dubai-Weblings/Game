@@ -105,16 +105,11 @@ socket.on('playerAttack',({id, bull_angle}) =>{
   socket.broadcast.emit('playerAttack', ({id:socket.id, bull_angle}));
 });
 
-socket.on("gameOver", () => {
-  clients = [];
-})
-
-
 
 });
 /*
 
-//                                                                           DATABASE 
+//                                                                           DATABASE (to be implemented by susan)
 const router = require('./routes/routes');
 // defining routes
   app.use(router);
