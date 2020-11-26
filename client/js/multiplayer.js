@@ -1,28 +1,4 @@
 
-/* 
-THE FOLLOWING IS SHERICA'S CONTRIBUTION TO THE GAME MUSIC:
-*is not implemented correctly so will be commented to avoid any errors or warnings*
-Sherica's: 
-
-function startGame() {
-    
-    
-    myMusic = new sound("car bg music 1.mp3");
-    myMusic.play();
-    myGameArea.start();
-}
-function updateGameArea() //this function : stops the music when the car hits an obstacle.
-{
-    var x, height, gap, minHeight, maxHeight, minGap, maxGap;
-    for (i = 0; i < myObstacles.length; i += 1) {
-        if (myGamePiece.crashWith(myObstacles[i])) {
-            
-            myMusic.stop();
-            myGameArea.stop();
-            return;
-        } 
-    }
-}*/
 
 //MULTIPLAYER.JS FUNCTIONAL GAME CODE:
 /*AUTHOR NAME: RIDA @raqp2000*/
@@ -190,3 +166,29 @@ function collision(player, object){
         setTimeout(function(){alert("Sorry this game is full!")},500);//game over alert after 90s
     }*/
 });
+
+
+/* 
+THE FOLLOWING IS SHERICA'S CONTRIBUTION TO THE GAME MUSIC:
+*is not implemented correctly so will be commented to avoid any errors or warnings*
+Sherica: 
+
+function startGame() {
+    
+    
+    myMusic = new sound("car bg music 1.mp3");
+    myMusic.play();
+    myGameArea.start();
+}
+function updateGameArea() //this function : stops the music when the car hits an obstacle.
+{
+    var x, height, gap, minHeight, maxHeight, minGap, maxGap;
+    for (i = 0; i < myObstacles.length; i += 1) {
+        if (myGamePiece.crashWith(myObstacles[i])) {
+            
+            myMusic.stop();
+            myGameArea.stop();
+            return;
+        } 
+    }
+}*/
