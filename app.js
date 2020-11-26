@@ -105,6 +105,11 @@ socket.on('playerAttack',({id, bull_angle}) =>{
   socket.broadcast.emit('playerAttack', ({id:socket.id, bull_angle}));
 });
 
+socket.on("gameOver", () => {
+  clients = [];
+})
+
+
 
 });
 /*

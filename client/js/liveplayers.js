@@ -70,7 +70,7 @@ class Liveplayers{
             this.horizontalPos -= this.speed;
         }
 
-        if (this.keyEvents.ArrowDown && this.verticalPos <600) {  //move down when ArrowDown is pressed & don't let the car move beyond 1000px (height)
+        if (this.keyEvents.ArrowDown && this.verticalPos <580) {  //move down when ArrowDown is pressed & don't let the car move beyond 1000px (height)
             this.verticalPos += this.speed;
         }
         if (this.keyEvents.ArrowRight && this.horizontalPos <620) {    //move right when the ArrowRight is press & don't let the car move beyond 1020px (width)

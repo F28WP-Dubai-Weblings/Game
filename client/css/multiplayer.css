@@ -20,47 +20,35 @@ animation: glow 3s ease-in-out infinite alternate;
 
 }
 
-#button{
-display: block;
-width: 100%;
-border: none;
-background-color: #3f062f;
-opacity: 0.6;
-padding: 14px 28px;
-font-size:1.5em;
-cursor: pointer;
-color: black;
-font-family: fantasy;
-text-align: center;
-background-color: transparent;
-outline: none;
+#attackBody{
+  background-image: url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/attack.png");
 }
 
-#attackBody{
-background-image:url("https://f28wp-dubai-weblings.github.io/Game/client/media/icons/attack.png")
-}
+
 
 body {
 overflow-x: hidden; /*Prevents horizontal and vertical scrolling(applicable to the default web browser zoom level)*/
 overflow-y:hidden;
 }
 
+
 #button
 {
+background-color: transparent;
 width:200px;
 height:7vh;
 position: absolute;
 background-size:contain;
-
+outline: none;
 left:90px;
 line-height: 30px;
-background-color: black;
 top:550px;
 font-size: 20px;
 text-align: center;
 color:white;
 font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
-box-shadow:0 5px 5px #777;
+outline:none;
+box-shadow:0 5px 5px  rgb(71, 8, 43);
 
 }
 

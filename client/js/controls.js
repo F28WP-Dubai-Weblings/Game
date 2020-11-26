@@ -23,7 +23,7 @@ function controls(player, socket) {
     function attack(){
 
 
-        if (player.score >=300){ //player can only attack if player is score is equal to or greater than 100
+        if (player.score >=200){ //player can only attack if player is score is equal to or greater than 100
             player.attack = true;
 
             //generate a random angle to determine the players horizontal/vertical velocity

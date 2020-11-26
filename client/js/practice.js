@@ -17,7 +17,8 @@ let racer = {
     score:0
 };
 
-let fuelObj, coneObj = {};   //declare empty dictionary/objects
+let fuelObj = {};   //declare empty dictionary/objects
+let coneObj = {};
 
 
 
@@ -40,15 +41,16 @@ function upKey(event){
 }
 
 
-function collision(racer,fuelObj){
+function collision(racer,object){
 
     
     /* NOTE TO READER: the +40s here are added to make sure the collision is significant, 
     i.e, the bullet or the fuelPoints have significantly collided with the player, not simply overlapped at their boundaries/borders*/
    playerRect = racer.getBoundingClientRect();
-   objectRect = fuelObj.getBoundingClientRect();
+   objectRect = object.getBoundingClientRect();
 
-   return( !((playerRect.bottom < objectRect.top) || (playerRect.top > objectRect.bottom)|| (playerRect.right<objectRect.left+40) || (playerRect.left +40 > objectRect.right)))
+
+   return( !((playerRect.bottom < objectRect.top) || (playerRect.top> objectRect.bottom)|| (playerRect.right<objectRect.left+55) || (playerRect.left+55> objectRect.right)))
             
 }
 
@@ -135,7 +137,7 @@ function move(){
             gameOver();     
         }
 
-        if (events.ArrowUp && racer.verticalPos>70) {   //move up when ArrowUp is pressed & don't let the car move above 70px (height)
+        if (events.ArrowUp && racer.verticalPos>0) {   //move up when ArrowUp is pressed & don't let the car move above 70px (height)
             racer.verticalPos -= racer.pixelPosition;
         }
         if (events.ArrowLeft && racer.horizontalPos>0) {   //move left when ArrowLeft is pressed & set minimum horizontal position as 35px (width)
@@ -145,7 +147,7 @@ function move(){
         if (events.ArrowDown  && racer.verticalPos<530) {  //move down when ArrowDown is pressed & don't let the car move beyond 1000px (height)
             racer.verticalPos += racer.pixelPosition;
         }
-        if (events.ArrowRight && racer.horizontalPos<675) {    //move right when the ArrowRight is press & don't let the car move beyond 1020px (width)
+        if (events.ArrowRight && racer.horizontalPos<690) {    //move right when the ArrowRight is press & don't let the car move beyond 1020px (width)
             racer.horizontalPos += racer.pixelPosition;
         }     
         

@@ -49,7 +49,10 @@ socket.on("init", ({id,num, player_list, fuelPoints, bullets}) => {
 
     controls(player, socket);   //call controls in controls.js to keep track of player movement
 
+    
+    
     socket.emit('newPlayer', player);   //emit to the server that a new player has joined 
+    
     socket.on('newPlayer', newPlayer => {
         players.push(new Liveplayers(newPlayer))});  //update the 'clients' list on the browser when a newPlayer message is recieved
     
@@ -71,8 +74,6 @@ socket.on("init", ({id,num, player_list, fuelPoints, bullets}) => {
         attacks[0].verticalPos = reqPlayer.verticalPos;
     });
 
-
-    
     players = player_list.map(element => new Liveplayers(element)).concat(player);  //make a copy of the list of players sent by the server on the client browser
     points = fuelPoints.map(element => new Fuel(element));  //make a copy of the list of fuelPoints sent by the server on the client browser
     attacks = bullets.map(shoot => new Bullet(shoot));  //make a copy of the array containing bullet sent by the server on the client browser
@@ -111,7 +112,7 @@ function collision(player, object){
     function draw(){
 
         if (players.length === 3 ){
-        setTimeout(function(){alert("Game Over! "+ "Your score was: " + player.score)},90000);    //game ends after 90 seconds
+        setTimeout(function(){socket.emit("gameOver");players =[]; alert("Game Over! "+ "Your score was: " + player.score)},90000);    //game ends after 90 seconds
 
         waitScreen.style.display = "none";  //remove the wait screen
         gameScreen.style.display = "flex";  //now display the gameScreen
@@ -172,10 +173,10 @@ function collision(player, object){
     counter++; }
         window.requestAnimationFrame(draw); 
         }
-    if (player.num > 4){
-        setTimeout(function(){alert("Sorry this game is full!")},500);//game over alert after 90s
-    }
+    
     draw();
 
-    
+    if (players.length > 3){
+        setTimeout(function(){alert("Sorry this game is full!")},500);//game over alert after 90s
+    }
 });
