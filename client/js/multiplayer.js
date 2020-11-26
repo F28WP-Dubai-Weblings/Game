@@ -163,8 +163,8 @@ function collision(player, object){
 
     /*
         This was temporarily setup until Susan finishes the game room/game session/disconnect implementation. 
-        .....since session was not implemented due to issues, this will temporarily be reset*/
-        issues
+        .....since session was not implemented due to issues, this will temporarily be reset
+        */
     if (players.length > 3){
         setTimeout(function(){alert("Sorry this game is full!")},500);//game over alert after 90s
     }
