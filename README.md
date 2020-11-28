@@ -20,3 +20,22 @@ HTML5, CSS3, Javascript are going to be the main programming languages we will i
 
 We will be making a scoreboard that will display the first three rankers and your rank during the live game.
 We have progressed with the obstacles, the player will be able to shoot bullets at other cars each player has 3 lives. After three lives the player will not be able to continue with the game. As for extra bonuses we have added fuels by which the persons acceleration will be increased.
+
+### Download the Game:  
+You will **Need**:
+  *Visual Studio Code
+  *nodemon module
+  *express module
+  *express-session module
+  *mysql module
+  *socket.io module
+  *sql-template-strings
+  
+To install the above modules you will need to type the following into you terminal:  
+  npm i [insert module name]
+
+Once that's done you can run this command: **npm run dev**
+
+And Open your browser and type: **http://localhost:3000/**
+
+**Voilà you are now ready to start playing this game locally.**
