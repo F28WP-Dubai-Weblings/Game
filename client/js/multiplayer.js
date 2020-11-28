@@ -1,28 +1,7 @@
-//background music
 
-/* *is not implemented correctly so will be commented to avoid any errors or warnings*
-Sherica's: 
 
-function startGame() {
-    
-    
-    myMusic = new sound("car bg music 1.mp3");
-    myMusic.play();
-    myGameArea.start();
-}
-function updateGameArea() //this function : stops the music when the car hits an obstacle.
-{
-    var x, height, gap, minHeight, maxHeight, minGap, maxGap;
-    for (i = 0; i < myObstacles.length; i += 1) {
-        if (myGamePiece.crashWith(myObstacles[i])) {
-            
-            myMusic.stop();
-            myGameArea.stop();
-            return;
-        } 
-    }
-}*/
-
+//MULTIPLAYER.JS FUNCTIONAL GAME CODE:
+/*AUTHOR NAME: RIDA @raqp2000*/
 
 const canvas = document.getElementById("canvas"),
 ctx = canvas.getContext("2d");
@@ -101,14 +80,15 @@ function collision(player, object){
     return false; //else return false - no collision.
 }
 
-/* TEMPORARILY SET UP AS A SUBSTITUTE TO 'ENTER GAME SESSION CODE PAGE'. Will now be commented out
+/* TEMPORARILY SET UP AS A SUBSTITUTE TO 'ENTER GAME SESSION CODE PAGE'. Will now be commented out.
+    ....temporary wait screen will now be reset since Session will not be implemented by susan due to varoius issues
     Note to Reader: the game screen is hidden once multiplayer.js is run AS SOON AS the canvas is created to prevent
-    any sneaky bugs, in terms of players being drawn to the game canvas
+    any sneaky bugs, in terms of players being drawn to the game canvas*/
     const gameScreen = document.getElementById("gameScreen");
     gameScreen.style.display = "none"; //hide the game screen
 
     const waitScreen = document.getElementById("waitScreen");
-    waitScreen.style.display = "block"; //display the wait screen*/
+    waitScreen.style.display = "block"; //display the wait screen
 
 
     let counter = 0;  
@@ -118,9 +98,9 @@ function collision(player, object){
 
         if (players.length === 3 ){
         setTimeout(function(){alert("Game Over! "+ "Your score was: " + player.score)},90000);    //game ends after 90 seconds
-        /*Look at previous note/comment
+        
         waitScreen.style.display = "none";  //remove the wait screen
-        gameScreen.style.display = "flex";  //now display the gameScreen*/
+        gameScreen.style.display = "flex";  //now display the gameScreen
         
         ScoreBoard.innerHTML="SCORE:  " + player.score; 
 
@@ -182,8 +162,36 @@ function collision(player, object){
     draw();
 
     /*
-        This was temporarily setup until susan finishes the game room/game session/disconnect implementation
+        This was temporarily setup until Susan finishes the game room/game session/disconnect implementation. 
+        .....since session was not implemented due to issues, this will temporarily be reset
+        */
     if (players.length > 3){
         setTimeout(function(){alert("Sorry this game is full!")},500);//game over alert after 90s
-    }*/
+    }
 });
+
+
+/* 
+THE FOLLOWING IS SHERICA'S CONTRIBUTION TO THE GAME MUSIC:
+*is not implemented correctly so will be commented to avoid any errors or warnings*
+Sherica: 
+
+function startGame() {
+    
+    
+    myMusic = new sound("car bg music 1.mp3");
+    myMusic.play();
+    myGameArea.start();
+}
+function updateGameArea() //this function : stops the music when the car hits an obstacle.
+{
+    var x, height, gap, minHeight, maxHeight, minGap, maxGap;
+    for (i = 0; i < myObstacles.length; i += 1) {
+        if (myGamePiece.crashWith(myObstacles[i])) {
+            
+            myMusic.stop();
+            myGameArea.stop();
+            return;
+        } 
+    }
+}*/

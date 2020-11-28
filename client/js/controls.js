@@ -1,4 +1,4 @@
-
+/*AUTHOR NAME: RIDA @raqp2000 */
 function controls(player, socket) {
       
     window.addEventListener("keydown", downKey);    //listen for a key pressed

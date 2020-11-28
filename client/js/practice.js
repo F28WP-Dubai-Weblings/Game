@@ -1,3 +1,5 @@
+//JS CODE FOR SINGLE PLAYER MODE
+/*AUTHOR NAME: RIDA @raqp2000*/
 
 const score = document.querySelector(".scoreBoard");
 const startBoard = document.querySelector(".startNav");
@@ -48,13 +50,13 @@ function upKey(event){
 function collision(racer,object){
 
     
-    /* NOTE TO READER: the +40s here are added to make sure the collision is significant, 
+    /* NOTE TO READER: the +40s and +10s here are added to make sure the collision is significant, 
     i.e, the bullet or the fuelPoints have significantly collided with the player, not simply overlapped at their boundaries/borders*/
    playerRect = racer.getBoundingClientRect();
    objectRect = object.getBoundingClientRect();
 
 
-   return( !((playerRect.bottom < objectRect.top) || (playerRect.top> objectRect.bottom)|| (playerRect.right<objectRect.left+55) || (playerRect.left+55> objectRect.right)))
+   return( !((playerRect.bottom < 10+objectRect.top) || (playerRect.top+10> objectRect.bottom)|| (playerRect.right<objectRect.left+40) || (playerRect.left+40> objectRect.right)))
             
 }
 

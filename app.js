@@ -1,3 +1,5 @@
+/*AUTHORS NAMES: RIDA @raqp2000 ; SUSAN @susanprog*/
+
 //entry point file of the server
 console.log("In app.js");
 
@@ -107,9 +109,9 @@ socket.on('playerAttack',({id, bull_angle}) =>{
 
 
 });
-/*
 
-//                                                                           DATABASE (to be implemented by susan)
+
+//                                                                           DATABASE 
 const router = require('./routes/routes');
 // defining routes
   app.use(router);
@@ -117,5 +119,5 @@ const router = require('./routes/routes');
 //create database if not exists
 const initDB = require('./db/db');
 initDB();
-  */
+
 
