@@ -23,13 +23,13 @@ We have progressed with the obstacles, the player will be able to shoot bullets 
 
 ### Download the Game:  
 You will **Need**:
-  *Visual Studio Code
-  *nodemon module
-  *express module
-  *express-session module
-  *mysql module
-  *socket.io module
-  *sql-template-strings
+  * Visual Studio Code
+  * nodemon module
+  * express module
+  * express-session module
+  * mysql module
+  * socket.io module
+  * sql-template-strings
   
 To install the above modules you will need to type the following into you terminal:  
   npm i [insert module name]
