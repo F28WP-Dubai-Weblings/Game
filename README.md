@@ -31,6 +31,7 @@ You will **Need**:
   * socket.io module
   * sql-template-strings module
   
+Download the zip file of this game and open it in vscode then you will need to install the modules.
 To install the above modules you will need to type the following into you terminal:  
   npm i [insert module name]
 
