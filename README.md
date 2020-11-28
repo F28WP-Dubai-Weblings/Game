@@ -29,7 +29,7 @@ You will **Need**:
   * express-session module
   * mysql module
   * socket.io module
-  * sql-template-strings
+  * sql-template-strings module
   
 To install the above modules you will need to type the following into you terminal:  
   npm i [insert module name]
