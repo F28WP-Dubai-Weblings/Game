@@ -24,6 +24,7 @@ We have progressed with the obstacles, the player will be able to shoot bullets 
 ### Download the Game:  
 You will **Need**:
   * Visual Studio Code
+  * MySQL community server
   * nodemon module
   * express module
   * express-session module
@@ -33,7 +34,7 @@ You will **Need**:
   
 Download the zip file of this game and open it in vscode then you will need to install the modules.
 To install the above modules you will need to type the following into you terminal:  
-  npm i [insert module name]
+  **npm i [insert module name]**
 
 Once that's done you can run this command: **npm run dev**
 
